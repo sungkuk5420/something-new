@@ -17,3 +17,29 @@
     font-size: 14px;
     line-height: 108.5%;
 }
+.q-field--filled .q-field__control{
+    background: none !important;
+    padding: 0 5px;
+    input{
+        line-height: 33px;
+        font-size: 22px;
+    }
+    &:before{
+        background:none !important;
+        opacity: 1 !important;
+        border-width: 2px;
+        border-color: #747070  !important;
+    }
+    &:after{
+        border-width: 2px;
+        background: #fe7f8e !important;
+                        }
+}
+.q-field__label{
+    font-size: 22px;
+    line-height: 33px;
+    color: #D7D7D7;
+}
+.q-field--float .q-field__label{
+    display: none;
+}
