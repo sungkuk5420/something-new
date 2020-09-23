@@ -49,7 +49,7 @@
 npm install
 
 2.퀘이샤 설치
-npm install -g @quasar/cli
+npm install -g @quasar/cli@1.0.0
 
 3.프로젝트 실행
 quasar dev
