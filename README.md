@@ -54,3 +54,8 @@ npm install -g @quasar/cli@1.0.0
 3.프로젝트 실행
 quasar dev
 ```
+
+## UI프레임워크는 vant를 채택
+```
+https://youzan.github.io/vant/#/en-US/
+```

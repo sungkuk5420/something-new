@@ -14,10 +14,12 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "quasar": "^1.0.0",
+    "vant": "^2.10.8",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0"
+    "@quasar/app": "^1.0.0",
+    "babel-plugin-import": "^1.13.0"
   },
   "engines": {
     "node": ">= 10.18.1",
