@@ -1,1 +1,19 @@
 // app global css in SCSS form
+
+
+*{
+    font-family: Noto Sans CJK KR;
+    font-style: normal;
+}
+
+.van-button {
+    &.van-button--default{
+        background: #fe7f8e;
+        color: #ffffff;
+        border-radius: 8px;
+        height:56px;
+    }
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 108.5%;
+}
