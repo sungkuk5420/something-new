@@ -4,7 +4,7 @@
 ## 링크 정리
 
 | 이름 | 링크 |
-| ------- | ------ |
+| -------------- | ------ |
 | 디자인시안 (피그마) | https://www.figma.com/file/qnwnarfRMd074nSMPwweXz/%EC%8D%B8%EB%9D%B5-App-Design?node-id=0%3A1 |
 | 썸띵 (웹) | https://something.netlify.app/ |
 | 일정 프로젝트 간판 | https://github.com/sungkuk5420/something-new/projects/1 |
