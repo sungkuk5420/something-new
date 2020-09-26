@@ -15,6 +15,16 @@ const routes = [
     children: [{ path: "", component: () => import("pages/Setting.vue") }]
   },
   {
+    path: "/user-profile",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/UserProfile.vue") }]
+  },
+  {
+    path: "/user-location",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/UserLocation.vue") }]
+  },
+  {
     path: "/userlist",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/UserList.vue") }]
