@@ -13,6 +13,11 @@ const routes = [
     path: "/setting",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/Setting.vue") }]
+  },
+  {
+    path: "/userlist",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/UserList.vue") }]
   }
 ];
 
