@@ -88,7 +88,6 @@
 <script>
 import { Toast } from "vant";
 export default {
-  name: "PageIndex",
   data() {
     return {
       step: 1,
