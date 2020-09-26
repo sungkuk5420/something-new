@@ -23,5 +23,10 @@ export const actions = {
     console.log(`store action [T.ACTION] data`);
     console.log(data);
     commit(T.ACTION, data);
+  },
+  [T.USER_LOGIN]({ commit }, data) {
+    console.log(`store action [T.USER_LOGIN] data`);
+    console.log(data);
+    commit(T.USER_LOGIN, data);
   }
 };
