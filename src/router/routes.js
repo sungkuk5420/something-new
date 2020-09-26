@@ -22,7 +22,16 @@ const routes = [
   {
     path: "/ParticipationList",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/ParticipationList.vue") }]
+    children: [
+      { path: "", component: () => import("pages/ParticipationList.vue") }
+    ]
+  },
+  {
+    path: "/profileIntroduce",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/ProfileIntroduce.vue") }
+    ]
   }
 ];
 
@@ -33,6 +42,5 @@ if (process.env.MODE !== "ssr") {
     component: () => import("pages/Error404.vue")
   });
 }
-
 
 export default routes;

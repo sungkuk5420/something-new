@@ -27,7 +27,7 @@
         <van-tabbar-item to="/ParticipationList" icon="friends-o"
           >ParticipationList</van-tabbar-item
         >
-        <van-tabbar-item to="/setting" icon="setting-o"
+        <van-tabbar-item to="/profileIntroduce" icon="setting-o"
           >setting</van-tabbar-item
         >
       </van-tabbar>
