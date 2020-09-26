@@ -1,422 +1,124 @@
 <template>
   <q-page class="setting-page">
-    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item>1</van-swipe-item>
-      <van-swipe-item>2</van-swipe-item>
-      <van-swipe-item>3</van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>
-    </van-swipe>
-
-    <div class="card-detail">
-      <section>
-        <!-- 카드 상세 -->
-        <div class="floating-card">
-          <div class="normal">
-            <div class="left">
-              <div class="user-name">
-                김냠냠
-              </div>
-              <ul class="user-age-addr">
-                <li>25세</li>
-                <li>서울</li>
-              </ul>
-            </div>
-            <div class="right">
-              <div class="btn-no">
-                <svg
-                  width="52"
-                  height="52"
-                  viewBox="0 0 52 52"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g filter="url(#filter0_d)">
-                    <circle cx="24" cy="24" r="21" fill="white" />
-                  </g>
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M16.4862 31.5376C17.6223 32.6737 19.4645 32.6737 20.6006 31.5376L24.0239 28.1143L27.48 31.5704C28.6162 32.7066 30.4583 32.7066 31.5945 31.5704C32.7306 30.4342 32.7306 28.5921 31.5945 27.4559L28.1384 23.9998L31.5944 20.5437C32.7306 19.4076 32.7306 17.5655 31.5944 16.4293C30.4583 15.2931 28.6162 15.2931 27.48 16.4293L24.0239 19.8853L20.6007 16.4621C19.4645 15.3259 17.6224 15.3259 16.4862 16.4621C15.35 17.5983 15.35 19.4404 16.4862 20.5766L19.9094 23.9998L16.4862 27.4231C15.35 28.5593 15.35 30.4014 16.4862 31.5376Z"
-                    fill="#D2CDCD"
-                  />
-                  <defs>
-                    <filter
-                      id="filter0_d"
-                      x="0"
-                      y="0"
-                      width="52"
-                      height="52"
-                      filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
-                    >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix
-                        in="SourceAlpha"
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                      />
-                      <feOffset dx="2" dy="2" />
-                      <feGaussianBlur stdDeviation="2.5" />
-                      <feColorMatrix
-                        type="matrix"
-                        values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow"
-                        result="shape"
-                      />
-                    </filter>
-                  </defs>
-                </svg>
-              </div>
-              <div class="btn-ok">
-                <svg
-                  width="52"
-                  height="52"
-                  viewBox="0 0 52 52"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g filter="url(#filter0_d)">
-                    <rect
-                      x="3"
-                      y="3"
-                      width="42"
-                      height="42"
-                      rx="21"
-                      fill="url(#paint0_linear)"
-                    />
-                    <rect
-                      x="29.7849"
-                      y="12.7998"
-                      width="11.7508"
-                      height="21.2814"
-                      rx="5.87539"
-                      transform="rotate(40.2482 29.7849 12.7998)"
-                      fill="#FF96A2"
-                    />
-                    <rect
-                      x="9.30005"
-                      y="21.585"
-                      width="11.7508"
-                      height="21.2814"
-                      rx="5.87539"
-                      transform="rotate(-45 9.30005 21.585)"
-                      fill="#FFBCC4"
-                    />
-                  </g>
-                  <defs>
-                    <filter
-                      id="filter0_d"
-                      x="0"
-                      y="0"
-                      width="52"
-                      height="52"
-                      filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
-                    >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix
-                        in="SourceAlpha"
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                      />
-                      <feOffset dx="2" dy="2" />
-                      <feGaussianBlur stdDeviation="2.5" />
-                      <feColorMatrix
-                        type="matrix"
-                        values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow"
-                        result="shape"
-                      />
-                    </filter>
-                    <linearGradient
-                      id="paint0_linear"
-                      x1="40.6113"
-                      y1="39.791"
-                      x2="8.33203"
-                      y2="5.625"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stop-color="#FF4259" />
-                      <stop offset="1" stop-color="#FE7F8E" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- 카드 상세 끝 -->
-        <!-- 내가 좋아한 카드  -->
-        <div class="floating-card">
-          <div class="give-like">
-            <div class="left">
-              <div class="user-name">
-                김냠냠
-              </div>
-              <ul class="user-age-addr">
-                <li>25세</li>
-                <li>서울</li>
-              </ul>
-            </div>
-            <div class="right">
-              <div class="like-btn">
-                <svg
-                  width="30"
-                  height="24"
-                  viewBox="0 0 30 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    x="20.4973"
-                    width="11.7579"
-                    height="21.2943"
-                    rx="5.87896"
-                    transform="rotate(40.2482 20.4973 0)"
-                    fill="#FE7F8E"
-                  />
-                  <rect
-                    y="8.79199"
-                    width="11.7579"
-                    height="21.2943"
-                    rx="5.87896"
-                    transform="rotate(-45 0 8.79199)"
-                    fill="#FFBCC4"
-                  />
-                </svg>
-                <p>좋아요</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- 내가 좋아한 카드 끝 -->
-      </section>
-      <section>
-        <div class="title">기본 정보</div>
-        <div class="content">
-          <ul>
-            <li>
-              <div class="info-title">성별</div>
-              <div class="info-description">여</div>
-            </li>
-            <li>
-              <div class="info-title">출생년도</div>
-              <div class="info-description">1998</div>
-            </li>
-            <li>
-              <div class="info-title">키</div>
-              <div class="info-description">163cm</div>
-            </li>
-            <li>
-              <div class="info-title">위치</div>
-              <div class="info-description">여</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="title">추가 정보</div>
-        <div class="content">
-          <ul>
-            <li>
-              <div class="info-title">취미</div>
-              <div class="info-description">롤, 하스스톤</div>
-            </li>
-            <li>
-              <div class="info-title">성격</div>
-              <div class="info-description">쾌활함, 또라이</div>
-            </li>
-            <li>
-              <div class="info-title">흡연</div>
-              <div class="info-description">가끔</div>
-            </li>
-            <li>
-              <div class="info-title">음주</div>
-              <div class="info-description">가끔</div>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section>
-        <!-- 내가 좋아한 카드 시작 -->
-        <div class="give-like-bottom">
-          <div class="give-like-bottom-title">
-            상대방의 응답을 기다리고 있어요!
-          </div>
-          <button type="button" class="btn-wating">대화하기</button>
-        </div>
-
-        <!-- 내가 좋아한 카드 끝 -->
-        <!-- 나를 좋아한 카드 시작 -->
-        <div class="take-like-bottom">
-          <div class="take-like-bottom-title">
-            상대방이 종규님의 답변을 기다리고 있어요!
-          </div>
-          <div class="take-like-bottom-btn">
-            <svg
+    <div class="mypage-title">내 정보</div>
+    <div class="mypage-info">
+      <div class="info-img">
+        <svg
+          width="66"
+          height="66"
+          viewBox="0 0 66 66"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g filter="url(#filter0_d)">
+            <circle cx="33" cy="29" r="23" fill="#C4C4C4" />
+            <circle cx="33" cy="29" r="23" fill="url(#pattern0)" />
+          </g>
+          <defs>
+            <filter
+              id="filter0_d"
+              x="0"
+              y="0"
               width="66"
               height="66"
-              viewBox="0 0 66 66"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
             >
-              <g filter="url(#filter0_d)">
-                <circle cx="31" cy="31" r="28" fill="white" />
-              </g>
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M20.9816 41.0501C22.4965 42.565 24.9527 42.565 26.4676 41.0501L31.0319 36.4858L35.64 41.0939C37.155 42.6088 39.6111 42.6088 41.126 41.0939C42.6409 39.579 42.6409 37.1228 41.126 35.6079L36.5179 30.9998L41.126 26.3917C42.6409 24.8768 42.6409 22.4206 41.126 20.9057C39.6111 19.3908 37.1549 19.3908 35.64 20.9057L31.0319 25.5138L26.4676 20.9495C24.9527 19.4346 22.4965 19.4346 20.9816 20.9495C19.4667 22.4644 19.4667 24.9206 20.9816 26.4355L25.5459 30.9998L20.9816 35.5641C19.4667 37.079 19.4667 39.5352 20.9816 41.0501Z"
-                fill="#D2CDCD"
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
               />
-              <defs>
-                <filter
-                  id="filter0_d"
-                  x="0"
-                  y="0"
-                  width="66"
-                  height="66"
-                  filterUnits="userSpaceOnUse"
-                  color-interpolation-filters="sRGB"
-                >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  />
-                  <feOffset dx="2" dy="2" />
-                  <feGaussianBlur stdDeviation="2.5" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="BackgroundImageFix"
-                    result="effect1_dropShadow"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="effect1_dropShadow"
-                    result="shape"
-                  />
-                </filter>
-              </defs>
-            </svg>
-            <svg
-              width="66"
-              height="66"
-              viewBox="0 0 66 66"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              <feOffset dy="4" />
+              <feGaussianBlur stdDeviation="5" />
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"
+              />
+              <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="effect1_dropShadow"
+              />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="effect1_dropShadow"
+                result="shape"
+              />
+            </filter>
+            <pattern
+              id="pattern0"
+              patternContentUnits="objectBoundingBox"
+              width="1"
+              height="1"
             >
-              <g filter="url(#filter0_d)">
-                <rect
-                  x="3"
-                  y="3"
-                  width="56"
-                  height="56"
-                  rx="28"
-                  fill="url(#paint0_linear)"
-                />
-                <rect
-                  x="38.7131"
-                  y="16.0664"
-                  width="15.6677"
-                  height="28.3752"
-                  rx="7.83385"
-                  transform="rotate(40.2482 38.7131 16.0664)"
-                  fill="#FF96A2"
-                />
-                <rect
-                  x="11.3999"
-                  y="27.7803"
-                  width="15.6677"
-                  height="28.3752"
-                  rx="7.83385"
-                  transform="rotate(-45 11.3999 27.7803)"
-                  fill="#FFBCC4"
-                />
-              </g>
-              <defs>
-                <filter
-                  id="filter0_d"
-                  x="0"
-                  y="0"
-                  width="66"
-                  height="66"
-                  filterUnits="userSpaceOnUse"
-                  color-interpolation-filters="sRGB"
-                >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                  />
-                  <feOffset dx="2" dy="2" />
-                  <feGaussianBlur stdDeviation="2.5" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="BackgroundImageFix"
-                    result="effect1_dropShadow"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="effect1_dropShadow"
-                    result="shape"
-                  />
-                </filter>
-                <linearGradient
-                  id="paint0_linear"
-                  x1="53.1484"
-                  y1="52.0547"
-                  x2="10.1094"
-                  y2="6.5"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#FF4259" />
-                  <stop offset="1" stop-color="#FE7F8E" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-        <!-- 나를 좋아한 카드 끝 -->
-        <!-- 서로 매칭된 카드 시작 -->
-        <div class="matching-bottom">
-          <div class="matching-bottom-title">
-            상대방의 응답을 기다리고 있어요!
-          </div>
-          <button type="button" class="btn-matching">대화하기</button>
-        </div>
-
-        <!-- 서로 매칭된 카드 끝 -->
-      </section>
+              <use
+                xlink:href="#image0"
+                transform="translate(-0.254098) scale(0.0163934)"
+              />
+            </pattern>
+            <image
+              id="image0"
+              width="92"
+              height="61"
+              xlink:href="data:image/jpeg;base64,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"
+            />
+          </defs>
+        </svg>
+      </div>
+      <div class="info-text">
+        <div class="nickname">고구마</div>
+        <div class="email">something@gmail.com</div>
+      </div>
+      <div class="info-button">
+        <button type="button" onclick="location.href = '#' ">
+          프로필 관리
+        </button>
+      </div>
+    </div>
+    <div class="mypage-list">
+      <ul>
+        <li>
+          <a href="#">
+            <div class="mypage-list-title">알림 설정</div>
+            <div class="mypage-list-button">
+              <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+              </svg>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="mypage-list-title">로그아웃</div>
+            <div class="mypage-list-button">
+              <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+              </svg>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="mypage-list-title">회원탈퇴</div>
+          </a>
+        </li>
+      </ul>
     </div>
   </q-page>
 </template>
@@ -425,213 +127,112 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
 <style lang="scss">
 .setting-page {
-  .my-swipe .van-swipe-item {
-    color: #fff;
-    font-size: 20px;
-    line-height: 150px;
-    text-align: center;
-    background-color: #39a9ed;
+  padding: 0 14px;
+  .mypage-title {
+    font-family: Noto Sans CJK KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 38px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+    color: #000000;
   }
-  .card-detail {
-    margin-bottom: 70px;
-    background: #f9f8f8;
-    .title {
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 14px;
-      line-height: 21px;
-      display: flex;
-      align-items: center;
-      color: #747070;
-      padding: 0 20px;
-      margin-bottom: 8px;
-    }
-    .content {
-      margin-bottom: 20px;
-      background: #fff;
-      ul {
-        border-top: 1px solid #ece8e8;
-        border-bottom: 1px solid #ece8e8;
-        padding: 0 16px;
-        li {
-          display: flex;
-          justify-content: space-between;
-          padding: 20px 10px;
-          border-bottom: 1px solid #ece8e8;
-          .info-title {
-            font-family: Noto Sans;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 22px;
-            color: #121214;
-          }
-          .info-description {
-            font-family: Noto Sans;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 22px;
-            color: #747070;
-          }
-        }
-        li:last-child {
-          border-bottom: none;
-        }
-      }
-    }
+  .mypage-info {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ece8e8;
+    padding: 10px 0;
   }
-  /*플로팅 타이틀 공통*/
-  .floating-card {
-    background: #ffffff;
-    box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.08);
+  .info-img {
+    flex: 1;
+  }
+  .info-text {
+    flex: 2;
+  }
+  .info-text .nickname {
+    font-family: Noto Sans CJK KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #121214;
+  }
+  .info-text .email {
+    font-family: Noto Sans CJK KR;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #747070;
+  }
+  .info-button button {
+    flex: 1;
+    background: #ffedef;
     border-radius: 16px;
-    margin: 0 16px;
-    padding: 20px 25px;
-    position: relative;
-    top: -41px;
-    .user-name {
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 24px;
-      color: #121214;
-    }
-    .user-age-addr {
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: normal;
-      display: flex;
-      font-size: 14px;
-      line-height: 21px;
-      color: #747070;
-      li {
-        position: relative;
-        padding-right: 10px;
-      }
-      li:before {
-        content: "";
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: #747070;
-        right: 3px;
-        border-radius: 100%;
-        top: 9px;
-      }
-      li:last-child:before {
-        display: none;
-      }
-    }
+    font-family: Noto Sans CJK KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    color: #ff576b;
+    padding: 7px 15px;
+    text-align: center;
+    border: none;
   }
-
-  /* 카드 상세 */
-  .normal {
+  .mypage-list ul li {
     display: flex;
-    justify-content: space-between;
-    .right {
-      display: flex;
-    }
-  }
+    align-items: center;
 
-  /* 내가 좋아한 카드  */
-  .give-like {
+    border-bottom: 1px solid #ece8e8;
+  }
+  .mypage-list ul li:last-child {
+    border-bottom: none;
+    text-align: center;
+  }
+  .mypage-list ul li:last-child .mypage-list-title {
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    /* grey / 600 */
+
+    color: #747070;
+  }
+  .mypage-list ul li a {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    .right {
-      p {
-        font-family: Noto Sans;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 10px;
-        line-height: 14px;
-        margin-bottom: 0;
-        color: #fe7f8e;
-      }
-    }
+    padding: 25px 15px;
   }
-  /* 내가 좋아한 카드 하단 */
-  .give-like-bottom {
-    padding: 0 18px;
-    margin-top: 30px;
-    .give-like-bottom-title {
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 108.5%;
-      color: #ff576b;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .btn-wating {
-      background: #d2cdcd;
-      border-radius: 8px;
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 108.5%;
-      color: #747070;
-      padding: 20px 0;
-      width: 100%;
-      border: none;
-    }
+  .mypage-list-title {
+    flex: 8;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.1;
+
+    /* darkBackground */
+
+    color: #121214;
   }
-  /* 나를 좋아한 카드 하단*/
-  .take-like-bottom {
-    padding: 0 18px;
-    margin-top: 30px;
-    .take-like-bottom-title {
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 108.5%;
-      color: #ff576b;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .take-like-bottom-btn {
-      display: flex;
-      justify-content: center;
-    }
-  }
-  /* 서로 매칭된 카드 하단 */
-  .matching-bottom {
-    padding: 0 18px;
-    margin-top: 30px;
-    .matching-bottom-title {
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 108.5%;
-      color: #ff576b;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .btn-matching {
-      background: #fe7f8e;
-      border-radius: 8px;
-      font-family: Noto Sans CJK KR;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 108.5%;
-      color: #fff;
-      padding: 20px 0;
-      width: 100%;
-      border: none;
-    }
+  .mypage-list-button {
+    flex: 2;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 </style>
