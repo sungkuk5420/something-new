@@ -60,12 +60,11 @@
 
         <van-button
           type="default"
+          :loading="loading"
+          loading-text="로그인"
           @click="
             () => {
-              $toast.success({
-                message: '준비중',
-                icon: 'ellipsis',
-              });
+              userLogin();
             }
           "
           >로그인
@@ -86,6 +85,7 @@
 </template>
 
 <script>
+import { T } from "../store/module-example/types";
 import { Toast } from "vant";
 export default {
   data() {
@@ -93,7 +93,30 @@ export default {
       step: 1,
       name: "",
       password: "",
+      loading: false,
     };
+  },
+  methods: {
+    userLogin() {
+      let isLogin = true;
+
+      const thisObj = this;
+      const successCb = (result) => {
+        // 완료함수
+        thisObj.$router.push({ path: "/userList" });
+        thisObj.loading = false;
+      };
+      const errorCb = () => {
+        //실패함수
+        thisObj.loading = false;
+      };
+      thisObj.loading = true;
+      thisObj.$store.dispatch(T.USER_LOGIN, {
+        data: { isLogin },
+        successCb,
+        errorCb,
+      });
+    },
   },
 };
 </script>

@@ -1,3 +1,4 @@
 export const T = {
-  TYPE: "TYPE"
+  TYPE: "TYPE",
+  USER_LOGIN: "USER_LOGIN"
 };
