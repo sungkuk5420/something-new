@@ -60,6 +60,8 @@
 
         <van-button
           type="default"
+          :loading="loading"
+          loading-text="로그인"
           @click="
             () => {
               userLogin();
@@ -91,14 +93,29 @@ export default {
       step: 1,
       name: "",
       password: "",
+      loading: false,
     };
   },
   methods: {
     userLogin() {
       let isLogin = true;
 
-      this.$store.dispatch(T.USER_LOGIN, isLogin);
-      this.$router.push({ path: "/userList" });
+      const thisObj = this;
+      const successCb = (result) => {
+        // 완료함수
+        thisObj.$router.push({ path: "/userList" });
+        thisObj.loading = false;
+      };
+      const errorCb = () => {
+        //실패함수
+        thisObj.loading = false;
+      };
+      thisObj.loading = true;
+      thisObj.$store.dispatch(T.USER_LOGIN, {
+        data: { isLogin },
+        successCb,
+        errorCb,
+      });
     },
   },
 };

@@ -19,7 +19,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer reveal class="bg-grey-8 text-white" v-show="getIsLogin">
+    <q-footer reveal class="bg-grey-8 text-white" v-show="isLogin">
       <van-tabbar v-model="active">
         <van-tabbar-item to="/main" icon="home-o">main</van-tabbar-item>
         <van-tabbar-item to="/userList" icon="search">userList</van-tabbar-item>
@@ -45,7 +45,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getIsLogin"]),
+    ...mapGetters({
+      isLogin: "getIsLogin",
+    }),
   },
 };
 </script>
