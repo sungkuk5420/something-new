@@ -24,7 +24,9 @@
       <van-tabbar v-model="active">
         <van-tabbar-item to="/main" icon="home-o">main</van-tabbar-item>
         <van-tabbar-item to="/userList" icon="search">userList</van-tabbar-item>
-        <van-tabbar-item icon="friends-o">Tab</van-tabbar-item>
+        <van-tabbar-item to="/ParticipationList" icon="friends-o"
+          >ParticipationList</van-tabbar-item
+        >
         <van-tabbar-item to="/setting" icon="setting-o"
           >setting</van-tabbar-item
         >

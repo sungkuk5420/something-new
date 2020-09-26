@@ -18,6 +18,11 @@ const routes = [
     path: "/userlist",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/UserList.vue") }]
+  },
+  {
+    path: "/ParticipationList",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/ParticipationList.vue") }]
   }
 ];
 
