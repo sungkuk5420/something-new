@@ -62,10 +62,7 @@
           type="default"
           @click="
             () => {
-              $toast.success({
-                message: '준비중',
-                icon: 'ellipsis',
-              });
+              userLogin();
             }
           "
           >로그인
@@ -86,6 +83,7 @@
 </template>
 
 <script>
+import { T } from "../store/module-example/types";
 import { Toast } from "vant";
 export default {
   data() {
@@ -94,6 +92,14 @@ export default {
       name: "",
       password: "",
     };
+  },
+  methods: {
+    userLogin() {
+      let isLogin = true;
+
+      this.$store.dispatch(T.USER_LOGIN, isLogin);
+      this.$router.push({ path: "/userList" });
+    },
   },
 };
 </script>

@@ -19,8 +19,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
-    <q-footer reveal class="bg-grey-8 text-white" v-show="true">
+    <q-footer reveal class="bg-grey-8 text-white" v-show="getIsLogin">
       <van-tabbar v-model="active">
         <van-tabbar-item to="/main" icon="home-o">main</van-tabbar-item>
         <van-tabbar-item to="/userList" icon="search">userList</van-tabbar-item>
@@ -36,6 +35,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { Tabbar, TabbarItem } from "vant";
 
 export default {
@@ -43,6 +43,9 @@ export default {
     return {
       active: 0,
     };
+  },
+  computed: {
+    ...mapGetters(["getIsLogin"]),
   },
 };
 </script>
