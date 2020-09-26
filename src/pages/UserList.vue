@@ -39,7 +39,7 @@ export default {
         { name: "정연" },
         { name: "쯔위" },
         { name: "지효" },
-        { name: "채영" },
+        { name: "채영" }
       ],
       searchList: [
         { name: "김성국" },
@@ -62,19 +62,19 @@ export default {
         { name: "정연" },
         { name: "쯔위" },
         { name: "지효" },
-        { name: "채영" },
-      ],
+        { name: "채영" }
+      ]
     };
   },
   methods: {
     userSearch() {
       let searchText = this.searchText;
 
-      this.searchList = this.userList.filter(function (user) {
+      this.searchList = this.userList.filter(function(user) {
         return user.name.indexOf(searchText) != -1;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
