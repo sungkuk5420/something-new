@@ -34,18 +34,25 @@ export const actions = {
     if (successCb) {
       setTimeout(() => {
         successCb(data);
-        commit(T.USER_LOGIN, data.isLogin);
+        commit(T.USER_LOGIN, data);
       }, 2000);
     }
   },
   [T.USER_LOG_OUT]({ commit }, { data = {}, successCb, errorCb }) {
     console.log(`store action [T.USER_LOG_OUT] data`);
     console.log(data);
+
     if (successCb) {
       setTimeout(() => {
         successCb(data);
         commit(T.USER_LOG_OUT, data.isLogin);
       }, 2000)
     }
+  },
+  [T.CHAT_ADD_DATA]({ commit }, data) {
+    console.log(`store action [T.CHAT_ADD_DATA] data`);
+    console.log(data);
+
+    commit(T.CHAT_ADD_DATA, data);
   }
 };

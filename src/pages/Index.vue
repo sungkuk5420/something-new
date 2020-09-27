@@ -56,7 +56,12 @@
       <q-step class="step-3" title="3" :name="3">
         <div class="main-text">비밀번호를 입력해주세요.</div>
         <div class="sub-text">다시 방문해 주셨군요!</div>
-        <q-input type="password" filled v-model="name" label="・・・・・・" />
+        <q-input
+          type="password"
+          filled
+          v-model="password"
+          label="・・・・・・"
+        />
 
         <van-button
           type="default"
@@ -86,7 +91,9 @@
 
 <script>
 import { T } from "../store/module-example/types";
+import { mapGetters } from "vuex";
 import { Toast } from "vant";
+
 export default {
   data() {
     return {
@@ -96,26 +103,48 @@ export default {
       loading: false,
     };
   },
+  computed: {
+    ...mapGetters({
+      userList: "getUserList",
+    }),
+  },
   methods: {
     userLogin() {
-      let isLogin = true;
-
       const thisObj = this;
+      let userCheck = false;
+      let userInfo = {
+        isLogin: true,
+        name: thisObj.name,
+        password: thisObj.password,
+      };
+
+      thisObj.userList.forEach(function (v, i) {
+        if (v.name === userInfo.name && v.password === userInfo.password) {
+          userCheck = true;
+        }
+      });
+
       const successCb = (result) => {
         // 완료함수
-        thisObj.$router.push({ path: "/userList" });
+        thisObj.$router.push({ path: "/chatRoom" });
         thisObj.loading = false;
       };
       const errorCb = () => {
         //실패함수
         thisObj.loading = false;
       };
+
       thisObj.loading = true;
-      thisObj.$store.dispatch(T.USER_LOGIN, {
-        data: { isLogin },
-        successCb,
-        errorCb,
-      });
+      if (userCheck) {
+        thisObj.$store.dispatch(T.USER_LOGIN, {
+          data: { userInfo },
+          successCb,
+          errorCb,
+        });
+      } else {
+        Toast.fail("아이디 비밀번호가 일치하지 않습니다.");
+        thisObj.loading = false;
+      }
     },
   },
 };
