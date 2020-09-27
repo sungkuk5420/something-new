@@ -23,7 +23,7 @@ export const actions = {
       }
     );
   },
-  [T.USER_LOGIN]({ commit }, { data = {}, successCb, errorCb }) {
+  [T.ACTION]({ commit }, { data = {}, successCb, errorCb }) {
     console.log(`store action [T.ACTION] data`);
     console.log(data);
     commit(T.ACTION, data);
@@ -34,8 +34,18 @@ export const actions = {
     if (successCb) {
       setTimeout(() => {
         successCb(data);
-        commit(T.USER_LOGIN, data);
+        commit(T.USER_LOGIN, data.isLogin);
       }, 2000);
+    }
+  },
+  [T.USER_LOG_OUT]({ commit }, { data = {}, successCb, errorCb }) {
+    console.log(`store action [T.USER_LOG_OUT] data`);
+    console.log(data);
+    if (successCb) {
+      setTimeout(() => {
+        successCb(data);
+        commit(T.USER_LOG_OUT, data.isLogin);
+      }, 2000)
     }
   }
 };

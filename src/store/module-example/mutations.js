@@ -6,5 +6,8 @@ export const mutations = {
   },
   [T.USER_LOGIN](state, data) {
     state.isLogin = data;
+  },
+  [T.USER_LOG_OUT](state, data) {
+    state.isLogin = data
   }
 };
