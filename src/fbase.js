@@ -15,6 +15,8 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+console.log("init!")
+
 export const firebaseInstance = firebase;
 export const dbService = firebase.firestore();
 

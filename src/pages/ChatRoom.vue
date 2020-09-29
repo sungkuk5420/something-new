@@ -19,6 +19,7 @@ import { T } from "../store/module-example/types";
 import { mapGetters } from "vuex";
 import { Field } from "vant";
 import { Toast } from "vant";
+import { dbService } from "../fbase";
 
 export default {
   data() {
@@ -28,19 +29,42 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userChatData: "getChatData",
+      // userChatData: "getChatData",
       currentUser: "getCurrentUser",
     }),
   },
+  mounted() {
+    const thisObj = this;
+    dbService.collection("chats").onSnapshot(async (snapshot) => {
+      const newChatArray = snapshot.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .sort((a, b) => b.createdAt - a.createdAt);
+      console.log(newChatArray);
+      thisObj.userChatData = newChatArray;
+    });
+  },
   methods: {
-    chatInput() {
+    async chatInput() {
       const thisObj = this;
       let chatData = thisObj.chatData;
 
-      if (chatData !== "") {
-        thisObj.$store.dispatch(T.CHAT_ADD_DATA, chatData);
-        thisObj.chatData = "";
-      }
+      // if (chatData !== "") {
+      //   thisObj.$store.dispatch(T.CHAT_ADD_DATA, chatData);
+      //   thisObj.chatData = "";
+      // }
+      const sendChat = {
+        text: thisObj.chatData,
+        createdAt: Date.now(),
+      };
+      await dbService
+        .collection("chats")
+        .add(sendChat)
+        .then(() => {
+          thisObj.chatData = "";
+        });
     },
   },
 };
