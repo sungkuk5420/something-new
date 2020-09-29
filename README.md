@@ -83,3 +83,9 @@ https://youzan.github.io/vant/#/en-US/
 깃허브
 https://github.com/youzan/vant
 ```
+
+
+## node sass 관련 에러날경우
+```
+npm rebuild node-sass
+```

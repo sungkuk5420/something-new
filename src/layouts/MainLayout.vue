@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" v-show="init">
     <q-header
       bordered
       class="bg-primary text-white"
@@ -37,10 +37,12 @@
 <script>
 import { mapGetters } from "vuex";
 import { Tabbar, TabbarItem } from "vant";
+import { authService } from "../fbase";
 
 export default {
   data() {
     return {
+      init: false,
       active: 0,
     };
   },
@@ -48,6 +50,15 @@ export default {
     ...mapGetters({
       isLogin: "getIsLogin",
     }),
+  },
+  mounted() {
+    authService.onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.user;
+      }
+      this.init = true;
+    });
   },
 };
 </script>
