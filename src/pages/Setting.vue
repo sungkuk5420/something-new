@@ -127,7 +127,7 @@
 export default {
   data() {
     return {};
-  },
+  }
 };
 </script>
 
@@ -144,6 +144,7 @@ export default {
     align-items: center;
     margin-bottom: 35px;
     color: #000000;
+    margin-top: 50px;
   }
   .mypage-info {
     display: flex;
