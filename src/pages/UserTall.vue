@@ -1,7 +1,7 @@
 <template>
-  <q-page class="user-location-page">
+  <q-page class="user-tall-page">
     <van-nav-bar
-      title="위치"
+      title="키"
       left-arrow
       @click-left="
         () => {
@@ -12,7 +12,7 @@
     </van-nav-bar>
     <div class="picker-place">
       <van-picker
-        title="위치"
+        title="키"
         :columns="columns"
         @confirm="onConfirm"
         @cancel="onCancel"
@@ -41,23 +41,23 @@ export default {
   data() {
     return {
       columns: [
-        "서울",
-        "경기",
-        "광주",
-        "대구",
-        "대전",
-        "부산",
-        "울산",
-        "인천",
-        "세종",
-        "강원",
-        "경남",
-        "경북",
-        "전남",
-        "전북",
-        "제주",
-        "충남",
-        "충북",
+        "140",
+        "141",
+        "142",
+        "143",
+        "144",
+        "145",
+        "145",
+        "147",
+        "148",
+        "149",
+        "150",
+        "151",
+        "152",
+        "153",
+        "154",
+        "156",
+        "167",
       ],
     };
   },
@@ -75,7 +75,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.user-location-page {
+.user-tall-page {
   .van-icon-arrow-left::before {
     color: #000;
   }

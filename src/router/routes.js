@@ -25,12 +25,37 @@ const routes = [
     children: [{ path: "", component: () => import("pages/UserLocation.vue") }]
   },
   {
+    path: "/user-tall",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/UserTall.vue") }]
+  },
+  {
+    path: "/hobby",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Hobby.vue") }]
+  },
+  {
+    path: "/personality",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Personality.vue") }]
+  },
+  {
+    path: "/smoke",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Smoke.vue") }]
+  },
+  {
+    path: "/drink",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Drink.vue") }]
+  },
+  {
     path: "/userlist",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/UserList.vue") }]
   },
   {
-    path: "/ParticipationList",
+    path: "/participationList",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/ParticipationList.vue") }]
   }
