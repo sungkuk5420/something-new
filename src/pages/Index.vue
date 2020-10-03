@@ -125,8 +125,8 @@
         <div class="main-title-sub">자신있는 사진을 올려주세요!</div>
         <div class="photo-uproad">
           <my-upload
-            v-show="!imgDataUrl"
             field="img"
+            :class="!imgDataUrl ? 'is-show' : ''"
             @crop-success="cropSuccess"
             @crop-upload-success="cropUploadSuccess"
             @crop-upload-fail="cropUploadFail"
@@ -140,25 +140,6 @@
             img-format="png"
             ref="uploader"
           >
-            <svg
-              class="test-image"
-              width="80"
-              height="80"
-              viewBox="0 0 80 80"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="40" cy="40" r="40" fill="#E6E6E6" />
-              <rect x="39" y="25" width="3" height="31" fill="#C4C4C4" />
-              <rect
-                x="56"
-                y="39"
-                width="3"
-                height="31"
-                transform="rotate(90 56 39)"
-                fill="#C4C4C4"
-              />
-            </svg>
           </my-upload>
           <img class="preview-image" :src="imgDataUrl" v-show="imgDataUrl" />
           <div class="photo-shooting" v-show="!imgDataUrl">
@@ -293,7 +274,8 @@ export default {
     cropSuccess(imgDataUrl, field) {
       console.log("-------- crop success --------");
       this.imgDataUrl = imgDataUrl;
-      console.log(imgDataUrl);
+      const thisObj = this;
+      console.log(imgDataUrl.trim() == "");
     },
     /**
      * upload success
@@ -555,6 +537,10 @@ export default {
           height: 250px;
           background: white;
           border-radius: 16px;
+          display: none;
+          &.is-show {
+            display: block !important;
+          }
           .vicp-wrap {
             position: relative;
             padding: 0;
@@ -649,6 +635,7 @@ export default {
           justify-content: center;
           flex-direction: column;
           margin-top: 60px;
+          min-height: 358px;
           .preview-image {
             width: 250px;
             height: 250px;
