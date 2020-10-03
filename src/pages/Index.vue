@@ -191,8 +191,12 @@
           </div>
         </div>
 
-        <button type="button" class="now">조금 더 알려주기</button>
-        <button type="button" class="later">나중에 할래요</button>
+        <button type="button" class="now" @click="userLogin">
+          조금 더 알려주기
+        </button>
+        <button type="button" class="later" @click="userLogin">
+          나중에 할래요
+        </button>
       </q-step>
     </q-stepper>
   </q-page>
