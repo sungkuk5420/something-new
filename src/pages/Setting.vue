@@ -74,7 +74,7 @@
         <div class="email">something@gmail.com</div>
       </div>
       <div class="info-button">
-        <button type="button" onclick="location.href = '#' ">
+        <button type="button" @click="$router.push('/user-profile')">
           프로필 관리
         </button>
       </div>
@@ -127,7 +127,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 

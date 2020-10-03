@@ -1,16 +1,18 @@
 <template>
   <q-page class="user-profile-page">
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item>1</van-swipe-item>
-      <van-swipe-item>2</van-swipe-item>
-      <van-swipe-item>3</van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>
+      <van-swipe-item>
+        <img src="~assets/user-image-1.jpg" />
+      </van-swipe-item>
+      <van-swipe-item><img src="~assets/user-image-2.jpg" /></van-swipe-item>
+      <van-swipe-item><img src="~assets/user-image-3.jpg" /></van-swipe-item>
+      <van-swipe-item><img src="~assets/user-image-4.jpg" /></van-swipe-item>
     </van-swipe>
 
     <div class="card-detail">
       <section>
         <!-- 카드 상세 -->
-        <div class="floating-card">
+        <!-- <div class="floating-card">
           <div class="normal">
             <div class="left">
               <div class="user-name">김냠냠</div>
@@ -160,10 +162,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- 카드 상세 끝 -->
         <!-- 내가 좋아한 카드  -->
-        <div class="floating-card">
+        <!-- <div class="floating-card">
           <div class="give-like">
             <div class="left">
               <div class="user-name">김냠냠</div>
@@ -202,6 +204,63 @@
               </div>
             </div>
           </div>
+        </div> -->
+        <!-- 내가 좋아한 카드 끝 -->
+        <!-- 내가 좋아한 카드  -->
+        <div class="floating-card">
+          <div class="give-like">
+            <div class="left">
+              <div class="user-name">
+                <span>김냥냥</span
+                ><svg
+                  style="margin-left: 5px"
+                  width="13"
+                  height="12"
+                  viewBox="0 0 13 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 9.50069V12.0007H2.5L9.87333 4.62736L7.37333 2.12736L0 9.50069ZM11.8067 2.69402C12.0667 2.43402 12.0667 2.01402 11.8067 1.75402L10.2467 0.194023C9.98667 -0.0659766 9.56667 -0.0659766 9.30667 0.194023L8.08667 1.41402L10.5867 3.91402L11.8067 2.69402Z"
+                    fill="#FE7F8E"
+                  />
+                </svg>
+              </div>
+              <ul class="user-age-address">
+                <li>25세</li>
+                <li>서울</li>
+              </ul>
+            </div>
+            <div class="right">
+              <div class="like-div">
+                <svg
+                  width="30"
+                  height="24"
+                  viewBox="0 0 30 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="20.4973"
+                    width="11.7579"
+                    height="21.2943"
+                    rx="5.87896"
+                    transform="rotate(40.2482 20.4973 0)"
+                    fill="#FE7F8E"
+                  />
+                  <rect
+                    y="8.79199"
+                    width="11.7579"
+                    height="21.2943"
+                    rx="5.87896"
+                    transform="rotate(-45 0 8.79199)"
+                    fill="#FFBCC4"
+                  />
+                </svg>
+                <p>1,343</p>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- 내가 좋아한 카드 끝 -->
       </section>
@@ -217,13 +276,35 @@
               <div class="info-title">출생년도</div>
               <div class="info-description">1998</div>
             </li>
-            <li>
+            <li @click="$router.push('/user-tall')">
               <div class="info-title">키</div>
-              <div class="info-description">163cm</div>
+              <div class="info-description">
+                <span>163cm</span>
+                <svg
+                  width="8"
+                  height="14"
+                  viewBox="0 0 8 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+                </svg>
+              </div>
             </li>
             <li>
               <div class="info-title">위치</div>
-              <div class="info-description">여</div>
+              <div class="info-description">
+                <span> 여 </span>
+                <svg
+                  width="8"
+                  height="14"
+                  viewBox="0 0 8 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+                </svg>
+              </div>
             </li>
           </ul>
         </div>
@@ -233,35 +314,79 @@
           <ul>
             <li>
               <div class="info-title">취미</div>
-              <div class="info-description">롤, 하스스톤</div>
+              <div class="info-description">
+                <span> 롤, 하스스톤 </span>
+                <svg
+                  width="8"
+                  height="14"
+                  viewBox="0 0 8 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+                </svg>
+              </div>
             </li>
             <li>
               <div class="info-title">성격</div>
-              <div class="info-description">쾌활함, 또라이</div>
+              <div class="info-description">
+                <span> 쾌활함, 또라이 </span>
+                <svg
+                  width="8"
+                  height="14"
+                  viewBox="0 0 8 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+                </svg>
+              </div>
             </li>
             <li>
               <div class="info-title">흡연</div>
-              <div class="info-description">가끔</div>
+              <div class="info-description">
+                <span> 가끔 </span>
+                <svg
+                  width="8"
+                  height="14"
+                  viewBox="0 0 8 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+                </svg>
+              </div>
             </li>
             <li>
               <div class="info-title">음주</div>
-              <div class="info-description">가끔</div>
+              <div class="info-description">
+                <span> 가끔 </span>
+                <svg
+                  width="8"
+                  height="14"
+                  viewBox="0 0 8 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path opacity="0.3" d="M1 1L7 7L1 13" stroke="black" />
+                </svg>
+              </div>
             </li>
           </ul>
         </div>
       </section>
       <section>
         <!-- 내가 좋아한 카드 시작 -->
-        <div class="give-like-bottom">
+        <!-- <div class="give-like-bottom">
           <div class="give-like-bottom-title">
             상대방의 응답을 기다리고 있어요!
           </div>
           <button type="button" class="button-wating">대화하기</button>
-        </div>
+        </div> -->
 
         <!-- 내가 좋아한 카드 끝 -->
         <!-- 나를 좋아한 카드 시작 -->
-        <div class="take-like-bottom">
+        <!-- <div class="take-like-bottom">
           <div class="take-like-bottom-title">
             상대방이 종규님의 답변을 기다리고 있어요!
           </div>
@@ -401,15 +526,15 @@
               </defs>
             </svg>
           </div>
-        </div>
+        </div> -->
         <!-- 나를 좋아한 카드 끝 -->
         <!-- 서로 매칭된 카드 시작 -->
-        <div class="matching-bottom">
+        <!-- <div class="matching-bottom">
           <div class="matching-bottom-title">
             상대방의 응답을 기다리고 있어요!
           </div>
           <button type="button" class="button-matching">대화하기</button>
-        </div>
+        </div> -->
 
         <!-- 서로 매칭된 카드 끝 -->
       </section>
@@ -427,15 +552,25 @@ export default {
 
 <style lang="scss">
 .user-profile-page {
+  .van-swipe {
+    max-width: 100%;
+    max-height: 375px;
+  }
+  .van-swipe__indicators {
+    top: 50px;
+  }
   .my-swipe .van-swipe-item {
     color: #fff;
     font-size: 20px;
     line-height: 150px;
     text-align: center;
-    background-color: #39a9ed;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   .card-detail {
-    margin-bottom: 70px;
+    padding-bottom: 80px;
     background: #f9f8f8;
     .title {
       font-family: Noto Sans CJK KR;
@@ -451,16 +586,18 @@ export default {
     }
     .content {
       margin-bottom: 20px;
-      background: #fff;
       ul {
         border-top: 1px solid #ece8e8;
         border-bottom: 1px solid #ece8e8;
         padding: 0 16px;
+        background: #fff;
         li {
           display: flex;
           justify-content: space-between;
           padding: 20px 10px;
           border-bottom: 1px solid #ece8e8;
+          position: relative;
+          padding-right: 40px;
           .info-title {
             font-family: Noto Sans;
             font-style: normal;
@@ -470,12 +607,20 @@ export default {
             color: #121214;
           }
           .info-description {
-            font-family: Noto Sans;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 22px;
-            color: #747070;
+            display: flex;
+            align-items: center;
+            span {
+              font-family: Noto Sans;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 16px;
+              line-height: 22px;
+              color: #747070;
+            }
+            svg {
+              position: absolute;
+              right: 20px;
+            }
           }
         }
         li:last-child {
@@ -527,6 +672,17 @@ export default {
         display: none;
       }
     }
+    .right {
+      display: flex;
+      align-items: center;
+    }
+    .like-div {
+      display: flex;
+      align-items: center;
+      svg {
+        height: 20px;
+      }
+    }
   }
 
   /* 카드 상세 */
@@ -547,7 +703,7 @@ export default {
         font-family: Noto Sans;
         font-style: normal;
         font-weight: normal;
-        font-size: 10px;
+        font-size: 14px;
         line-height: 14px;
         margin-bottom: 0;
         color: #fe7f8e;

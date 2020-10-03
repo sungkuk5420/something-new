@@ -25,12 +25,17 @@ const routes = [
     children: [{ path: "", component: () => import("pages/UserLocation.vue") }]
   },
   {
+    path: "/user-tall",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/UserTall.vue") }]
+  },
+  {
     path: "/userlist",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/UserList.vue") }]
   },
   {
-    path: "/ParticipationList",
+    path: "/participationList",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/ParticipationList.vue") }]
   }
