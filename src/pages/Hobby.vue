@@ -1,76 +1,43 @@
 <template>
   <q-page class="hobby-page">
-    <van-nav-bar title="취미선택" left-arrow> </van-nav-bar>
+    <van-nav-bar
+      title="취미 선택"
+      left-arrow
+      @click-left="
+        () => {
+          $router.push('/user-profile');
+        }
+      "
+    >
+    </van-nav-bar>
     <div class="hobby">
       <div class="hobby-plus">
-        <input type="text" />
+        <input type="text" placeholder="직접입력" />
         <div class="plus">추가</div>
       </div>
       <div class="hobby-content">
         <ul>
-          <li>
-            게임
-          </li>
-          <li>
-            낚시
-          </li>
-          <li>
-            리그오브레전드
-          </li>
-          <li>
-            여행가기
-          </li>
-          <li>
-            캠핑
-          </li>
-          <li>
-            전시회
-          </li>
-          <li>
-            독서
-          </li>
-          <li>
-            게임
-          </li>
-          <li>
-            낚시
-          </li>
-          <li>
-            리그오브레전드
-          </li>
-          <li>
-            여행가기
-          </li>
-          <li>
-            캠핑
-          </li>
-          <li>
-            전시회
-          </li>
-          <li>
-            독서
-          </li>
-          <li>
-            게임
-          </li>
-          <li>
-            낚시
-          </li>
-          <li>
-            리그오브레전드
-          </li>
-          <li>
-            여행가기
-          </li>
-          <li>
-            캠핑
-          </li>
-          <li>
-            전시회
-          </li>
-          <li>
-            독서
-          </li>
+          <li class="is-active">게임</li>
+          <li>낚시</li>
+          <li>리그오브레전드</li>
+          <li>여행가기</li>
+          <li>캠핑</li>
+          <li>전시회</li>
+          <li>독서</li>
+          <li>게임</li>
+          <li>낚시</li>
+          <li>리그오브레전드</li>
+          <li>여행가기</li>
+          <li>캠핑</li>
+          <li>전시회</li>
+          <li>독서</li>
+          <li>게임</li>
+          <li>낚시</li>
+          <li>리그오브레전드</li>
+          <li>여행가기</li>
+          <li>캠핑</li>
+          <li>전시회</li>
+          <li>독서</li>
         </ul>
       </div>
     </div>
@@ -81,7 +48,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -94,17 +61,26 @@ export default {
     border-bottom: none;
   }
   .hobby {
-    .hobby-plus {
+    &-plus {
       padding: 24px 16px 16px 16px;
       display: flex;
       border-bottom: 1px solid #ece8e8;
       margin-bottom: 20px;
       input {
+        padding-left: 10px;
         background: #f9f8f8;
         border-radius: 8px;
         border: none;
         flex: 8;
         height: 38px;
+        &::placeholder {
+          font-family: Noto Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 127.3%;
+          color: #d2cdcd;
+        }
       }
       .plus {
         flex: 2;
@@ -119,6 +95,7 @@ export default {
         color: #fe7f8e;
       }
     }
+
     .hobby-content {
       ul {
         padding: 0 16px;
@@ -136,6 +113,10 @@ export default {
           font-size: 16px;
           line-height: 127.3%;
           color: #bebbbb;
+          &.is-active {
+            background: #fe7f8e;
+            color: white;
+          }
         }
       }
     }

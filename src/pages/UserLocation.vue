@@ -3,8 +3,11 @@
     <van-nav-bar
       title="위치"
       left-arrow
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
+      @click-left="
+        () => {
+          $router.push('/user-profile');
+        }
+      "
     >
     </van-nav-bar>
     <div class="picker-place">
@@ -59,15 +62,15 @@ export default {
     };
   },
   methods: {
-    onConfirm(value, index) {
-      Toast(`Value: ${value}, Index: ${index}`);
-    },
+    // onConfirm(value, index) {
+    //   Toast(`Value: ${value}, Index: ${index}`);
+    // },
     onChange(picker, value, index) {
       Toast(`Value: ${value}, Index: ${index}`);
     },
-    onCancel() {
-      Toast("Cancel");
-    },
+    // onCancel() {
+    //   Toast("Cancel");
+    // },
   },
 };
 </script>
@@ -108,7 +111,7 @@ export default {
       }
     }
     .van-picker {
-      /* margin-bottom: 80px; */
+      margin-bottom: 122px;
     }
     .van-picker-column__item .van-ellipsis {
       font-family: Noto Sans CJK KR;

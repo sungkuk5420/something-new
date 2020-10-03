@@ -3,8 +3,11 @@
     <van-nav-bar
       title="음주"
       left-arrow
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
+      @click-left="
+        () => {
+          $router.push('/user-profile');
+        }
+      "
     >
     </van-nav-bar>
 
@@ -15,7 +18,7 @@
         <li>적당히 마셔요</li>
         <li>많이 마셔요</li>
         <li>술고래에요</li>
-        <li>조금씩 자주 마셔요</li>
+        <li class="is-active">조금씩 자주 마셔요</li>
       </ul>
     </div>
   </q-page>
@@ -25,7 +28,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -45,6 +48,9 @@ export default {
         font-size: 14px;
         line-height: 20px;
         color: #121214;
+        &.is-active {
+          color: #ff576b;
+        }
       }
       li:last-child {
         border-bottom: none;

@@ -291,10 +291,10 @@
                 </svg>
               </div>
             </li>
-            <li>
+            <li @click="$router.push('/user-location')">
               <div class="info-title">위치</div>
               <div class="info-description">
-                <span> 여 </span>
+                <span> 서울 </span>
                 <svg
                   width="8"
                   height="14"
@@ -312,7 +312,7 @@
         <div class="title">추가 정보</div>
         <div class="content">
           <ul>
-            <li>
+            <li @click="$router.push('/hobby')">
               <div class="info-title">취미</div>
               <div class="info-description">
                 <span> 롤, 하스스톤 </span>
@@ -327,7 +327,7 @@
                 </svg>
               </div>
             </li>
-            <li>
+            <li @click="$router.push('/personality')">
               <div class="info-title">성격</div>
               <div class="info-description">
                 <span> 쾌활함, 또라이 </span>
@@ -342,7 +342,7 @@
                 </svg>
               </div>
             </li>
-            <li>
+            <li @click="$router.push('/smoke')">
               <div class="info-title">흡연</div>
               <div class="info-description">
                 <span> 가끔 </span>
@@ -357,7 +357,7 @@
                 </svg>
               </div>
             </li>
-            <li>
+            <li @click="$router.push('/drink')">
               <div class="info-title">음주</div>
               <div class="info-description">
                 <span> 가끔 </span>

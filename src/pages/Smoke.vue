@@ -3,8 +3,11 @@
     <van-nav-bar
       title="흡연"
       left-arrow
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
+      @click-left="
+        () => {
+          $router.push('/user-profile');
+        }
+      "
     >
     </van-nav-bar>
 
@@ -14,7 +17,7 @@
         <li>가끔 해요</li>
         <li>자주 해요</li>
         <li>비흡연자 앞에서는 하지 않아요</li>
-        <li>상대방이 싫어하면 끊을 수 있어요</li>
+        <li class="is-active">상대방이 싫어하면 끊을 수 있어요</li>
       </ul>
     </div>
   </q-page>
@@ -24,7 +27,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -44,6 +47,9 @@ export default {
         font-size: 14px;
         line-height: 20px;
         color: #121214;
+        &.is-active {
+          color: #ff576b;
+        }
       }
       li:last-child {
         border-bottom: none;

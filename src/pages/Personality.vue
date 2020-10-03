@@ -1,14 +1,23 @@
 <template>
   <q-page class="personality-page">
-    <van-nav-bar title="취미선택" left-arrow> </van-nav-bar>
+    <van-nav-bar
+      title="성격 선택"
+      left-arrow
+      @click-left="
+        () => {
+          $router.push('/user-profile');
+        }
+      "
+    >
+    </van-nav-bar>
     <div class="personality">
       <div class="personality-plus">
-        <input type="text" />
+        <input type="text" placeholder="직접입력" />
         <div class="plus">추가</div>
       </div>
       <div class="personality-content">
         <ul>
-          <li>밝아요</li>
+          <li class="is-active">밝아요</li>
           <li>내성적이에요</li>
           <li>적극적이에요</li>
           <li>소심해요</li>
@@ -36,7 +45,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -55,11 +64,20 @@ export default {
       border-bottom: 1px solid #ece8e8;
       margin-bottom: 20px;
       input {
+        padding-left: 10px;
         background: #f9f8f8;
         border-radius: 8px;
         border: none;
         flex: 8;
         height: 38px;
+        &::placeholder {
+          font-family: Noto Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 127.3%;
+          color: #d2cdcd;
+        }
       }
       .plus {
         flex: 2;
@@ -80,7 +98,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         li {
-          padding: 8px 16px;
+          padding: 8px 13px;
           background: #f9f8f8;
           border-radius: 8px;
           margin-right: 8px;
@@ -91,6 +109,10 @@ export default {
           font-size: 16px;
           line-height: 127.3%;
           color: #bebbbb;
+          &.is-active {
+            background: #fe7f8e;
+            color: white;
+          }
         }
       }
     }
