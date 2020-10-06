@@ -1,8 +1,7 @@
 export default function () {
   return {
     state: "",
-    isLogin: false,
-    currentUser: '',
+    currentUser: null,
     userList: [
       {
         uid: '1',
