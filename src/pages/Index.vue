@@ -62,15 +62,8 @@
           type="default"
           @click="
             () => {
-<<<<<<< HEAD
-              $toast.success({
-                message: '준비중',
-                icon: 'ellipsis',
-              });
-=======
               //userLogin();
               $refs.stepper.next();
->>>>>>> master
             }
           "
           >로그인
@@ -198,10 +191,6 @@ export default {
       step: 1,
       name: "",
       password: "",
-<<<<<<< HEAD
-    };
-  },
-=======
       loading: false,
       radio: "",
       areaColumns: [
@@ -330,7 +319,6 @@ export default {
       });
     },
   },
->>>>>>> master
 };
 </script>
 
