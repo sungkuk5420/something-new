@@ -50,9 +50,9 @@ const routes = [
     children: [{ path: "", component: () => import("pages/Drink.vue") }]
   },
   {
-    path: "/userlist",
+    path: "/chatlist",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/UserList.vue") }]
+    children: [{ path: "", component: () => import("pages/ChatList.vue") }]
   },
   {
     path: "/participationList",

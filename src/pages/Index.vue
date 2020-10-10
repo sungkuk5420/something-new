@@ -308,7 +308,6 @@ export default {
       const thisObj = this;
       const successCb = (result) => {
         // 완료함수
-        thisObj.$router.push({ path: "/userList" });
         thisObj.loading = false;
       };
       const errorCb = () => {
