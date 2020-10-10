@@ -111,17 +111,14 @@ export default {
   methods: {
     userLogin() {
       const thisObj = this;
-      let userCheck = false;
+      let userCheck = null;
       let userInfo = {
-        isLogin: true,
         name: thisObj.name,
         password: thisObj.password,
       };
 
-      thisObj.userList.forEach(function (v, i) {
-        if (v.name === userInfo.name && v.password === userInfo.password) {
-          userCheck = true;
-        }
+      userCheck = thisObj.userList.filter(function(user) {
+        return user.name === userInfo.name && user.password === userInfo.password;
       });
 
       const successCb = (result) => {
@@ -135,7 +132,7 @@ export default {
       };
 
       thisObj.loading = true;
-      if (userCheck) {
+      if (userCheck.length == 1) {
         thisObj.$store.dispatch(T.USER_LOGIN, {
           data: { userInfo },
           successCb,

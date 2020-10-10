@@ -135,7 +135,7 @@ export default {
     logOut(event) {
       event.preventDefault();
 
-      let isLogin = false;
+      let userCheck = null;
 
       const thisObj = this;
       const successCb = (result) => {
@@ -149,7 +149,7 @@ export default {
         Toast.fail("로그아웃 실패");
       };
       thisObj.$store.dispatch(T.USER_LOG_OUT, {
-        data: { isLogin },
+        data: { userCheck },
         successCb,
         errorCb,
       });

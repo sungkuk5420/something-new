@@ -45,7 +45,7 @@ export const actions = {
     if (successCb) {
       setTimeout(() => {
         successCb(data);
-        commit(T.USER_LOG_OUT, data.isLogin);
+        commit(T.USER_LOG_OUT, data.userCheck);
       }, 2000)
     }
   },
