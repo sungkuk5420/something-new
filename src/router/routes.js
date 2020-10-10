@@ -57,7 +57,14 @@ const routes = [
   {
     path: "/participationList",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/ParticipationList.vue") }]
+    children: [
+      { path: "", component: () => import("pages/ParticipationList.vue") }
+    ]
+  },
+  {
+    path: "/chat",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Chat.vue") }]
   }
 ];
 
@@ -68,6 +75,5 @@ if (process.env.MODE !== "ssr") {
     component: () => import("pages/Error404.vue")
   });
 }
-
 
 export default routes;
