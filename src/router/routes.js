@@ -15,12 +15,47 @@ const routes = [
     children: [{ path: "", component: () => import("pages/Setting.vue") }]
   },
   {
-    path: "/userlist",
+    path: "/user-profile",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/UserList.vue") }]
+    children: [{ path: "", component: () => import("pages/UserProfile.vue") }]
   },
   {
-    path: "/ParticipationList",
+    path: "/user-location",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/UserLocation.vue") }]
+  },
+  {
+    path: "/user-tall",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/UserTall.vue") }]
+  },
+  {
+    path: "/hobby",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Hobby.vue") }]
+  },
+  {
+    path: "/personality",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Personality.vue") }]
+  },
+  {
+    path: "/smoke",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Smoke.vue") }]
+  },
+  {
+    path: "/drink",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/Drink.vue") }]
+  },
+  {
+    path: "/chatlist",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/ChatList.vue") }]
+  },
+  {
+    path: "/participationList",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/ParticipationList.vue") }
