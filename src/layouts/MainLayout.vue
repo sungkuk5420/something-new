@@ -29,7 +29,7 @@
             <img class="on" src="../assets/home_on.svg" />
           </template>
         </van-tabbar-item>
-        <van-tabbar-item to="/userList">
+        <van-tabbar-item to="/chatlist">
           <span>chat</span>
           <template #icon="chat">
             <img class="off" src="../assets/chat.svg" />
@@ -66,30 +66,30 @@ export default {
       icon: {
         name: "home",
         active: "../assets/home.svg",
-        inactive: "../assets/home_on.svg"
+        inactive: "../assets/home_on.svg",
       },
       icon: {
         name: "chat",
         active: "../assets/chat.svg",
-        inactive: "../assets/chat_on.svg"
+        inactive: "../assets/chat_on.svg",
       },
       icon: {
         name: "card",
         active: "../assets/card.svg",
-        inactive: "../assets/card_on.svg"
+        inactive: "../assets/card_on.svg",
       },
       icon: {
         name: "menu",
         active: "../assets/menu.svg",
-        inactive: "../assets/menu_on.svg"
-      }
+        inactive: "../assets/menu_on.svg",
+      },
     };
   },
   computed: {
     ...mapGetters({
-      isLogin: "getIsLogin"
-    })
-  }
+      isLogin: "getIsLogin",
+    }),
+  },
 };
 </script>
 <style lang="scss">
