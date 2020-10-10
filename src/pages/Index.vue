@@ -60,6 +60,8 @@
 
         <van-button
           type="default"
+          :loading="loading"
+          loading-text="로그인"
           @click="
             () => {
               //userLogin();
@@ -182,6 +184,7 @@
 </template>
 
 <script>
+import { T } from "../store/module-example/types";
 import { Toast } from "vant";
 
 import myUpload from "vue-image-crop-upload";
