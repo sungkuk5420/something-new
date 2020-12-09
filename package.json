@@ -16,7 +16,8 @@
     "firebase": "^7.23.0",
     "quasar": "^1.0.0",
     "vant": "^2.10.8",
-    "vue-i18n": "^8.0.0"
+    "vue-i18n": "^8.0.0",
+    "vue-image-crop-upload": "^2.5.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",
