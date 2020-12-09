@@ -254,16 +254,13 @@ export default {
       imgDataUrl: "", // the datebase64 url of created image
     };
   },
-<<<<<<< HEAD
-  computed: {
-    ...mapGetters({
-      userList: "getUserList",
-    }),
-=======
   components: {
     "my-upload": myUpload,
   },
   computed: {
+    ...mapGetters({
+      userList: "getUserList",
+    }),
     yearsColumns() {
       let returnArray = [];
       for (let i = 0, len = 51; i < len; i++) {
@@ -272,7 +269,6 @@ export default {
       console.log(returnArray);
       return returnArray;
     },
->>>>>>> master
   },
   methods: {
     customCallPrepareUpload() {
@@ -329,7 +325,6 @@ export default {
 
       const successCb = (result) => {
         // 완료함수
-        thisObj.$router.push({ path: "/chatRoom" });
         thisObj.loading = false;
       };
       const errorCb = () => {
@@ -338,16 +333,16 @@ export default {
       };
 
       thisObj.loading = true;
-      if (userCheck.length == 1) {
+      // if (userCheck.length == 1) {
         thisObj.$store.dispatch(T.USER_LOGIN, {
           data: { userInfo },
           successCb,
           errorCb,
         });
-      } else {
-        Toast.fail("아이디 비밀번호가 일치하지 않습니다.");
-        thisObj.loading = false;
-      }
+      // } else {
+      //   Toast.fail("아이디 비밀번호가 일치하지 않습니다.");
+      //   thisObj.loading = false;
+      // }
     },
   },
 };
