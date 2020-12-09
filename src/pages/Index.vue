@@ -177,10 +177,10 @@
           </div>
         </div>
 
-        <button type="button" class="now" @click="userLogin">
+        <button type="button" class="now" @click="registerUser">
           조금 더 알려주기
         </button>
-        <button type="button" class="later" @click="userLogin">
+        <button type="button" class="later" @click="registerUser">
           나중에 할래요
         </button>
       </q-step>
@@ -221,8 +221,6 @@ export default {
         "충남",
         "충북",
       ],
-      loading: false,
-
       show: true,
       params: {
         token: "123456798",
@@ -344,6 +342,25 @@ export default {
       //   thisObj.loading = false;
       // }
     },
+    registerUser() {
+      const registerUserData = {
+        email: this.name,
+        password: this.password,
+      }
+      const successCb = (result) => {
+        // 완료함수
+        this.loading = false;
+      }
+      const errorCb = () => {
+        //실패함수
+        this.loading = false;
+      }
+      this.$store.dispatch(T.REGISTER_USER, {
+        data: registerUserData,
+        successCb,
+        errorCb,
+      })
+    }
   },
 };
 </script>

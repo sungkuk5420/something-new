@@ -1,5 +1,6 @@
 import { T } from "./types";
 import { ajaxActions } from "./ajaxActions";
+import {authService, firebaseDB} from "src/fbase";
 
 export const actions = {
   [T.AJAX_ACTION]({ commit }, { data = {}, successCb, errorCb }) {
@@ -54,5 +55,31 @@ export const actions = {
     console.log(data);
 
     commit(T.CHAT_ADD_DATA, data);
+  },
+  async [T.REGISTER_USER]({commit},{ data, successCb, errorCb}) {
+    console.log(`store action [T.REGISTER_USER] data : ${JSON.stringify(data)}`);
+    try {
+      const registerResult = await authService.createUserWithEmailAndPassword(data.email, data.password)
+      if (registerResult) {
+        successCb(registerResult);
+        console.log(`store action [T.REGISTER_USER] success data : ${JSON.stringify(registerResult)}`);
+        await firebaseDB.ref(`users/${registerResult.user.uid}`).set({
+            age: '',
+            chats: '',
+            comment: '',
+            email: registerResult.user.email,
+            height: '',
+            name: '',
+            profileImage: '',
+            uid:
+              registerResult.user.uid,
+            voteHistories: ''
+          }
+        )
+      }
+    } catch (e) {
+      console.log(`store action [T.REGISTER_USER] error : ${JSON.stringify(e)}`);
+      errorCb()
+    }
   }
 };

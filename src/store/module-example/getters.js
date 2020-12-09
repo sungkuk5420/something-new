@@ -11,7 +11,4 @@ export const getters = {
     getChatData(state) {
         return state.chatData;
     },
-    getCurrentUser(state) {
-        return state.currentUser;
-    }
 };
