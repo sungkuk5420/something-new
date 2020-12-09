@@ -57,6 +57,12 @@ const routes = [
   {
     path: "/participationList",
     component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/ParticipationList.vue") }]
+  },
+  {
+    path: "/chatRoom",
+    component: () => import("layouts/SubLayout.vue"),
+    children: [{ path: "", component: () => import("pages/ChatRoom.vue") }]
     children: [
       { path: "", component: () => import("pages/ParticipationList.vue") }
     ]

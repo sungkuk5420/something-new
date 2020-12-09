@@ -56,7 +56,12 @@
       <q-step class="step-3" title="3" :name="3">
         <div class="main-text">비밀번호를 입력해주세요.</div>
         <div class="sub-text">다시 방문해 주셨군요!</div>
-        <q-input type="password" filled v-model="name" label="・・・・・・" />
+        <q-input
+          type="password"
+          filled
+          v-model="password"
+          label="・・・・・・"
+        />
 
         <van-button
           type="default"
@@ -185,6 +190,7 @@
 
 <script>
 import { T } from "../store/module-example/types";
+import { mapGetters } from "vuex";
 import { Toast } from "vant";
 
 import myUpload from "vue-image-crop-upload";
@@ -248,6 +254,12 @@ export default {
       imgDataUrl: "", // the datebase64 url of created image
     };
   },
+<<<<<<< HEAD
+  computed: {
+    ...mapGetters({
+      userList: "getUserList",
+    }),
+=======
   components: {
     "my-upload": myUpload,
   },
@@ -260,6 +272,7 @@ export default {
       console.log(returnArray);
       return returnArray;
     },
+>>>>>>> master
   },
   methods: {
     customCallPrepareUpload() {
@@ -303,23 +316,38 @@ export default {
       console.log(file);
     },
     userLogin() {
-      let isLogin = true;
-
       const thisObj = this;
+      let userCheck = null;
+      let userInfo = {
+        name: thisObj.name,
+        password: thisObj.password,
+      };
+
+      userCheck = thisObj.userList.filter(function(user) {
+        return user.name === userInfo.name && user.password === userInfo.password;
+      });
+
       const successCb = (result) => {
         // 완료함수
+        thisObj.$router.push({ path: "/chatRoom" });
         thisObj.loading = false;
       };
       const errorCb = () => {
         //실패함수
         thisObj.loading = false;
       };
+
       thisObj.loading = true;
-      thisObj.$store.dispatch(T.USER_LOGIN, {
-        data: { isLogin },
-        successCb,
-        errorCb,
-      });
+      if (userCheck.length == 1) {
+        thisObj.$store.dispatch(T.USER_LOGIN, {
+          data: { userInfo },
+          successCb,
+          errorCb,
+        });
+      } else {
+        Toast.fail("아이디 비밀번호가 일치하지 않습니다.");
+        thisObj.loading = false;
+      }
     },
   },
 };

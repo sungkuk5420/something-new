@@ -98,7 +98,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="#" @click="logOut">
             <div class="mypage-list-title">로그아웃</div>
             <div class="mypage-list-button">
               <svg
@@ -124,9 +124,36 @@
 </template>
 
 <script>
+import { T } from "../store/module-example/types";
+import { Toast } from "vant";
+
 export default {
   data() {
     return {};
+  },
+  methods: {
+    logOut(event) {
+      event.preventDefault();
+
+      let userCheck = null;
+
+      const thisObj = this;
+      const successCb = (result) => {
+        // 완료함수
+        thisObj.$router.push({ path: "/" });
+        Toast.success("로그아웃 성공");
+      };
+
+      const errorCb = (result) => {
+        // 실패함수
+        Toast.fail("로그아웃 실패");
+      };
+      thisObj.$store.dispatch(T.USER_LOG_OUT, {
+        data: { userCheck },
+        successCb,
+        errorCb,
+      });
+    },
   },
 };
 </script>

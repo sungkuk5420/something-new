@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" v-show="init">
     <q-header
       bordered
       class="bg-primary text-white"
@@ -19,7 +19,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer reveal class="bg-grey-8 text-white" v-show="isLogin">
+    <q-footer reveal class="bg-grey-8 text-white" v-show="currentUser !== null">
       <van-tabbar v-model="active">
         <van-tabbar-item to="/main">
           <span>home</span>
@@ -58,10 +58,12 @@
 <script>
 import { mapGetters } from "vuex";
 import { Tabbar, TabbarItem } from "vant";
+import { authService } from "../fbase";
 
 export default {
   data() {
     return {
+      init: false,
       active: 0,
       icon: {
         name: "home",
@@ -87,8 +89,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isLogin: "getIsLogin",
+      currentUser: "getCurrentUser",
     }),
+  },
+  mounted() {
+    authService.onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.user;
+      }
+      this.init = true;
+    });
   },
 };
 </script>
