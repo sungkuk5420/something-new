@@ -48,7 +48,7 @@
         <div class="main-text">이메일을 입력해주세요 :)</div>
         <div class="sub-text">로그인 또는 회원가입에 필요합니다.</div>
         <q-input filled v-model="name" label="example@gmail.com" />
-        <van-button type="default" @click="$refs.stepper.next()"
+        <van-button type="default" @click="checkStep2"
           >다음
         </van-button>
       </q-step>
@@ -69,8 +69,8 @@
           loading-text="로그인"
           @click="
             () => {
-              //userLogin();
-              $refs.stepper.next();
+              userLogin();
+              // $refs.stepper.next();
             }
           "
           >로그인
@@ -269,6 +269,27 @@ export default {
     },
   },
   methods: {
+
+    emailIsValid (email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    },
+    checkForm() {
+      if (!this.name) {
+        Toast.fail('이메일을 입력해주세요.')
+        return false;
+      }
+      else if (!this.password)  {
+        Toast.fail('비밀번호를 입력해주세요.')
+        return false;
+      }
+      else if (!this.emailIsValid(this.name)) {
+        Toast.fail('이메일 양식이 틀립니다. 다시 입력해주세요.')
+        return false;
+      }
+      else if (this.name && this.password && this.emailIsValid(this.name)) {
+        return true;
+      }
+    },
     customCallPrepareUpload() {
       this.$refs.uploader.prepareUpload();
     },
@@ -309,37 +330,47 @@ export default {
     afterRead(file) {
       console.log(file);
     },
+    checkStep2() {
+      if (!this.name) {
+        Toast.fail('이메일을 입력해주세요.');
+        return;
+      }
+      else if (!this.emailIsValid(this.name)) {
+        Toast.fail('이메일 양식이 틀립니다. 다시 입력해주세요.');
+        return;
+      }
+      this.$refs.stepper.next();
+    },
     userLogin() {
-      const thisObj = this;
-      let userCheck = null;
-      let userInfo = {
-        name: thisObj.name,
-        password: thisObj.password,
+      if(!this.checkForm()) return;
+      const userInfo = {
+        email: this.name,
+        password: this.password,
       };
 
-      userCheck = thisObj.userList.filter(function(user) {
+      const userCheck = this.userList.filter(function(user) {
         return user.name === userInfo.name && user.password === userInfo.password;
       });
 
       const successCb = (result) => {
         // 완료함수
-        thisObj.loading = false;
+        this.loading = false;
       };
       const errorCb = () => {
         //실패함수
-        thisObj.loading = false;
+        this.loading = false;
       };
-
-      thisObj.loading = true;
+      if (!this.checkForm()) return;
+      this.loading = true;
       // if (userCheck.length == 1) {
-        thisObj.$store.dispatch(T.USER_LOGIN, {
-          data: { userInfo },
-          successCb,
-          errorCb,
-        });
+      this.$store.dispatch(T.USER_LOGIN, {
+        data: userInfo,
+        successCb,
+        errorCb,
+      });
       // } else {
       //   Toast.fail("아이디 비밀번호가 일치하지 않습니다.");
-      //   thisObj.loading = false;
+      //   this.loading = false;
       // }
     },
     registerUser() {
@@ -355,6 +386,8 @@ export default {
         //실패함수
         this.loading = false;
       }
+      if(!this.checkForm()) return;
+      this.loading = true;
       this.$store.dispatch(T.REGISTER_USER, {
         data: registerUserData,
         successCb,

@@ -1,6 +1,7 @@
 import { T } from "./types";
 import { ajaxActions } from "./ajaxActions";
 import {authService, firebaseDB} from "src/fbase";
+import {Toast} from "vant";
 
 export const actions = {
   [T.AJAX_ACTION]({ commit }, { data = {}, successCb, errorCb }) {
@@ -29,25 +30,29 @@ export const actions = {
     console.log(data);
     commit(T.ACTION, data);
   },
-  [T.USER_LOGIN]({ commit }, { data = {}, successCb, errorCb }) {
+  async [T.USER_LOGIN]({ commit }, { data, successCb, errorCb }) {
     console.log(`store action [T.USER_LOGIN] data`);
     console.log(data);
-    if (successCb) {
-      setTimeout(() => {
-        successCb(data);
-        commit(T.USER_LOGIN, data);
-      }, 2000);
+    try {
+      const loginResult = await authService.signInWithEmailAndPassword(data.email, data.password)
+      if (loginResult) {
+        successCb(loginResult)
+      }
+    } catch (e) {
+      Toast.fail('입력하신 회원정보를 다시 확인해주시기 바랍니다.')
+      errorCb()
     }
   },
-  [T.USER_LOG_OUT]({ commit }, { data = {}, successCb, errorCb }) {
+  async [T.USER_LOG_OUT]({ commit }, { data = {}, successCb, errorCb }) {
     console.log(`store action [T.USER_LOG_OUT] data`);
     console.log(data);
-
-    if (successCb) {
-      setTimeout(() => {
-        successCb(data);
-        commit(T.USER_LOG_OUT, data.userCheck);
-      }, 2000)
+    try {
+      const logOutResult = await authService.signOut();
+      if (logOutResult) {
+        successCb()
+      }
+    } catch (e) {
+      errorCb()
     }
   },
   [T.CHAT_ADD_DATA]({ commit }, data) {
