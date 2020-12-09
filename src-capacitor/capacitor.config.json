@@ -1,0 +1,7 @@
+{
+  "appId": "app.netlify.something",
+  "appName": "something",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}

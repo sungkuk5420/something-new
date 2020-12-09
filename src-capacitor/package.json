@@ -1,0 +1,19 @@
+{
+  "name": "quasar-boilerplate",
+  "version": "0.0.1",
+  "description": "something app",
+  "author": "sungkuk5420 <sungkuk5420@gmail.com>",
+  "private": true,
+  "scripts": {
+    "postinstall": "jetifier"
+  },
+  "dependencies": {
+    "@capacitor/android": "2.4.4",
+    "@capacitor/cli": "^2.4.4",
+    "@capacitor/core": "^2.4.4",
+    "@capacitor/ios": "^2.4.4"
+  },
+  "devDependencies": {
+    "jetifier": "^1.6.6"
+  }
+}
