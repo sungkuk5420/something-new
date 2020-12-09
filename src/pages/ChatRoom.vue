@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      // userChatData: "getChatData",
+      userChatData: "getChatData",
       currentUser: "getCurrentUser",
     }),
   },
