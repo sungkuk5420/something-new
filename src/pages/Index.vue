@@ -47,12 +47,11 @@
       <q-step class="step-2" title="2" :name="2">
         <div class="main-text">이메일을 입력해주세요 :)</div>
         <div class="sub-text">로그인 또는 회원가입에 필요합니다.</div>
-        <q-input filled v-model="name" label="example@gmail.com" />
+        <q-input filled v-model="email" label="example@gmail.com" ref="emailInput" />
         <van-button type="default" @click="checkStep2"
           >다음
         </van-button>
       </q-step>
-
       <q-step class="step-3" title="3" :name="3">
         <div class="main-text">비밀번호를 입력해주세요.</div>
         <div class="sub-text">다시 방문해 주셨군요!</div>
@@ -61,67 +60,57 @@
           filled
           v-model="password"
           label="・・・・・・"
+          ref="passwordInput"
         />
-
         <van-button
           type="default"
           :loading="loading"
           loading-text="로그인"
-          @click="
-            () => {
-              userLogin();
-              // $refs.stepper.next();
-            }
-          "
+          @click="() => userLogin()"
           >로그인
         </van-button>
       </q-step>
-
       <q-step class="step-4" title="4" :name="4">
         <div class="main-text">비밀번호를 입력해주세요.</div>
         <div class="sub-text">회원가입을 진행합니다 :)</div>
-        <q-input type="password" filled v-model="name" label="・・・・・・" />
-
-        <van-button type="default" @click="$refs.stepper.next()"
-          >로그인
+        <q-input type="password" filled v-model="password" label="・・・・・・" />
+        <van-button type="default" @click="checkStep4"
+          >다음
         </van-button>
       </q-step>
       <q-step class="step-5" title="5" :name="5">
         <div class="main-title">성별을 알려주세요!</div>
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
-        <van-radio-group v-model="radio">
-          <van-radio name="1" @click="$refs.stepper.next()">남성</van-radio>
-          <van-radio name="2" @click="$refs.stepper.next()">여성</van-radio>
+        <van-radio-group v-model="gender">
+          <van-radio name="men" @click="$refs.stepper.next()">남성</van-radio>
+          <van-radio name="woman" @click="$refs.stepper.next()">여성</van-radio>
         </van-radio-group>
       </q-step>
-
       <q-step class="step-6" title="6" :name="6">
         <div class="main-title">어디 사시나요?</div>
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
-        <van-picker title="위치" :columns="areaColumns" item-height="60">
+        <van-picker title="위치" :columns="areaColumns" item-height="60" @change="changeLocation">
         </van-picker>
         <van-button type="default" @click="$refs.stepper.next()"
           >다음
         </van-button>
       </q-step>
-
       <q-step class="step-7" title="7" :name="7">
         <div class="main-title">언제 태어나셨나요?</div>
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
-        <van-picker title="년도" :columns="yearsColumns" item-height="60">
+        <van-picker title="년도" :columns="yearsColumns" item-height="60" @change="changeYear">
         </van-picker>
-        <van-button type="default" @click="$refs.stepper.next()"
+        <van-button type="default" @click="checkStep7"
           >다음
         </van-button>
       </q-step>
-
       <q-step class="step-8" title="8" :name="8">
         <div class="main-title">뭐라고 부르면 좋을까요?</div>
         <div class="main-title-sub">닉네임을 알려주세요</div>
-        <q-input filled v-model="name" label="ex. 귀요미" />
+        <q-input filled v-model="name" label="ex. 귀요미" ref="nameInput" />
         <div class="discription">마땅한 닉네임이 생각나지 않으세요?</div>
         <div class="discription-point">닉네임 추천받기</div>
-        <van-button type="default" @click="$refs.stepper.next()"
+        <van-button type="default" @click="checkStep8"
           >다음
         </van-button>
       </q-step>
@@ -194,14 +183,21 @@ import { mapGetters } from "vuex";
 import { Toast } from "vant";
 
 import myUpload from "vue-image-crop-upload";
+import {firebaseDB} from "src/fbase";
+import * as firebase from "firebase";
 export default {
   data() {
     return {
+      nowYear: new Date().getUTCFullYear(),
       step: 1,
       name: "",
+      email: "",
+      gender: "",
+      age: 0,
       password: "",
+      location: "서울",
+      selectYear: 1970,
       loading: false,
-      radio: "",
       areaColumns: [
         "서울",
         "경기",
@@ -260,35 +256,36 @@ export default {
       userList: "getUserList",
     }),
     yearsColumns() {
-      let returnArray = [];
-      for (let i = 0, len = 51; i < len; i++) {
-        returnArray.push((1970 + i).toString());
-      }
-      console.log(returnArray);
-      return returnArray;
+      const years = Array(this.nowYear - (this.nowYear - 51)).fill('').map((v, idx) => this.nowYear - idx);
+      return years.reverse();
     },
   },
   methods: {
-
     emailIsValid (email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     },
     checkForm() {
-      if (!this.name) {
-        Toast.fail('이메일을 입력해주세요.')
+      if (!this.email) {
+        Toast.fail('이메일을 입력해주세요.');
         return false;
       }
       else if (!this.password)  {
-        Toast.fail('비밀번호를 입력해주세요.')
+        Toast.fail('비밀번호를 입력해주세요.');
         return false;
       }
-      else if (!this.emailIsValid(this.name)) {
+      else if (!this.emailIsValid(this.email)) {
         Toast.fail('이메일 양식이 틀립니다. 다시 입력해주세요.')
         return false;
       }
-      else if (this.name && this.password && this.emailIsValid(this.name)) {
+      else if (this.email && this.password && this.emailIsValid(this.email)) {
         return true;
       }
+    },
+    changeLocation(_, value) {
+      this.location = value;
+    },
+    changeYear(_, value) {
+      this.selectYear =  value;
     },
     customCallPrepareUpload() {
       this.$refs.uploader.prepareUpload();
@@ -302,8 +299,6 @@ export default {
     cropSuccess(imgDataUrl, field) {
       console.log("-------- crop success --------");
       this.imgDataUrl = imgDataUrl;
-      const thisObj = this;
-      console.log(imgDataUrl.trim() == "");
     },
     /**
      * upload success
@@ -331,12 +326,35 @@ export default {
       console.log(file);
     },
     checkStep2() {
-      if (!this.name) {
+      if (!this.email) {
         Toast.fail('이메일을 입력해주세요.');
+        this.$refs.emailInput.focus();
         return;
       }
-      else if (!this.emailIsValid(this.name)) {
+      else if (!this.emailIsValid(this.email)) {
         Toast.fail('이메일 양식이 틀립니다. 다시 입력해주세요.');
+        this.$refs.emailInput.focus();
+        return;
+      }
+      this.name = this.email.split('@')[0];
+      this.$refs.stepper.next();
+    },
+    checkStep4() {
+      if (!this.password) {
+        Toast.fail('비밀번호를 입력해주세요.');
+        this.$refs.passwordInput.focus();
+        return;
+      }
+      this.$refs.stepper.next();
+    },
+    checkStep7() {
+      this.age = (this.nowYear - this.selectYear) + 1;
+      this.$refs.stepper.next()
+    },
+    checkStep8() {
+      if(!this.name) {
+        Toast.fail('닉네임을 입력해주세요.');
+        this.$refs.nameInput.focus();
         return;
       }
       this.$refs.stepper.next();
@@ -344,7 +362,7 @@ export default {
     userLogin() {
       if(!this.checkForm()) return;
       const userInfo = {
-        email: this.name,
+        email: this.email,
         password: this.password,
       };
 
@@ -356,9 +374,10 @@ export default {
         // 완료함수
         this.loading = false;
       };
-      const errorCb = () => {
+      const errorCb = (errorMessage) => {
         //실패함수
         this.loading = false;
+        if (errorMessage === 'auth/user-not-found') this.$refs.stepper.next();
       };
       if (!this.checkForm()) return;
       this.loading = true;
@@ -375,10 +394,61 @@ export default {
     },
     registerUser() {
       const registerUserData = {
-        email: this.name,
+        email: this.email,
         password: this.password,
       }
-      const successCb = (result) => {
+      const successCb = async (result) => {
+        if (this.imgDataUrl === '') {
+          await firebaseDB.ref(`users/${result.user.uid}`).set({
+              age: this.age,
+              location: this.location,
+              gender: this.gender,
+              chats: '',
+              comment: '',
+              email: result.user.email,
+              height: '',
+              name: this.name,
+              profileImage: '',
+              uid: result.user.uid,
+              voteHistories: ''
+            }
+          )
+        } else if (this.imgDataUrl) {
+          const profileImageStorageRef = firebase.storage().ref(`profileImage/${result.user.uid}.png`);
+          try {
+            const snapshot = await profileImageStorageRef.putString(this.imgDataUrl, 'data_url')
+            const imageDownloadUrl = await  snapshot.ref.getDownloadURL();
+            await firebaseDB.ref(`users/${result.user.uid}`).set({
+                age: this.age,
+                location: this.location,
+                gender: this.gender,
+                chats: '',
+                comment: '',
+                email: result.user.email,
+                height: '',
+                name: this.name,
+                profileImage: imageDownloadUrl,
+                uid: result.user.uid,
+                voteHistories: ''
+              }
+            )
+          } catch (e) {
+            await firebaseDB.ref(`users/${result.user.uid}`).set({
+                age: this.age,
+                location: this.location,
+                gender: this.gender,
+                chats: '',
+                comment: '',
+                email: result.user.email,
+                height: '',
+                name: this.name,
+                profileImage: '',
+                uid: result.user.uid,
+                voteHistories: ''
+              }
+            )
+          }
+        }
         // 완료함수
         this.loading = false;
       }

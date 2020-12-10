@@ -1,6 +1,6 @@
 import { T } from "./types";
 import { ajaxActions } from "./ajaxActions";
-import {authService, firebaseDB} from "src/fbase";
+import {authService} from "src/fbase";
 import {Toast} from "vant";
 
 export const actions = {
@@ -39,8 +39,8 @@ export const actions = {
         successCb(loginResult)
       }
     } catch (e) {
-      Toast.fail('입력하신 회원정보를 다시 확인해주시기 바랍니다.')
-      errorCb()
+      if (e.code !== 'auth/user-not-found') Toast.fail('입력하신 회원정보를 다시 확인해주시기 바랍니다.')
+      errorCb(e.code)
     }
   },
   async [T.USER_LOG_OUT]({ commit }, { data = {}, successCb, errorCb }) {
@@ -68,19 +68,6 @@ export const actions = {
       if (registerResult) {
         successCb(registerResult);
         console.log(`store action [T.REGISTER_USER] success data : ${JSON.stringify(registerResult)}`);
-        await firebaseDB.ref(`users/${registerResult.user.uid}`).set({
-            age: '',
-            chats: '',
-            comment: '',
-            email: registerResult.user.email,
-            height: '',
-            name: '',
-            profileImage: '',
-            uid:
-              registerResult.user.uid,
-            voteHistories: ''
-          }
-        )
       }
     } catch (e) {
       console.log(`store action [T.REGISTER_USER] error : ${JSON.stringify(e)}`);
