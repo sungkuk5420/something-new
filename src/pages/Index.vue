@@ -163,7 +163,7 @@ import { mapGetters } from "vuex";
 import { Toast } from "vant";
 
 import myUpload from "vue-image-crop-upload";
-import { firebaseDB } from "src/fbase";
+import { authService, firebaseDB } from "src/fbase";
 import * as firebase from "firebase";
 export default {
   data() {
@@ -241,6 +241,41 @@ export default {
         .map((v, idx) => this.nowYear - idx);
       return years.reverse();
     },
+  },
+  mounted() {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("-----------------로그인성공 ------------------");
+        console.log(user);
+        const successCb = (userList) => {
+          console.log(userList);
+          const currentUserData = userList[0];
+          if (currentUserData) {
+            this.$store.dispatch(T.SET_USER_DATA_ON_SOTRE, {
+              data: {
+                loginUser: currentUserData,
+              },
+              successCb: () => {
+                this.$router.push("/main");
+              },
+              errorCb,
+            });
+          }
+          this.loading = false;
+        };
+        const errorCb = (errorMessage) => {
+          this.loading = false;
+        };
+        this.loading = true;
+        this.$store.dispatch(T.GET_USER_DATA, {
+          data: {
+            email: user.email,
+          },
+          successCb,
+          errorCb,
+        });
+      }
+    });
   },
   methods: {
     emailIsValid(email) {
@@ -358,16 +393,11 @@ export default {
         this.loading = false;
       };
       this.loading = true;
-      // if (userCheck.length == 1) {
       this.$store.dispatch(T.USER_LOGIN, {
         data: userInfo,
         successCb,
         errorCb,
       });
-      // } else {
-      //   Toast.fail("아이디 비밀번호가 일치하지 않습니다.");
-      //   this.loading = false;
-      // }
     },
     registerUser() {
       console.log("this.imgDataUrl");

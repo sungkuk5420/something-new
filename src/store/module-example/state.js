@@ -1,7 +1,7 @@
 export default function () {
   return {
     state: "",
-    currentUser: null,
+    loginUser: null,
     userList: [],
     chatData: []
   };

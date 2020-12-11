@@ -3,9 +3,7 @@
     <div class="chat_area">
       <h6 class="chat_title">chat-room</h6>
       <ul class="list type_main">
-        <li v-for="(list, index) in userChatData" :key="index">
-          {{ currentUser }} : {{ list }}
-        </li>
+        <li v-for="(list, index) in userChatData" :key="index">{{ loginUser }} : {{ list }}</li>
       </ul>
       <div class="input_area">
         <input type="text" v-model="chatData" @keyup.enter="chatInput" />
@@ -30,7 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       userChatData: "getChatData",
-      currentUser: "getCurrentUser",
+      loginUser: "getCurrentUser",
     }),
   },
   mounted() {

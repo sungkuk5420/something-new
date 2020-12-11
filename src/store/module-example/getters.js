@@ -3,7 +3,7 @@ export const getters = {
         return state;
     },
     getCurrentUser(state) {
-        return state.currentUser;
+        return state.loginUser;
     },
     getUserList(state) {
         return state.userList;

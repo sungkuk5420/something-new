@@ -33,32 +33,12 @@
               />
               <feOffset dy="4" />
               <feGaussianBlur stdDeviation="5" />
-              <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"
-              />
-              <feBlend
-                mode="normal"
-                in2="BackgroundImageFix"
-                result="effect1_dropShadow"
-              />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="effect1_dropShadow"
-                result="shape"
-              />
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0" />
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
             </filter>
-            <pattern
-              id="pattern0"
-              patternContentUnits="objectBoundingBox"
-              width="1"
-              height="1"
-            >
-              <use
-                xlink:href="#image0"
-                transform="translate(-0.254098) scale(0.0163934)"
-              />
+            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0" transform="translate(-0.254098) scale(0.0163934)" />
             </pattern>
             <image
               id="image0"
@@ -74,9 +54,7 @@
         <div class="email">something@gmail.com</div>
       </div>
       <div class="info-button">
-        <button type="button" @click="$router.push('/user-profile')">
-          프로필 관리
-        </button>
+        <button type="button" @click="$router.push('/user-profile')">프로필 관리</button>
       </div>
     </div>
     <div class="mypage-list">
@@ -140,7 +118,6 @@ export default {
       const thisObj = this;
       const successCb = (result) => {
         // 완료함수
-        thisObj.$router.push({ path: "/" });
         Toast.success("로그아웃 성공");
       };
 

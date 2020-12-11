@@ -1,25 +1,18 @@
 <template>
   <q-layout view="hHh lpR fFf" v-show="init">
-    <q-header
-      bordered
-      class="bg-primary text-white"
-      height-hint="98"
-      v-show="false"
-    >
+    <q-header bordered class="bg-primary text-white" height-hint="98" v-show="false">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img
-              src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg"
-            /> </q-avatar
-          >Title
+            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
+          </q-avatar>Title
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer reveal class="bg-grey-8 text-white" v-show="currentUser !== null">
+    <q-footer reveal class="bg-grey-8 text-white" v-show="loginUser !== null">
       <van-tabbar v-model="active">
         <van-tabbar-item to="/main">
           <span>home</span>
@@ -89,7 +82,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentUser: "getCurrentUser",
+      loginUser: "getCurrentUser",
     }),
   },
   mounted() {

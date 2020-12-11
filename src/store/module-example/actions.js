@@ -135,5 +135,12 @@ export const actions = {
           errorCb();
         }
       });
+  },
+  [T.SET_USER_DATA_ON_SOTRE]({ commit }, { data, successCb, errorCb }) {
+    console.log(`store action [T.SET_USER_DATA_ON_SOTRE] data : ${JSON.stringify(data)}`);
+    commit(T.SET_USER_DATA_ON_SOTRE, data.loginUser);
+    if (successCb) {
+      successCb();
+    }
   }
 };
