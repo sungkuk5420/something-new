@@ -19,7 +19,7 @@ import { T } from "../store/module-example/types";
 import { mapGetters } from "vuex";
 import { Field } from "vant";
 import { Toast } from "vant";
-import { dbService } from "../fbase";
+import { fireStore } from "../fbase";
 
 export default {
   data() {
@@ -35,7 +35,7 @@ export default {
   },
   mounted() {
     const thisObj = this;
-    dbService.collection("chats").onSnapshot(async (snapshot) => {
+    fireStore.collection("chats").onSnapshot(async (snapshot) => {
       const newChatArray = snapshot.docs
         .map((doc) => ({
           id: doc.id,
@@ -59,7 +59,7 @@ export default {
         text: thisObj.chatData,
         createdAt: Date.now(),
       };
-      await dbService
+      await fireStore
         .collection("chats")
         .add(sendChat)
         .then(() => {

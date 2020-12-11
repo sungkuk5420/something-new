@@ -1,7 +1,7 @@
 import { T } from "./types";
 import { ajaxActions } from "./ajaxActions";
-import {authService} from "src/fbase";
-import {Toast} from "vant";
+import { authService, fireStore } from "src/fbase";
+import { Toast } from "vant";
 
 export const actions = {
   [T.AJAX_ACTION]({ commit }, { data = {}, successCb, errorCb }) {
@@ -61,17 +61,79 @@ export const actions = {
 
     commit(T.CHAT_ADD_DATA, data);
   },
-  async [T.REGISTER_USER]({commit},{ data, successCb, errorCb}) {
+  [T.GET_USER_DATA]({ commit }, { data, successCb, errorCb }) {
+    console.log(`store action [T.GET_USER_DATA] data`);
+    console.log(data);
+
+    fireStore.collection("users").where('email', '==', data.email).get().then((querySnapshot) => {
+      let userList = [];
+      console.log("success")
+      if (querySnapshot.empty) {
+        successCb([])
+        return false;
+      }
+      querySnapshot.forEach((doc) => {
+        let id = doc.id;
+        userList.push({
+          id,
+          ...doc.data()
+        })
+        //commit(GET_USER_LIST, userList);
+        successCb(userList)
+      });
+    }).catch(function (error) {
+      console.error("Error adding document: ", error);
+    })
+  },
+
+  async [T.REGISTER_USER]({ dispatch, commit }, { data, successCb, errorCb }) {
     console.log(`store action [T.REGISTER_USER] data : ${JSON.stringify(data)}`);
+    const registerUserData = data.registerUserData;
     try {
-      const registerResult = await authService.createUserWithEmailAndPassword(data.email, data.password)
+      const registerResult = await authService.createUserWithEmailAndPassword(registerUserData.email, registerUserData.password)
+      console.log(registerResult)
       if (registerResult) {
-        successCb(registerResult);
+        let userData = { ...registerUserData, uid: registerResult.user.uid };
+        delete userData.password
+        if (registerResult.additionalUserInfo.isNewUser) {
+          //새로운 유저가입완료. 파이어스토어쪽에도 등록하기.
+          dispatch(T.UPSERT_USER_INTO_FIRESTORE, {
+            data: {
+              userData
+            },
+            successCb: () => {
+              successCb(userData);
+              //원래페이지로 돌아가서 스토리지에 이미지 파일 등록.
+            },
+            errorCb: () => {
+              //파이어 스토어 등록실패. 나중에 기본 인증시스템에서도 제거해볼것.
+            }
+          })
+        }
+        return false;
+
         console.log(`store action [T.REGISTER_USER] success data : ${JSON.stringify(registerResult)}`);
       }
     } catch (e) {
       console.log(`store action [T.REGISTER_USER] error : ${JSON.stringify(e)}`);
-      errorCb()
+      errorCb(e.message || "")
     }
+  },
+  [T.UPSERT_USER_INTO_FIRESTORE]({ commit }, { data, successCb, errorCb }) {
+    console.log(`store action [T.UPSERT_USER_INTO_FIRESTORE] data : ${JSON.stringify(data)}`);
+    const userData = data.userData;
+    fireStore.collection(`users`).doc(userData.uid).set(userData)
+      .then(function (docRef) {
+        console.log(docRef)
+        // context.commit(SET_LOGIN_USER, insertedUser);
+        if (successCb) {
+          successCb();
+        }
+      })
+      .catch(function (error) {
+        if (errorCb) {
+          errorCb();
+        }
+      });
   }
 };

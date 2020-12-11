@@ -34,12 +34,8 @@
         <div class="main-text">설레는 만남</div>
         <div class="sub-text">곧 설레는 인연을 찾아드릴께요!</div>
         <div class="footer">
-          <van-button type="default" @click="$refs.stepper.next()"
-            >이메일로 바로 시작하기
-          </van-button>
-          <div class="footer__text">
-            계속 진행하면 something의 서비스 약관 및
-          </div>
+          <van-button type="default" @click="$refs.stepper.next()">이메일로 바로 시작하기</van-button>
+          <div class="footer__text">계속 진행하면 something의 서비스 약관 및</div>
           <div class="footer__text">개인정보 보호정책에 동의합니다.</div>
         </div>
       </q-step>
@@ -47,36 +43,38 @@
       <q-step class="step-2" title="2" :name="2">
         <div class="main-text">이메일을 입력해주세요 :)</div>
         <div class="sub-text">로그인 또는 회원가입에 필요합니다.</div>
-        <q-input filled v-model="email" label="example@gmail.com" ref="emailInput" />
-        <van-button type="default" @click="checkStep2"
-          >다음
-        </van-button>
+        <q-input
+          v-on:keyup.enter="checkStep2"
+          filled
+          v-model="email"
+          label="example@gmail.com"
+          ref="emailInput"
+        />
+        <van-button type="default" @click="checkStep2">다음</van-button>
       </q-step>
       <q-step class="step-3" title="3" :name="3">
         <div class="main-text">비밀번호를 입력해주세요.</div>
         <div class="sub-text">다시 방문해 주셨군요!</div>
-        <q-input
-          type="password"
-          filled
-          v-model="password"
-          label="・・・・・・"
-          ref="passwordInput"
-        />
+        <q-input type="password" filled v-model="password" label="・・・・・・" ref="passwordInput" />
         <van-button
+          v-on:keyup.enter="checkuserLoginStep2"
           type="default"
           :loading="loading"
           loading-text="로그인"
-          @click="() => userLogin()"
-          >로그인
-        </van-button>
+          @click="userLogin"
+        >로그인</van-button>
       </q-step>
       <q-step class="step-4" title="4" :name="4">
         <div class="main-text">비밀번호를 입력해주세요.</div>
         <div class="sub-text">회원가입을 진행합니다 :)</div>
-        <q-input type="password" filled v-model="password" label="・・・・・・" />
-        <van-button type="default" @click="checkStep4"
-          >다음
-        </van-button>
+        <q-input
+          v-on:keyup.enter="checkStep4"
+          type="password"
+          filled
+          v-model="password"
+          label="・・・・・・"
+        />
+        <van-button type="default" @click="checkStep4">다음</van-button>
       </q-step>
       <q-step class="step-5" title="5" :name="5">
         <div class="main-title">성별을 알려주세요!</div>
@@ -89,30 +87,28 @@
       <q-step class="step-6" title="6" :name="6">
         <div class="main-title">어디 사시나요?</div>
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
-        <van-picker title="위치" :columns="areaColumns" item-height="60" @change="changeLocation">
-        </van-picker>
-        <van-button type="default" @click="$refs.stepper.next()"
-          >다음
-        </van-button>
+        <van-picker title="위치" :columns="areaColumns" item-height="60" @change="changeLocation"></van-picker>
+        <van-button type="default" @click="$refs.stepper.next()">다음</van-button>
       </q-step>
       <q-step class="step-7" title="7" :name="7">
         <div class="main-title">언제 태어나셨나요?</div>
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
-        <van-picker title="년도" :columns="yearsColumns" item-height="60" @change="changeYear">
-        </van-picker>
-        <van-button type="default" @click="checkStep7"
-          >다음
-        </van-button>
+        <van-picker title="년도" :columns="yearsColumns" item-height="60" @change="changeYear"></van-picker>
+        <van-button type="default" @click="checkStep7">다음</van-button>
       </q-step>
       <q-step class="step-8" title="8" :name="8">
         <div class="main-title">뭐라고 부르면 좋을까요?</div>
         <div class="main-title-sub">닉네임을 알려주세요</div>
-        <q-input filled v-model="name" label="ex. 귀요미" ref="nameInput" />
+        <q-input
+          v-on:keyup.enter="checkStep8"
+          filled
+          v-model="name"
+          label="ex. 귀요미"
+          ref="nameInput"
+        />
         <div class="discription">마땅한 닉네임이 생각나지 않으세요?</div>
         <div class="discription-point">닉네임 추천받기</div>
-        <van-button type="default" @click="checkStep8"
-          >다음
-        </van-button>
+        <van-button type="default" @click="checkStep8">다음</van-button>
       </q-step>
       <q-step class="step-9" title="9" :name="9">
         <div class="main-title">프로필 사진을 등록해주세요!</div>
@@ -133,25 +129,12 @@
             :headers="headers"
             img-format="png"
             ref="uploader"
-          >
-          </my-upload>
+          ></my-upload>
           <img class="preview-image" :src="imgDataUrl" v-show="imgDataUrl" />
-          <div class="photo-shooting" v-show="!imgDataUrl">
-            지금 바로 찍을래요
-          </div>
+          <div class="photo-shooting" v-show="!imgDataUrl">지금 바로 찍을래요</div>
         </div>
-        <van-button
-          type="default"
-          v-show="!imgDataUrl"
-          @click.prevent="customCallPrepareUpload"
-          >다음
-        </van-button>
-        <van-button
-          type="default"
-          v-show="imgDataUrl"
-          @click="$refs.stepper.next()"
-          >다음
-        </van-button>
+        <van-button type="default" v-show="!imgDataUrl" @click.prevent="customCallPrepareUpload">다음</van-button>
+        <van-button type="default" v-show="imgDataUrl" @click="registerUser">다음</van-button>
       </q-step>
 
       <q-step class="step-10" title="10" :name="10">
@@ -162,16 +145,13 @@
           <div class="point-text">회원가입 완료</div>
           <div class="title">궁금한 게 더 있어요!</div>
           <div class="sub">
-            조금 더 알려주시면 더욱 좋은 인연을<br />찾아드릴수 있을 것 같아요!
+            조금 더 알려주시면 더욱 좋은 인연을
+            <br />찾아드릴수 있을 것 같아요!
           </div>
         </div>
 
-        <button type="button" class="now" @click="registerUser">
-          조금 더 알려주기
-        </button>
-        <button type="button" class="later" @click="registerUser">
-          나중에 할래요
-        </button>
+        <button type="button" class="now" @click="userLogin">조금 더 알려주기</button>
+        <button type="button" class="later" @click="userLogin">나중에 할래요</button>
       </q-step>
     </q-stepper>
   </q-page>
@@ -183,7 +163,7 @@ import { mapGetters } from "vuex";
 import { Toast } from "vant";
 
 import myUpload from "vue-image-crop-upload";
-import {firebaseDB} from "src/fbase";
+import { firebaseDB } from "src/fbase";
 import * as firebase from "firebase";
 export default {
   data() {
@@ -256,36 +236,21 @@ export default {
       userList: "getUserList",
     }),
     yearsColumns() {
-      const years = Array(this.nowYear - (this.nowYear - 51)).fill('').map((v, idx) => this.nowYear - idx);
+      const years = Array(this.nowYear - (this.nowYear - 51))
+        .fill("")
+        .map((v, idx) => this.nowYear - idx);
       return years.reverse();
     },
   },
   methods: {
-    emailIsValid (email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    },
-    checkForm() {
-      if (!this.email) {
-        Toast.fail('이메일을 입력해주세요.');
-        return false;
-      }
-      else if (!this.password)  {
-        Toast.fail('비밀번호를 입력해주세요.');
-        return false;
-      }
-      else if (!this.emailIsValid(this.email)) {
-        Toast.fail('이메일 양식이 틀립니다. 다시 입력해주세요.')
-        return false;
-      }
-      else if (this.email && this.password && this.emailIsValid(this.email)) {
-        return true;
-      }
+    emailIsValid(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     },
     changeLocation(_, value) {
       this.location = value;
     },
     changeYear(_, value) {
-      this.selectYear =  value;
+      this.selectYear = value;
     },
     customCallPrepareUpload() {
       this.$refs.uploader.prepareUpload();
@@ -299,6 +264,7 @@ export default {
     cropSuccess(imgDataUrl, field) {
       console.log("-------- crop success --------");
       this.imgDataUrl = imgDataUrl;
+      console.log(imgDataUrl);
     },
     /**
      * upload success
@@ -327,48 +293,61 @@ export default {
     },
     checkStep2() {
       if (!this.email) {
-        Toast.fail('이메일을 입력해주세요.');
+        Toast.fail("이메일을 입력해주세요.");
+        this.$refs.emailInput.focus();
+        return;
+      } else if (!this.emailIsValid(this.email)) {
+        Toast.fail("이메일 양식이 틀립니다. 다시 입력해주세요.");
         this.$refs.emailInput.focus();
         return;
       }
-      else if (!this.emailIsValid(this.email)) {
-        Toast.fail('이메일 양식이 틀립니다. 다시 입력해주세요.');
-        this.$refs.emailInput.focus();
-        return;
-      }
-      this.name = this.email.split('@')[0];
-      this.$refs.stepper.next();
+
+      const successCb = (userList) => {
+        this.name = this.email.split("@")[0];
+        if (userList.length === 0) {
+          this.step = 4; // 회원가입
+        } else {
+          this.$refs.stepper.next(); // 로그인
+        }
+        this.loading = false;
+      };
+      const errorCb = (errorMessage) => {
+        this.loading = false;
+      };
+      this.loading = true;
+      this.$store.dispatch(T.GET_USER_DATA, {
+        data: {
+          email: this.email,
+        },
+        successCb,
+        errorCb,
+      });
     },
     checkStep4() {
       if (!this.password) {
-        Toast.fail('비밀번호를 입력해주세요.');
+        Toast.fail("비밀번호를 입력해주세요.");
         this.$refs.passwordInput.focus();
         return;
       }
       this.$refs.stepper.next();
     },
     checkStep7() {
-      this.age = (this.nowYear - this.selectYear) + 1;
-      this.$refs.stepper.next()
+      this.age = this.nowYear - this.selectYear + 1;
+      this.$refs.stepper.next();
     },
     checkStep8() {
-      if(!this.name) {
-        Toast.fail('닉네임을 입력해주세요.');
+      if (!this.name) {
+        Toast.fail("닉네임을 입력해주세요.");
         this.$refs.nameInput.focus();
         return;
       }
       this.$refs.stepper.next();
     },
     userLogin() {
-      if(!this.checkForm()) return;
       const userInfo = {
         email: this.email,
         password: this.password,
       };
-
-      const userCheck = this.userList.filter(function(user) {
-        return user.name === userInfo.name && user.password === userInfo.password;
-      });
 
       const successCb = (result) => {
         // 완료함수
@@ -377,9 +356,7 @@ export default {
       const errorCb = (errorMessage) => {
         //실패함수
         this.loading = false;
-        if (errorMessage === 'auth/user-not-found') this.$refs.stepper.next();
       };
-      if (!this.checkForm()) return;
       this.loading = true;
       // if (userCheck.length == 1) {
       this.$store.dispatch(T.USER_LOGIN, {
@@ -393,77 +370,76 @@ export default {
       // }
     },
     registerUser() {
+      console.log("this.imgDataUrl");
+      console.log(this.imgDataUrl);
       const registerUserData = {
+        age: this.age,
+        location: this.location,
+        gender: this.gender,
         email: this.email,
         password: this.password,
-      }
-      const successCb = async (result) => {
-        if (this.imgDataUrl === '') {
-          await firebaseDB.ref(`users/${result.user.uid}`).set({
-              age: this.age,
-              location: this.location,
-              gender: this.gender,
-              chats: '',
-              comment: '',
-              email: result.user.email,
-              height: '',
-              name: this.name,
-              profileImage: '',
-              uid: result.user.uid,
-              voteHistories: ''
-            }
-          )
-        } else if (this.imgDataUrl) {
-          const profileImageStorageRef = firebase.storage().ref(`profileImage/${result.user.uid}.png`);
+        profileImage: this.imgDataUrl,
+        chats: "",
+        comment: "",
+        email: this.email,
+        height: "",
+        name: this.name,
+        profileImage: "",
+        uid: "",
+        voteHistories: "",
+      };
+      console.log(registerUserData);
+      const successCb = async (userData) => {
+        console.log("회원가입완료!!");
+        if (this.imgDataUrl) {
+          console.log("이미지등록시작!!");
+          const profileImageStorageRef = firebase
+            .storage()
+            .ref(`profileImage/${userData.uid}.png`);
           try {
-            const snapshot = await profileImageStorageRef.putString(this.imgDataUrl, 'data_url')
-            const imageDownloadUrl = await  snapshot.ref.getDownloadURL();
-            await firebaseDB.ref(`users/${result.user.uid}`).set({
-                age: this.age,
-                location: this.location,
-                gender: this.gender,
-                chats: '',
-                comment: '',
-                email: result.user.email,
-                height: '',
-                name: this.name,
-                profileImage: imageDownloadUrl,
-                uid: result.user.uid,
-                voteHistories: ''
-              }
-            )
+            const snapshot = await profileImageStorageRef.putString(
+              this.imgDataUrl,
+              "data_url"
+            );
+            const imageDownloadUrl = await snapshot.ref.getDownloadURL();
+            console.log("이미지등록완료!!!!");
+            const updateUserData = {
+              ...userData,
+              profileImage: imageDownloadUrl,
+            };
+            this.$store.dispatch(T.UPSERT_USER_INTO_FIRESTORE, {
+              data: {
+                userData: updateUserData,
+              },
+              successCb: (result) => {
+                console.log("유저정보 업데이트완료!!!!");
+                this.$refs.stepper.next();
+                this.loading = false;
+              },
+              errorCb: (errorMessage) => {
+                console.log(errorMessage);
+                Toast.fail(`가입 실패.${error}`);
+                this.loading = false;
+              },
+            });
           } catch (e) {
-            await firebaseDB.ref(`users/${result.user.uid}`).set({
-                age: this.age,
-                location: this.location,
-                gender: this.gender,
-                chats: '',
-                comment: '',
-                email: result.user.email,
-                height: '',
-                name: this.name,
-                profileImage: '',
-                uid: result.user.uid,
-                voteHistories: ''
-              }
-            )
+            // 이미지파일 등록실패
           }
         }
-        // 완료함수
+      };
+      const errorCb = (error) => {
+        Toast.fail(`가입 실패.${error}`);
         this.loading = false;
-      }
-      const errorCb = () => {
-        //실패함수
-        this.loading = false;
-      }
-      if(!this.checkForm()) return;
+      };
       this.loading = true;
       this.$store.dispatch(T.REGISTER_USER, {
-        data: registerUserData,
+        data: {
+          registerUserData,
+        },
         successCb,
         errorCb,
-      })
-    }
+      });
+    },
   },
 };
 </script>
