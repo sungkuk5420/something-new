@@ -38,6 +38,7 @@
 <script>
 import some from "lodash/some";
 import uniqBy from "lodash/uniqBy";
+import uniq from "lodash/uniq";
 import { mapGetters } from "vuex";
 import { Toast } from "vant";
 import { T } from "src/store/module-example/types";
@@ -72,14 +73,36 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loginUser: "getCurrentUser",
+      loginUser: "getLoginUser",
     }),
   },
-  created() {
+  mounted() {
     if (this.loginUser.hobbies.length > 0) {
       this.loginUser.hobbies.map((hobby) => {
         if (
-          ["게임", "낚시", "여행", "캠핑", "전시 감상", "독서"].includes(hobby)
+          [
+            "게임",
+            "낚시",
+            "여행",
+            "캠핑",
+            "전시 감상",
+            "독서",
+            "춤",
+            "패션",
+            "악기 연주",
+            "권투",
+            "달리기",
+            "사격",
+            "암벽등반",
+            "요리",
+            "배드민턴",
+            "축구",
+            "야구",
+            "자전거",
+            "등산",
+            "수영",
+            "테니스",
+          ].includes(hobby)
         ) {
           this.items = this.items.map((item) => {
             if (item.data === hobby) {
@@ -119,7 +142,7 @@ export default {
             this.$store.dispatch(T.UPDATE_HOBBIES, {
               data: {
                 uid: this.loginUser.uid,
-                hobbies: uniqBy(changedArray),
+                hobbies: uniq(changedArray),
               },
             });
           } else {

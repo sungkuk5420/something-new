@@ -25,4 +25,13 @@ export const mutations = {
   [T.UPDATE_HOBBIES](state, data) {
     state.loginUser.hobbies = data.hobbies;
   },
+  [T.UPDATE_PERSONALITY](state, data) {
+    state.loginUser.personalities = data.personalities;
+  },
+  [T.UPDATE_SMOKING](state, data) {
+    state.loginUser.smoking = data.smoking;
+  },
+  [T.UPDATE_DRINKING](state, data) {
+    state.loginUser.drinking = data.drinking;
+  },
 };

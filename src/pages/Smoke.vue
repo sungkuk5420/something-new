@@ -13,20 +13,63 @@
 
     <div class="list">
       <ul>
-        <li>하지 않아요</li>
-        <li>가끔 해요</li>
-        <li>자주 해요</li>
-        <li>비흡연자 앞에서는 하지 않아요</li>
-        <li class="is-active">상대방이 싫어하면 끊을 수 있어요</li>
+        <li
+          :class="{ 'is-active': this.loginUser.smoking === 'ST00' }"
+          @click="() => changeValue('ST00')"
+        >
+          하지 않아요
+        </li>
+        <li
+          :class="{ 'is-active': this.loginUser.smoking === 'ST01' }"
+          @click="() => changeValue('ST01')"
+        >
+          가끔 해요
+        </li>
+        <li
+          :class="{ 'is-active': this.loginUser.smoking === 'ST02' }"
+          @click="() => changeValue('ST02')"
+        >
+          자주 해요
+        </li>
+        <li
+          :class="{ 'is-active': this.loginUser.smoking === 'ST03' }"
+          @click="() => changeValue('ST03')"
+        >
+          비흡연자 앞에서는 하지 않아요
+        </li>
+        <li
+          :class="{ 'is-active': this.loginUser.smoking === 'ST04' }"
+          @click="() => changeValue('ST04')"
+        >
+          상대방이 싫어하면 끊을 수 있어요
+        </li>
       </ul>
     </div>
   </q-page>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { T } from "src/store/module-example/types";
+
 export default {
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters({
+      loginUser: "getLoginUser",
+    }),
+  },
+  methods: {
+    changeValue(selectValue) {
+      this.$store.dispatch(T.UPDATE_SMOKING, {
+        data: {
+          uid: this.loginUser.uid,
+          smoking: selectValue,
+        },
+      });
+    },
   },
 };
 </script>

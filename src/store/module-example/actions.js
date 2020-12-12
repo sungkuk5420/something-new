@@ -20,7 +20,7 @@ export const actions = {
       });
       commit(T.UPDATE_LOCATION, data.location);
     } catch (e) {
-      console.log("T.UPDATE_LOCATION", e);
+      console.log("T.UPDATE_LOCATION error", e);
     }
   },
   async [T.UPDATE_HOBBIES]({ commit }, { data }) {
@@ -30,7 +30,37 @@ export const actions = {
       });
       commit(T.UPDATE_HOBBIES, data.hobbies);
     } catch (e) {
-      console.log("T.UPDATE_HOBBIES", e);
+      console.log("T.UPDATE_HOBBIES error", e);
+    }
+  },
+  async [T.UPDATE_PERSONALITY]({ commit }, { data }) {
+    try {
+      await fireStore.collection("users").doc(data.uid).update({
+        personalities: data.personalities,
+      });
+      commit(T.UPDATE_PERSONALITY, data);
+    } catch (e) {
+      console.log("T.UPDATE_PERSONALITY error", e);
+    }
+  },
+  async [T.UPDATE_SMOKING]({ commit }, { data }) {
+    try {
+      await fireStore.collection("users").doc(data.uid).update({
+        smoking: data.smoking,
+      });
+      commit(T.UPDATE_SMOKING, data);
+    } catch (e) {
+      console.log("T.UPDATE_SMOKING error", e);
+    }
+  },
+  async [T.UPDATE_DRINKING]({ commit }, { data }) {
+    try {
+      await fireStore.collection("users").doc(data.uid).update({
+        drinking: data.drinking,
+      });
+      commit(T.UPDATE_DRINKING, data);
+    } catch (e) {
+      console.log("T.UPDATE_DRINKING error", e);
     }
   },
   async [T.USER_LOGIN]({ commit }, { data, successCb, errorCb }) {
@@ -75,7 +105,6 @@ export const actions = {
     //ex) data:{where:["email","==",email]}
 
     const where = data.where || ["email", "!=", ""];
-    console.log(where)
     fireStore
       .collection("users")
       .where(...where)
