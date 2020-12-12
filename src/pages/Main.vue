@@ -12,7 +12,9 @@
 
         <div class="user-card__name">{{currentUser.name}}</div>
         <div class="user-card__age-wapper">
-          <div class="user-card__age-wapper__age">{{currentUser.age}}세</div>
+          <div
+            class="user-card__age-wapper__age"
+          >{{ new Date().getFullYear() - currentUser.birthYear}}세</div>
           <svg
             width="12"
             height="17"
