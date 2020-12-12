@@ -1,27 +1,39 @@
 <template>
   <q-page class="main-page">
     <div class="main-title">이런 친구는 어때요?</div>
-    <div class="user-card">
-      <svg
-        viewBox="0 0 343 469"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
+    <div class="user-card-wrapper">
+      <div
+        class="user-card"
+        v-for="(currentUser,index) in userList.filter(item=>item.profileImage!='')"
+        :key="currentUser.uid"
+        :style="`top:${index*15}px; z-index:${index}`"
       >
-        <rect width="343" height="469" rx="24" fill="#C4C4C4" />
-        <rect width="343" height="469" rx="24" fill="url(#pattern0)" />
-        <defs>
-          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use
-              xlink:href="#image0"
-              transform="translate(0 -0.0478919) scale(0.0016835 0.00123122)"
-            />
-          </pattern>
-        </defs>
-      </svg>
+        <div class="profile-image" :style="`background-image:url('${currentUser.profileImage}')`"></div>
 
-      <div class="infomation"></div>
-      <div class="hashtag"></div>
+        <div class="user-card__name">{{currentUser.name}}</div>
+        <div class="user-card__age-wapper">
+          <div class="user-card__age-wapper__age">{{currentUser.age}}세</div>
+          <svg
+            width="12"
+            height="17"
+            viewBox="0 0 12 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 8.12579C5.43168 8.12579 4.88663 7.90703 4.48477 7.51765C4.08291 7.12827 3.85714 6.60015 3.85714 6.04948C3.85714 5.49882 4.08291 4.9707 4.48477 4.58132C4.88663 4.19194 5.43168 3.97318 6 3.97318C6.56832 3.97318 7.11337 4.19194 7.51523 4.58132C7.91709 4.9707 8.14286 5.49882 8.14286 6.04948C8.14286 6.32215 8.08743 6.59214 7.97974 6.84405C7.87205 7.09596 7.71421 7.32485 7.51523 7.51765C7.31625 7.71045 7.08002 7.86339 6.82004 7.96774C6.56005 8.07208 6.2814 8.12579 6 8.12579ZM6 0.23584C4.4087 0.23584 2.88258 0.848347 1.75736 1.93862C0.632141 3.02889 0 4.50761 0 6.04948C0 10.4097 6 16.8463 6 16.8463C6 16.8463 12 10.4097 12 6.04948C12 4.50761 11.3679 3.02889 10.2426 1.93862C9.11742 0.848347 7.5913 0.23584 6 0.23584Z"
+              fill="#FF576B"
+            />
+          </svg>
+
+          <div class="user-card__age-wapper__km">14Km 이내</div>
+        </div>
+        <div class="user-card__hash-tag-wapper">
+          <div class="user-card__hash-tag-wapper__tag">맛집 탐방</div>
+          <div class="user-card__hash-tag-wapper__tag">헬린이</div>
+          <div class="user-card__hash-tag-wapper__tag">웃음이 예뻐요</div>
+        </div>
+      </div>
     </div>
     <div class="choice">
       <svg
@@ -148,7 +160,9 @@
 import { T } from "../store/module-example/types";
 export default {
   data() {
-    return {};
+    return {
+      userList: [],
+    };
   },
   mounted() {
     this.getAllUsers();
@@ -156,7 +170,7 @@ export default {
   methods: {
     getAllUsers() {
       const successCb = (userList) => {
-        console.log(userList);
+        this.userList = userList;
         this.loading = false;
       };
       const errorCb = (errorMessage) => {
@@ -175,8 +189,8 @@ export default {
 
 <style lang="scss">
 .main-page {
-  padding: 0 20px;
   margin-bottom: 60px;
+  height: 100vh;
   .main-title {
     font-family: Noto Sans CJK KR;
     font-style: normal;
@@ -185,14 +199,86 @@ export default {
     line-height: 38px;
     display: flex;
     align-items: center;
-    margin-bottom: 48px;
-    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-top: 5vh;
     color: #000000;
+    margin-left: 15px;
   }
   .choice {
     margin-top: 26px;
     display: flex;
     justify-content: center;
+    position: fixed;
+    bottom: calc(50px + 2vh);
+    width: 100%;
+  }
+  .user-card-wrapper {
+    position: relative;
+    height: calc(100% - (50px + 35vh));
+    display: flex;
+    flex: none;
+    justify-content: center;
+  }
+  .user-card {
+    max-width: 345px;
+    color: #ffffff;
+    background: #ddd;
+    border-radius: 24px;
+    position: absolute;
+    border: 1px solid #fff;
+    width: 100%;
+    height: 100%;
+    max-height: 469px;
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center center;
+      border-radius: 24px;
+    }
+    &__name {
+      position: absolute;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 35px;
+      display: flex;
+      align-items: center;
+      bottom: 90px;
+      left: 25px;
+    }
+    &__age-wapper {
+      position: absolute;
+      bottom: 60px;
+      left: 25px;
+      display: flex;
+      &__age {
+        font-size: 20px;
+        line-height: 30px;
+        display: flex;
+        align-items: center;
+      }
+      svg {
+        margin: 5px 5px 0 15px;
+      }
+      &__km {
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+    &__hash-tag-wapper {
+      position: absolute;
+      bottom: 20px;
+      left: 25px;
+      display: flex;
+      &__tag {
+        background: rgba(0, 0, 0, 0.44);
+        border: 1px solid #ffffff;
+        box-sizing: border-box;
+        border-radius: 24px;
+        padding: 4px 10px;
+        margin-right: 8px;
+      }
+    }
   }
 }
 </style>
