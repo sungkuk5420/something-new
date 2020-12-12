@@ -9,7 +9,7 @@
         }
       "
     ></van-nav-bar>
-    <div class="chat">
+    <div class="chat" ref="chatsArea">
       <div class="chat-contents">
         <div class="date-bar">
           <div class="line">
@@ -82,13 +82,17 @@ export default {
             ...doc.data(),
           }))
           .sort((a, b) => a.createdAt - b.createdAt);
-        console.log(chatsArray);
         this.chats = chatsArray;
+        if (this.$refs.chatsArea) {
+          this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
+        }
       });
   },
   methods: {
     async sendMessage() {
-      console.log(this.loginUser);
+      if (this.messageInput == "") {
+        return false;
+      }
       await fireStore.collection("chats/ABS1LEtAwASMn69CKIqK/messages").add({
         text: this.messageInput,
         createdAt: Date.now(),
