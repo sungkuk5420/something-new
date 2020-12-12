@@ -5,28 +5,32 @@ import { Toast } from "vant";
 export const actions = {
   async [T.UPDATE_HEIGHT]({ commit }, { data }) {
     try {
-      await fireStore
-        .collection("users")
-        .doc(data.uid)
-        .update({
-          height: data.height
-        })
+      await fireStore.collection("users").doc(data.uid).update({
+        height: data.height,
+      });
       commit(T.UPDATE_HEIGHT, data.height);
     } catch (e) {
-      console.log('T.UPDATE_HEIGHT error', e)
+      console.log("T.UPDATE_HEIGHT error", e);
     }
   },
   async [T.UPDATE_LOCATION]({ commit }, { data }) {
     try {
-      await fireStore
-        .collection("users")
-        .doc(data.uid)
-        .update({
-          location: data.location
-        })
+      await fireStore.collection("users").doc(data.uid).update({
+        location: data.location,
+      });
       commit(T.UPDATE_LOCATION, data.location);
     } catch (e) {
-      console.log('T.UPDATE_LOCATION', e);
+      console.log("T.UPDATE_LOCATION", e);
+    }
+  },
+  async [T.UPDATE_HOBBIES]({ commit }, { data }) {
+    try {
+      await fireStore.collection("users").doc(data.uid).update({
+        hobbies: data.hobbies,
+      });
+      commit(T.UPDATE_HOBBIES, data.hobbies);
+    } catch (e) {
+      console.log("T.UPDATE_HOBBIES", e);
     }
   },
   async [T.USER_LOGIN]({ commit }, { data, successCb, errorCb }) {

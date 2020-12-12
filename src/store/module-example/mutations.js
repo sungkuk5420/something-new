@@ -22,4 +22,7 @@ export const mutations = {
   [T.UPDATE_LOCATION](state, data) {
     state.loginUser.location = data.location;
   },
+  [T.UPDATE_HOBBIES](state, data) {
+    state.loginUser.hobbies = data.hobbies;
+  },
 };

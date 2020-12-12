@@ -12,32 +12,23 @@
     </van-nav-bar>
     <div class="hobby">
       <div class="hobby-plus">
-        <input type="text" placeholder="직접입력" />
-        <div class="plus">추가</div>
+        <input
+          type="text"
+          placeholder="직접입력"
+          v-model="inputText"
+          ref="input"
+        />
+        <div class="plus" @click="addItems">추가</div>
       </div>
       <div class="hobby-content">
         <ul>
-          <li class="is-active">게임</li>
-          <li>낚시</li>
-          <li>리그오브레전드</li>
-          <li>여행가기</li>
-          <li>캠핑</li>
-          <li>전시회</li>
-          <li>독서</li>
-          <li>게임</li>
-          <li>낚시</li>
-          <li>리그오브레전드</li>
-          <li>여행가기</li>
-          <li>캠핑</li>
-          <li>전시회</li>
-          <li>독서</li>
-          <li>게임</li>
-          <li>낚시</li>
-          <li>리그오브레전드</li>
-          <li>여행가기</li>
-          <li>캠핑</li>
-          <li>전시회</li>
-          <li>독서</li>
+          <li
+            v-for="item in items"
+            :class="{ 'is-active': item.active }"
+            @click="() => toggleItem(item.data)"
+          >
+            {{ item.data }}
+          </li>
         </ul>
       </div>
     </div>
@@ -45,9 +36,91 @@
 </template>
 
 <script>
+import some from "lodash/some";
+import uniqBy from "lodash/uniqBy";
+import { mapGetters } from "vuex";
+import { Toast } from "vant";
+import { T } from "src/store/module-example/types";
 export default {
   data() {
-    return {};
+    return {
+      inputText: "",
+      items: [
+        { active: false, data: "게임" },
+        { active: false, data: "낚시" },
+        { active: false, data: "여행" },
+        { active: false, data: "캠핑" },
+        { active: false, data: "전시 감상" },
+        { active: false, data: "독서" },
+      ],
+    };
+  },
+  computed: {
+    ...mapGetters({
+      loginUser: "getCurrentUser",
+    }),
+  },
+  created() {
+    if (this.loginUser.hobbies.length > 0) {
+      this.loginUser.hobbies.map((hobby) => {
+        if (
+          ["게임", "낚시", "여행", "캠핑", "전시 감상", "독서"].includes(hobby)
+        ) {
+          this.items = this.items.map((item) => {
+            if (item.data === hobby) {
+              return { active: true, data: hobby };
+            } else {
+              return { ...item };
+            }
+          });
+        } else {
+          this.items.push({ active: true, data: hobby });
+        }
+      });
+    }
+  },
+  methods: {
+    addItems() {
+      if (!this.inputText) {
+        Toast.fail("입력된 값이 없습니다");
+        this.$refs.input.focus();
+        return;
+      }
+      if (some(this.items, { data: this.inputText })) {
+        Toast.fail("리스트에 이미 있는 취미입니다");
+        this.$refs.input.focus();
+        return;
+      }
+      const inputArray = [{ active: false, data: this.inputText }];
+      const addArray = this.items.concat(inputArray);
+      this.inputText = "";
+      this.items = uniqBy(addArray, "data");
+    },
+    toggleItem(selectValue) {
+      this.items = this.items.map((item) => {
+        if (item.data === selectValue) {
+          if (!item.active) {
+            const changedArray = this.loginUser.hobbies.concat([selectValue]);
+            this.$store.dispatch(T.UPDATE_HOBBIES, {
+              data: {
+                uid: this.loginUser.uid,
+                hobbies: uniqBy(changedArray),
+              },
+            });
+          } else {
+            const filterArray = this.loginUser.hobbies.filter(
+              (hobby) => hobby !== item.data
+            );
+            this.$store.dispatch(T.UPDATE_HOBBIES, {
+              data: { uid: this.loginUser.uid, hobbies: filterArray },
+            });
+          }
+          return { active: !item.active, data: item.data };
+        } else {
+          return { ...item };
+        }
+      });
+    },
   },
 };
 </script>

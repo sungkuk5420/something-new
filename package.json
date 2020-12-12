@@ -18,9 +18,10 @@
     "@quasar/extras": "^1.9.11",
     "axios": "^0.21.0",
     "firebase": "7.24.0",
-    "quasar": "^1.0.0",
+    "lodash": "^4.17.20",
+    "quasar": "^1.14.7",
     "vant": "^2.11.2",
-    "vue-i18n": "^8.0.0",
+    "vue-i18n": "^8.22.2",
     "vue-image-crop-upload": "^2.5.0"
   },
   "devDependencies": {
