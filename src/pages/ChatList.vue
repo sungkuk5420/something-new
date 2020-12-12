@@ -4,7 +4,7 @@
     <div class="list" v-show="chatList.length != 0">
       <ul>
         <van-swipe-cell v-for="(currentChat,index) in chatList" :key="index">
-          <li class="chat first">
+          <li class="chat first" @click="moveToChatRoom">
             <div class="user-image">
               <svg
                 width="44"
@@ -117,6 +117,9 @@ export default {
           badgeCount: `4`,
         },
       ];
+    },
+    moveToChatRoom() {
+      this.$router.push("/chat");
     },
   },
 };

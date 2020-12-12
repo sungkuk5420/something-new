@@ -12,7 +12,11 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer reveal class="bg-grey-8 text-white" v-show="loginUser !== null">
+    <q-footer
+      reveal
+      class="bg-grey-8 text-white"
+      v-show="loginUser !== null && $router.currentRoute.path!='/chat'"
+    >
       <van-tabbar v-model="active">
         <van-tabbar-item to="/main">
           <template #icon="home">
@@ -78,6 +82,7 @@ export default {
     }),
   },
   mounted() {
+    console.log(this.$router.currentRoute.path);
     authService.onAuthStateChanged((user) => {
       console.log(user);
       if (user) {

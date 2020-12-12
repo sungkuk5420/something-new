@@ -5,17 +5,20 @@
       left-arrow
       @click-left="
         () => {
-          $router.push('/chat');
+          $router.push('/chatList');
         }
       "
-    >
-    </van-nav-bar>
+    ></van-nav-bar>
     <div class="chat">
       <div class="chat-contents">
         <div class="date-bar">
-          <div class="line"><hr /></div>
+          <div class="line">
+            <hr />
+          </div>
           <div class="date">2020년 10월 4일</div>
-          <div class="line"><hr /></div>
+          <div class="line">
+            <hr />
+          </div>
         </div>
         <div class="chat-content">
           <div class="chat-line">
@@ -37,10 +40,7 @@
                     width="1"
                     height="1"
                   >
-                    <use
-                      xlink:href="#image0"
-                      transform="translate(0 -0.25) scale(0.0192308)"
-                    />
+                    <use xlink:href="#image0" transform="translate(0 -0.25) scale(0.0192308)" />
                   </pattern>
                   <image
                     id="image0"
@@ -78,7 +78,7 @@
       </div>
       <div class="input-box">
         <div class="input-inner">
-          <input type="text" name="" id="" />
+          <input type="text" name id />
         </div>
         <div class="input-emoticon">
           <svg
@@ -89,14 +89,7 @@
             xmlns="http://www.w3.org/2000/svg"
           >
             <rect opacity="0.5" width="32" height="32" rx="8" fill="#E3E1E1" />
-            <rect
-              x="23"
-              y="15"
-              width="2"
-              height="14"
-              transform="rotate(90 23 15)"
-              fill="#747070"
-            />
+            <rect x="23" y="15" width="2" height="14" transform="rotate(90 23 15)" fill="#747070" />
             <rect
               x="17"
               y="23"
