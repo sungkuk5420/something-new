@@ -19,13 +19,18 @@
       >
       </van-picker>
       <div class="button-wrapper">
-        <button type="button" class="button-save" @click="saveHeight">저장</button>
+        <button type="button" class="button-save" @click="saveHeight">
+          저장
+        </button>
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
+import { T } from "src/store/module-example/types";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -41,15 +46,20 @@ export default {
         .map((v, idx) => maxHeight - idx)
         .reverse();
     },
+    ...mapGetters({
+      loginUser: "getCurrentUser",
+    }),
   },
   methods: {
     onChange(_, value) {
       this.selectHeight = value;
     },
-    saveHeight() {
-      this.$store.commit('UPDATE_HEIGHT', this.selectHeight)
-      this.$router.push('/user-profile');
-    }
+    async saveHeight() {
+      await this.$store.dispatch(T.UPDATE_HEIGHT, {
+        data: { height: this.selectHeight, uid: this.loginUser.uid },
+      });
+      await this.$router.push("/user-profile");
+    },
   },
 };
 </script>

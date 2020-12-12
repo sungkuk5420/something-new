@@ -100,7 +100,7 @@
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
         <van-picker
           title="위치"
-          :columns="areaColumns"
+          :columns="locations"
           item-height="60"
           @change="changeLocation"
         ></van-picker>
@@ -221,25 +221,6 @@ export default {
       location: "서울",
       selectYear: 1970,
       loading: false,
-      areaColumns: [
-        "서울",
-        "경기",
-        "광주",
-        "대구",
-        "대전",
-        "부산",
-        "울산",
-        "인천",
-        "세종",
-        "강원",
-        "경남",
-        "경북",
-        "전남",
-        "전북",
-        "제주",
-        "충남",
-        "충북",
-      ],
       show: true,
       params: {
         token: "123456798",
@@ -277,6 +258,7 @@ export default {
   computed: {
     ...mapGetters({
       userList: "getUserList",
+      locations:"getLocations"
     }),
     yearsColumns() {
       const years = Array(this.nowYear - (this.nowYear - 51))

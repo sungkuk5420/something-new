@@ -11,4 +11,7 @@ export const getters = {
     getChatData(state) {
         return state.chatData;
     },
+    getLocations(state) {
+      return state.locations;
+    }
 };

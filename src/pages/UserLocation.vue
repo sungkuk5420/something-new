@@ -13,64 +13,44 @@
     <div class="picker-place">
       <van-picker
         title="위치"
-        :columns="columns"
-        @confirm="onConfirm"
-        @cancel="onCancel"
+        :columns="locations"
         @change="onChange"
         item-height="60"
       >
       </van-picker>
       <div class="button-wrapper">
-        <button type="button" class="button-save">저장</button>
+        <button type="button" class="button-save" @click="saveLocation">저장</button>
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
-export default {
-  data() {
-    return {};
-  },
-};
-</script>
-<script>
-import { Toast } from "vant";
+import {mapGetters} from 'vuex';
+import {T} from "src/store/module-example/types";
 
 export default {
   data() {
     return {
-      columns: [
-        "서울",
-        "경기",
-        "광주",
-        "대구",
-        "대전",
-        "부산",
-        "울산",
-        "인천",
-        "세종",
-        "강원",
-        "경남",
-        "경북",
-        "전남",
-        "전북",
-        "제주",
-        "충남",
-        "충북",
-      ],
+      selectLocation: "서울"
     };
   },
+  computed: {
+    ...mapGetters({
+      locations:"getLocations",
+      loginUser: "getCurrentUser",
+    })
+  },
   methods: {
-    // onConfirm(value, index) {
-    //   Toast(`Value: ${value}, Index: ${index}`);
-    // },
-    onChange(picker, value, index) {
-      Toast(`Value: ${value}, Index: ${index}`);
+    onChange(_, value) {
+      this.selectLocation = value;
     },
-    // onCancel() {
-    //   Toast("Cancel");
-    // },
+    async saveLocation() {
+      await this.$store.dispatch(T.UPDATE_LOCATION, {
+        data: { location: this.selectLocation, uid: this.loginUser.uid },
+      });
+      await this.$router.push("/user-profile");
+    }
   },
 };
 </script>
@@ -91,7 +71,7 @@ export default {
 
     .button-wrapper {
       padding: 0 20px;
-      bottom: 20px;
+      bottom: 70px;
       left: 0;
       position: fixed;
       width: 100%;

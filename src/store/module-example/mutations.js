@@ -14,9 +14,12 @@ export const mutations = {
     state.chatData.push(data);
   },
   [T.SET_USER_DATA_ON_SOTRE](state, loginUser) {
-    state.loginUser = loginUser
+    state.loginUser = loginUser;
   },
-  [T.UPDATE_HEIGHT](state, height) {
-    state.loginUser.height = height
-  }
+  [T.UPDATE_HEIGHT](state, data) {
+    state.loginUser.height = data.height;
+  },
+  [T.UPDATE_LOCATION](state, data) {
+    state.loginUser.location = data.location;
+  },
 };

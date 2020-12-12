@@ -271,11 +271,7 @@
             <li>
               <div class="info-title">성별</div>
               <div class="info-description">
-                {{
-                  loginUser.gender === "men"
-                    ? "남자"
-                    : "여자"
-                }}
+                {{ loginUser.gender === "men" ? "남자" : "여자" }}
               </div>
             </li>
             <li>
@@ -289,7 +285,7 @@
               <div class="info-description">
                 <span>
                   {{
-                    loginUser.height
+                    loginUser.height > 0
                       ? `${loginUser.height}cm`
                       : "키를 선택해주세요"
                   }}
