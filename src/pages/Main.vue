@@ -4,9 +4,9 @@
     <div class="user-card-wrapper">
       <div
         class="user-card"
-        v-for="(currentUser,index) in userList.filter(item=>item.profileImage!='')"
+        v-for="(currentUser,index) in userList.filter(item=>item.profileImage!='').slice(0,3)"
         :key="currentUser.uid"
-        :style="`top:${index*15}px; z-index:${index}`"
+        :style="`bottom:${(index*1.1)*30}px; z-index:-${index}; transform:scale(${1-0.09*index});`"
       >
         <div class="profile-image" :style="`background-image:url('${currentUser.profileImage}')`"></div>
 
@@ -191,8 +191,8 @@ export default {
 
 <style lang="scss">
 .main-page {
-  margin-bottom: 60px;
   height: 100vh;
+  overflow: hidden;
   .main-title {
     font-family: Noto Sans CJK KR;
     font-style: normal;
@@ -207,7 +207,6 @@ export default {
     margin-left: 15px;
   }
   .choice {
-    margin-top: 26px;
     display: flex;
     justify-content: center;
     position: fixed;
@@ -216,10 +215,11 @@ export default {
   }
   .user-card-wrapper {
     position: relative;
-    height: calc(100% - (50px + 35vh));
+    height: calc(100% - (50px + 30vh));
     display: flex;
     flex: none;
     justify-content: center;
+    overflow: hidden;
   }
   .user-card {
     max-width: 345px;
@@ -229,7 +229,7 @@ export default {
     position: absolute;
     border: 1px solid #fff;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 7vh);
     max-height: 469px;
     .profile-image {
       width: 100%;
