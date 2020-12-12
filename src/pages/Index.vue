@@ -131,7 +131,7 @@
             ref="uploader"
           ></my-upload>
           <img class="preview-image" :src="imgDataUrl" v-show="imgDataUrl" />
-          <div class="photo-shooting" v-show="!imgDataUrl">지금 바로 찍을래요</div>
+          <div class="photo-shooting" v-show="!imgDataUrl" @click="captureImage">지금 바로 찍을래요</div>
         </div>
         <van-button type="default" v-show="!imgDataUrl" @click.prevent="customCallPrepareUpload">다음</van-button>
         <van-button type="default" v-show="imgDataUrl" @click="registerUser">다음</van-button>
@@ -163,8 +163,11 @@ import { mapGetters } from "vuex";
 import { Toast } from "vant";
 
 import myUpload from "vue-image-crop-upload";
-import { authService, firebaseDB } from "src/fbase";
 import * as firebase from "firebase";
+import {Plugins, CameraResultType, CameraSource} from '@capacitor/core'
+
+const { Camera } = Plugins
+
 export default {
   data() {
     return {
@@ -437,6 +440,15 @@ export default {
         errorCb,
       });
     },
+    async captureImage() {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        source: CameraSource.Camera,
+        resultType: CameraResultType.DataUrl
+      })
+      console.log('captureImage image', image.dataUrl)
+      this.imgDataUrl = image.dataUrl;
+    }
   },
 };
 </script>
