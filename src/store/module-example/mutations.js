@@ -25,4 +25,8 @@ export const mutations = {
   [T.UPDATE_HOBBIES](state, data) {
     state.loginUser.hobbies = data.hobbies;
   },
+  [T.UPDATE_PERSONALITY](state, data) {
+    console.log("UPDATE_PERSONALITY", data);
+    state.loginUser.personalities = data;
+  },
 };

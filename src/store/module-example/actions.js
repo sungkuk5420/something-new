@@ -20,7 +20,7 @@ export const actions = {
       });
       commit(T.UPDATE_LOCATION, data.location);
     } catch (e) {
-      console.log("T.UPDATE_LOCATION", e);
+      console.log("T.UPDATE_LOCATION error", e);
     }
   },
   async [T.UPDATE_HOBBIES]({ commit }, { data }) {
@@ -30,7 +30,18 @@ export const actions = {
       });
       commit(T.UPDATE_HOBBIES, data.hobbies);
     } catch (e) {
-      console.log("T.UPDATE_HOBBIES", e);
+      console.log("T.UPDATE_HOBBIES error", e);
+    }
+  },
+  async [T.UPDATE_PERSONALITY]({ commit }, { data }) {
+    try {
+      console.log("UPDATE_PERSONALITY", data);
+      await fireStore.collection("users").doc(data.uid).update({
+        personalities: data.personalities,
+      });
+      commit(T.UPDATE_PERSONALITY, data.personalities);
+    } catch (e) {
+      console.log("T.UPDATE_PERSONALITY error", e);
     }
   },
   async [T.USER_LOGIN]({ commit }, { data, successCb, errorCb }) {
@@ -75,7 +86,6 @@ export const actions = {
     //ex) data:{where:["email","==",email]}
 
     const where = data.where || ["email", "!=", ""];
-    console.log(where)
     fireStore
       .collection("users")
       .where(...where)
