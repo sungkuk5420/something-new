@@ -276,7 +276,9 @@
           <ul>
             <li>
               <div class="info-title">성별</div>
-              <div class="info-description">{{ loginUser.gender === "men" ? "남자" : "여자" }}</div>
+              <div class="info-description">
+                {{ loginUser.gender === "men" ? "남자" : "여자" }}
+              </div>
             </li>
             <li>
               <div class="info-title">출생년도</div>
@@ -287,9 +289,9 @@
               <div class="info-description">
                 <span>
                   {{
-                  loginUser.height > 0
-                  ? `${loginUser.height}cm`
-                  : "키를 선택해주세요"
+                    loginUser.height > 0
+                      ? `${loginUser.height}cm`
+                      : "키를 선택해주세요"
                   }}
                 </span>
                 <svg
@@ -329,9 +331,9 @@
               <div class="info-description">
                 <span>
                   {{
-                  loginUser.hobbies.length > 0
-                  ? loginUser.hobbies.toString()
-                  : "취미를 선택해주세요"
+                    loginUser.hobbies.length > 0
+                      ? loginUser.hobbies.toString()
+                      : "취미를 선택해주세요"
                   }}
                 </span>
                 <svg
@@ -350,9 +352,9 @@
               <div class="info-description">
                 <span>
                   {{
-                  loginUser.personalities.length > 0
-                  ? loginUser.personalities.toString()
-                  : "성격을 선택해주세요"
+                    loginUser.personalities.length > 0
+                      ? loginUser.personalities.toString()
+                      : "성격을 선택해주세요"
                   }}
                 </span>
                 <svg
@@ -371,9 +373,9 @@
               <div class="info-description">
                 <span>
                   {{
-                  loginUser.smoking !== ""
-                  ? loginUser.smoking
-                  : "흡연여부를 선택해주세요"
+                    loginUser.smoking !== ""
+                      ? smokeType()
+                      : "흡연여부를 선택해주세요"
                   }}
                 </span>
                 <svg
@@ -392,9 +394,9 @@
               <div class="info-description">
                 <span>
                   {{
-                  loginUser.drinking !== ""
-                  ? loginUser.drinking
-                  : "음주여부를 선택해주세요"
+                    loginUser.drinking !== ""
+                      ? drinkType()
+                      : "음주여부를 선택해주세요"
                   }}
                 </span>
                 <svg
@@ -590,6 +592,42 @@ export default {
       loginUser: "getLoginUser",
     }),
   },
+  methods: {
+    smokeType() {
+      switch (this.loginUser.smoking) {
+        case "ST00":
+          return "비흡연";
+        case "ST01":
+          return "가끔";
+        case "ST02":
+          return "자주";
+        case "ST03":
+          return "비흡연자 앞에서 안함";
+        case "ST04":
+          return "상대방이 싫어하면 금연";
+        default:
+          break;
+      }
+    },
+    drinkType() {
+      switch (this.loginUser.drinking) {
+        case "DT00":
+          return "못함";
+        case "DT01":
+          return "가끔";
+        case "DT02":
+          return "적당히";
+        case "DT03":
+          return "많이";
+        case "DT04":
+          return "술고래";
+        case "DT05":
+          return "조금씩 자주";
+        default:
+          break;
+      }
+    },
+  },
 };
 </script>
 
@@ -637,10 +675,10 @@ export default {
         li {
           display: flex;
           justify-content: space-between;
-          padding: 20px 10px;
           border-bottom: 1px solid #ece8e8;
           position: relative;
-          padding-right: 40px;
+          padding: 20px 40px 20px 10px;
+
           .info-title {
             font-family: Noto Sans;
             font-style: normal;

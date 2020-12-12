@@ -35,13 +35,32 @@ export const actions = {
   },
   async [T.UPDATE_PERSONALITY]({ commit }, { data }) {
     try {
-      console.log("UPDATE_PERSONALITY", data);
       await fireStore.collection("users").doc(data.uid).update({
         personalities: data.personalities,
       });
-      commit(T.UPDATE_PERSONALITY, data.personalities);
+      commit(T.UPDATE_PERSONALITY, data);
     } catch (e) {
       console.log("T.UPDATE_PERSONALITY error", e);
+    }
+  },
+  async [T.UPDATE_SMOKING]({ commit }, { data }) {
+    try {
+      await fireStore.collection("users").doc(data.uid).update({
+        smoking: data.smoking,
+      });
+      commit(T.UPDATE_SMOKING, data);
+    } catch (e) {
+      console.log("T.UPDATE_SMOKING error", e);
+    }
+  },
+  async [T.UPDATE_DRINKING]({ commit }, { data }) {
+    try {
+      await fireStore.collection("users").doc(data.uid).update({
+        drinking: data.drinking,
+      });
+      commit(T.UPDATE_DRINKING, data);
+    } catch (e) {
+      console.log("T.UPDATE_DRINKING error", e);
     }
   },
   async [T.USER_LOGIN]({ commit }, { data, successCb, errorCb }) {
