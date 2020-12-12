@@ -6,7 +6,7 @@
         class="user-card"
         v-for="(currentUser,index) in userList.filter(item=>item.profileImage!='').slice(0,3)"
         :key="currentUser.uid"
-        :style="`bottom:${(index*1.1)*30}px; z-index:-${index}; transform:scale(${1-0.09*index});`"
+        :style="`bottom:calc(2vh + ${(index*39)-(3*(index*index))}px); z-index:-${index}; transform:scale(${1-0.09*index});`"
       >
         <div class="profile-image" :style="`background-image:url('${currentUser.profileImage}')`"></div>
 
@@ -39,6 +39,7 @@
     </div>
     <div class="choice">
       <svg
+        style="width:72px;height:72px; margin-right:35px;"
         width="82"
         height="83"
         viewBox="0 0 82 83"
@@ -82,6 +83,7 @@
         </defs>
       </svg>
       <svg
+        style="width:72px;height:72px;"
         width="83"
         height="83"
         viewBox="0 0 83 83"
@@ -201,7 +203,7 @@ export default {
     line-height: 38px;
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
     margin-top: 5vh;
     color: #000000;
     margin-left: 15px;
@@ -215,7 +217,7 @@ export default {
   }
   .user-card-wrapper {
     position: relative;
-    height: calc(100% - (50px + 30vh));
+    height: calc(100% - (50px + 26vh));
     display: flex;
     flex: none;
     justify-content: center;
@@ -228,7 +230,7 @@ export default {
     border-radius: 24px;
     position: absolute;
     border: 1px solid #fff;
-    width: 100%;
+    width: calc(63% + (13vh));
     height: calc(100% - 7vh);
     max-height: 469px;
     .profile-image {
