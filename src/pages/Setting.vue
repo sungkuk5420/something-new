@@ -110,10 +110,6 @@ export default {
     return {
     }
   },
-  computed: {
-    // name: this.$store.state.loginUser.name,
-    // email: this.$store.state.loginUser.email,
-  },
   methods: {
     logOut(event) {
       event.preventDefault();

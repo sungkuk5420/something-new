@@ -176,7 +176,7 @@ export default {
       name: "",
       email: "",
       gender: "",
-      age: 0,
+      birthYear: 0,
       password: "",
       location: "서울",
       selectYear: 1970,
@@ -337,7 +337,7 @@ export default {
       this.$refs.stepper.next();
     },
     checkStep7() {
-      this.age = this.nowYear - this.selectYear + 1;
+      this.birthYear = this.selectYear;
       this.$refs.stepper.next();
     },
     checkStep8() {
@@ -370,10 +370,8 @@ export default {
       });
     },
     registerUser() {
-      console.log("this.imgDataUrl");
-      console.log(this.imgDataUrl);
       const registerUserData = {
-        age: this.age,
+        birthYear: this.birthYear,
         location: this.location,
         gender: this.gender,
         email: this.email,
@@ -381,10 +379,8 @@ export default {
         profileImage: this.imgDataUrl,
         chats: "",
         comment: "",
-        email: this.email,
         height: "",
         name: this.name,
-        profileImage: "",
         uid: "",
         voteHistories: "",
       };
@@ -407,7 +403,7 @@ export default {
               ...userData,
               profileImage: imageDownloadUrl,
             };
-            this.$store.dispatch(T.UPSERT_USER_INTO_FIRESTORE, {
+            await this.$store.dispatch(T.UPSERT_USER_INTO_FIRESTORE, {
               data: {
                 userData: updateUserData,
               },
