@@ -327,7 +327,13 @@
             <li @click="$router.push('/hobby')">
               <div class="info-title">취미</div>
               <div class="info-description">
-                <span>롤, 하스스톤</span>
+                <span>
+                  {{
+                  loginUser.hobbies.length > 0
+                  ? loginUser.hobbies.toString()
+                  : "취미를 선택해주세요"
+                  }}
+                </span>
                 <svg
                   width="8"
                   height="14"
@@ -342,7 +348,13 @@
             <li @click="$router.push('/personality')">
               <div class="info-title">성격</div>
               <div class="info-description">
-                <span>쾌활함, 또라이</span>
+                <span>
+                  {{
+                  loginUser.personalities.length > 0
+                  ? loginUser.personalities.toString()
+                  : "성격을 선택해주세요"
+                  }}
+                </span>
                 <svg
                   width="8"
                   height="14"
@@ -357,7 +369,13 @@
             <li @click="$router.push('/smoke')">
               <div class="info-title">흡연</div>
               <div class="info-description">
-                <span>가끔</span>
+                <span>
+                  {{
+                  loginUser.smoking !== ""
+                  ? loginUser.smoking
+                  : "흡연여부를 선택해주세요"
+                  }}
+                </span>
                 <svg
                   width="8"
                   height="14"
@@ -372,7 +390,13 @@
             <li @click="$router.push('/drink')">
               <div class="info-title">음주</div>
               <div class="info-description">
-                <span>가끔</span>
+                <span>
+                  {{
+                  loginUser.drinking !== ""
+                  ? loginUser.drinking
+                  : "음주여부를 선택해주세요"
+                  }}
+                </span>
                 <svg
                   width="8"
                   height="14"

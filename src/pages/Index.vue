@@ -365,7 +365,7 @@ export default {
         uid: "",
         voteHistories: "",
         hobbies: [],
-        character: [],
+        personalities: [],
         smoking: "",
         drinking: "",
       };
