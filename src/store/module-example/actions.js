@@ -16,7 +16,7 @@ export const actions = {
       console.log('T.UPDATE_HEIGHT error', e)
     }
   },
-  async [T.UPDATE_LOCATION]({commit}, {data}) {
+  async [T.UPDATE_LOCATION]({ commit }, { data }) {
     try {
       await fireStore
         .collection("users")
@@ -67,10 +67,14 @@ export const actions = {
   [T.GET_USER_DATA]({ commit }, { data, successCb, errorCb }) {
     console.log(`store action [T.GET_USER_DATA] data`);
     console.log(data);
+    //where 데이터를 넣으면 해당 데이터 == 값을 찾는다.
+    //ex) data:{where:["email","==",email]}
 
+    const where = data.where || ["email", "!=", ""];
+    console.log(where)
     fireStore
       .collection("users")
-      .where("email", "==", data.email)
+      .where(...where)
       .get()
       .then((querySnapshot) => {
         let userList = [];
@@ -86,8 +90,8 @@ export const actions = {
             ...doc.data(),
           });
           //commit(GET_USER_LIST, userList);
-          successCb(userList);
         });
+        successCb(userList);
       })
       .catch(function (error) {
         console.error("Error adding document: ", error);

@@ -37,7 +37,7 @@ export default {
         this.loading = true;
         this.$store.dispatch(T.GET_USER_DATA, {
           data: {
-            email: user.email,
+            where: ["email", "==", user.email],
           },
           successCb,
           errorCb,
