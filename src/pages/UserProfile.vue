@@ -4,9 +4,15 @@
       <van-swipe-item>
         <img src="~assets/user-image-1.jpg" />
       </van-swipe-item>
-      <van-swipe-item><img src="~assets/user-image-2.jpg" /></van-swipe-item>
-      <van-swipe-item><img src="~assets/user-image-3.jpg" /></van-swipe-item>
-      <van-swipe-item><img src="~assets/user-image-4.jpg" /></van-swipe-item>
+      <van-swipe-item>
+        <img src="~assets/user-image-2.jpg" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img src="~assets/user-image-3.jpg" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img src="~assets/user-image-4.jpg" />
+      </van-swipe-item>
     </van-swipe>
 
     <div class="card-detail">
@@ -162,7 +168,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>-->
         <!-- 카드 상세 끝 -->
         <!-- 내가 좋아한 카드  -->
         <!-- <div class="floating-card">
@@ -204,15 +210,15 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>-->
         <!-- 내가 좋아한 카드 끝 -->
         <!-- 내가 좋아한 카드  -->
         <div class="floating-card">
           <div class="give-like">
             <div class="left">
               <div class="user-name">
-                <span>{{ loginUser.name }}</span
-                ><svg
+                <span>{{ loginUser.name }}</span>
+                <svg
                   style="margin-left: 5px"
                   width="13"
                   height="12"
@@ -270,24 +276,20 @@
           <ul>
             <li>
               <div class="info-title">성별</div>
-              <div class="info-description">
-                {{ loginUser.gender === "men" ? "남자" : "여자" }}
-              </div>
+              <div class="info-description">{{ loginUser.gender === "men" ? "남자" : "여자" }}</div>
             </li>
             <li>
               <div class="info-title">출생년도</div>
-              <div class="info-description">
-                {{ loginUser.birthYear }}
-              </div>
+              <div class="info-description">{{ loginUser.birthYear }}</div>
             </li>
             <li @click="$router.push('/user-tall')">
               <div class="info-title">키</div>
               <div class="info-description">
                 <span>
                   {{
-                    loginUser.height > 0
-                      ? `${loginUser.height}cm`
-                      : "키를 선택해주세요"
+                  loginUser.height > 0
+                  ? `${loginUser.height}cm`
+                  : "키를 선택해주세요"
                   }}
                 </span>
                 <svg
@@ -325,7 +327,7 @@
             <li @click="$router.push('/hobby')">
               <div class="info-title">취미</div>
               <div class="info-description">
-                <span> 롤, 하스스톤 </span>
+                <span>롤, 하스스톤</span>
                 <svg
                   width="8"
                   height="14"
@@ -340,7 +342,7 @@
             <li @click="$router.push('/personality')">
               <div class="info-title">성격</div>
               <div class="info-description">
-                <span> 쾌활함, 또라이 </span>
+                <span>쾌활함, 또라이</span>
                 <svg
                   width="8"
                   height="14"
@@ -355,7 +357,7 @@
             <li @click="$router.push('/smoke')">
               <div class="info-title">흡연</div>
               <div class="info-description">
-                <span> 가끔 </span>
+                <span>가끔</span>
                 <svg
                   width="8"
                   height="14"
@@ -370,7 +372,7 @@
             <li @click="$router.push('/drink')">
               <div class="info-title">음주</div>
               <div class="info-description">
-                <span> 가끔 </span>
+                <span>가끔</span>
                 <svg
                   width="8"
                   height="14"
@@ -392,7 +394,7 @@
             상대방의 응답을 기다리고 있어요!
           </div>
           <button type="button" class="button-wating">대화하기</button>
-        </div> -->
+        </div>-->
 
         <!-- 내가 좋아한 카드 끝 -->
         <!-- 나를 좋아한 카드 시작 -->
@@ -536,7 +538,7 @@
               </defs>
             </svg>
           </div>
-        </div> -->
+        </div>-->
         <!-- 나를 좋아한 카드 끝 -->
         <!-- 서로 매칭된 카드 시작 -->
         <!-- <div class="matching-bottom">
@@ -544,7 +546,7 @@
             상대방의 응답을 기다리고 있어요!
           </div>
           <button type="button" class="button-matching">대화하기</button>
-        </div> -->
+        </div>-->
 
         <!-- 서로 매칭된 카드 끝 -->
       </section>
@@ -561,7 +563,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loginUser: "getCurrentUser",
+      loginUser: "getLoginUser",
     }),
   },
 };

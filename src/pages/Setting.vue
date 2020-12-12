@@ -33,39 +33,14 @@
               />
               <feOffset dy="4" />
               <feGaussianBlur stdDeviation="5" />
-              <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"
-              />
-              <feBlend
-                mode="normal"
-                in2="BackgroundImageFix"
-                result="effect1_dropShadow"
-              />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="effect1_dropShadow"
-                result="shape"
-              />
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0" />
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
             </filter>
-            <pattern
-              id="pattern0"
-              patternContentUnits="objectBoundingBox"
-              width="1"
-              height="1"
-            >
-              <use
-                xlink:href="#image0"
-                transform="translate(-0.254098) scale(0.0163934)"
-              />
+            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0" transform="translate(-0.254098) scale(0.0163934)" />
             </pattern>
-            <image
-              id="image0"
-              width="92"
-              height="61"
-              :href="loginUser.profileImage"
-            />
+            <image id="image0" width="92" height="61" :href="loginUser.profileImage" />
           </defs>
         </svg>
       </div>
@@ -74,9 +49,7 @@
         <div class="email">{{ loginUser.email }}</div>
       </div>
       <div class="info-button">
-        <button type="button" @click="$router.push('/user-profile')">
-          프로필 관리
-        </button>
+        <button type="button" @click="$router.push('/user-profile')">프로필 관리</button>
       </div>
     </div>
     <div class="mypage-list">
@@ -134,7 +107,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loginUser: "getCurrentUser",
+      loginUser: "getLoginUser",
     }),
   },
   methods: {

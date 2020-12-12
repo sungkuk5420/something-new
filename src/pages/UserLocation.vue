@@ -8,16 +8,9 @@
           $router.push('/user-profile');
         }
       "
-    >
-    </van-nav-bar>
+    ></van-nav-bar>
     <div class="picker-place">
-      <van-picker
-        title="위치"
-        :columns="locations"
-        @change="onChange"
-        item-height="60"
-      >
-      </van-picker>
+      <van-picker title="위치" :columns="locations" @change="onChange" item-height="60"></van-picker>
       <div class="button-wrapper">
         <button type="button" class="button-save" @click="saveLocation">저장</button>
       </div>
@@ -26,20 +19,20 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
-import {T} from "src/store/module-example/types";
+import { mapGetters } from "vuex";
+import { T } from "src/store/module-example/types";
 
 export default {
   data() {
     return {
-      selectLocation: "서울"
+      selectLocation: "서울",
     };
   },
   computed: {
     ...mapGetters({
-      locations:"getLocations",
-      loginUser: "getCurrentUser",
-    })
+      locations: "getLocations",
+      loginUser: "getLoginUser",
+    }),
   },
   methods: {
     onChange(_, value) {
@@ -50,7 +43,7 @@ export default {
         data: { location: this.selectLocation, uid: this.loginUser.uid },
       });
       await this.$router.push("/user-profile");
-    }
+    },
   },
 };
 </script>

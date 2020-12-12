@@ -21,7 +21,11 @@
           </div>
         </div>
         <div class="chat-content">
-          <div class="chat-line">
+          <div
+            :class="'chat-line ' +  `${loginUser.uid == currentMessage.creatorId?'mine':''}`"
+            v-for="(currentMessage,index) in chats"
+            :key="index"
+          >
             <div class="profile-image">
               <svg
                 width="39"
@@ -52,33 +56,15 @@
               </svg>
             </div>
             <div class="chat-text">
-              <div class="line">안녕하세요! 저는 고구마애요</div>
-            </div>
-          </div>
-          <div class="chat-line">
-            <div class="profile-image non-image"></div>
-            <div class="chat-text chat-last">
-              <div class="line">퍽퍽하죠</div>
-              <div class="time">12:16</div>
-            </div>
-          </div>
-          <div class="chat-line-mine">
-            <div class="chat-text">
-              <div class="time">12:16</div>
-              <div class="line">반가워요!</div>
-            </div>
-          </div>
-          <div class="chat-line-mine">
-            <div class="chat-text">
-              <div class="time">12:17</div>
-              <div class="line">전 감자애오</div>
+              <div class="line">{{currentMessage.text}}</div>
+              <div class="time">{{currentMessage.createdAt}}</div>
             </div>
           </div>
         </div>
       </div>
       <div class="input-box">
         <div class="input-inner">
-          <input type="text" name id />
+          <input type="text" name id v-model="messageInput" v-on:keyup.enter="sendMessage" />
         </div>
         <div class="input-emoticon">
           <svg
@@ -105,8 +91,60 @@
   </q-page>
 </template>
 
+
 <script>
-export default {};
+import { T } from "../store/module-example/types";
+import { fireStore } from "../fbase";
+import { mapGetters } from "vuex";
+import mixin from "./Mixin";
+export default {
+  mixins: [mixin],
+  data() {
+    return {
+      chats: [],
+      messageInput: "",
+    };
+  },
+  mounted() {
+    fireStore
+      .collection("chats/ABS1LEtAwASMn69CKIqK/messages")
+      .onSnapshot((snapshot) => {
+        const chatsArray = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .sort((a, b) => a.createdAt - b.createdAt);
+        console.log(chatsArray);
+        this.chats = chatsArray;
+      });
+  },
+  methods: {
+    async sendMessage() {
+      console.log(this.loginUser);
+      await fireStore.collection("chats/ABS1LEtAwASMn69CKIqK/messages").add({
+        text: this.messageInput,
+        createdAt: Date.now(),
+        creatorId: this.loginUser.uid,
+      });
+    },
+    getAllUsers() {
+      const successCb = (userList) => {
+        this.userList = userList;
+        this.loading = false;
+      };
+      const errorCb = (errorMessage) => {
+        this.loading = false;
+      };
+      this.loading = true;
+      this.$store.dispatch(T.GET_USER_DATA, {
+        data: {},
+        successCb,
+        errorCb,
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -122,8 +160,6 @@ export default {};
   }
   .chat {
     flex: 1;
-    // display: flex;
-    // align-content: space-around;
     .chat-contents {
       .date-bar {
         display: flex;
@@ -168,6 +204,7 @@ export default {};
             margin-left: 62px;
           }
           .chat-text {
+            display: flex;
             margin-left: 15px;
             .line {
               height: 43px;
@@ -203,13 +240,14 @@ export default {};
             display: flex;
           }
         }
-        .chat-line-mine {
+        .chat-line.mine {
           margin-right: 25px;
           margin-bottom: 4px;
           display: flex;
           justify-content: flex-end;
           .chat-text {
             display: flex;
+            flex-direction: row-reverse;
             .line {
               height: 43px;
               padding: 0 12px;
@@ -226,6 +264,7 @@ export default {};
               color: #ffffff;
             }
             .time {
+              order: 1;
               margin-right: 7px;
               padding-bottom: 4px;
               font-family: Noto Sans CJK KR;
@@ -237,6 +276,9 @@ export default {};
               color: #747070;
               align-items: flex-end;
             }
+          }
+          .profile-image {
+            display: none;
           }
         }
       }

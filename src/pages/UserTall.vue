@@ -8,20 +8,11 @@
           $router.push('/user-profile');
         }
       "
-    >
-    </van-nav-bar>
+    ></van-nav-bar>
     <div class="picker-place">
-      <van-picker
-        title="키"
-        :columns="columns"
-        @change="onChange"
-        item-height="60"
-      >
-      </van-picker>
+      <van-picker title="키" :columns="columns" @change="onChange" item-height="60"></van-picker>
       <div class="button-wrapper">
-        <button type="button" class="button-save" @click="saveHeight">
-          저장
-        </button>
+        <button type="button" class="button-save" @click="saveHeight">저장</button>
       </div>
     </div>
   </q-page>
@@ -47,7 +38,7 @@ export default {
         .reverse();
     },
     ...mapGetters({
-      loginUser: "getCurrentUser",
+      loginUser: "getLoginUser",
     }),
   },
   methods: {

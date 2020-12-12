@@ -2,7 +2,7 @@ export const getters = {
     getter(state) {
         return state;
     },
-    getCurrentUser(state) {
+    getLoginUser(state) {
         return state.loginUser;
     },
     getUserList(state) {
@@ -12,6 +12,6 @@ export const getters = {
         return state.chatData;
     },
     getLocations(state) {
-      return state.locations;
+        return state.locations;
     }
 };

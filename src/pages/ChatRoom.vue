@@ -28,7 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       userChatData: "getChatData",
-      loginUser: "getCurrentUser",
+      loginUser: "getLoginUser",
     }),
   },
   mounted() {
