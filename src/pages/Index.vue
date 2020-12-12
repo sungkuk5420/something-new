@@ -34,8 +34,12 @@
         <div class="main-text">설레는 만남</div>
         <div class="sub-text">곧 설레는 인연을 찾아드릴께요!</div>
         <div class="footer">
-          <van-button type="default" @click="$refs.stepper.next()">이메일로 바로 시작하기</van-button>
-          <div class="footer__text">계속 진행하면 something의 서비스 약관 및</div>
+          <van-button type="default" @click="$refs.stepper.next()"
+            >이메일로 바로 시작하기</van-button
+          >
+          <div class="footer__text">
+            계속 진행하면 something의 서비스 약관 및
+          </div>
           <div class="footer__text">개인정보 보호정책에 동의합니다.</div>
         </div>
       </q-step>
@@ -55,14 +59,21 @@
       <q-step class="step-3" title="3" :name="3">
         <div class="main-text">비밀번호를 입력해주세요.</div>
         <div class="sub-text">다시 방문해 주셨군요!</div>
-        <q-input type="password" filled v-model="password" label="・・・・・・" ref="passwordInput" />
+        <q-input
+          type="password"
+          filled
+          v-model="password"
+          label="・・・・・・"
+          ref="passwordInput"
+        />
         <van-button
           v-on:keyup.enter="checkuserLoginStep2"
           type="default"
           :loading="loading"
           loading-text="로그인"
           @click="userLogin"
-        >로그인</van-button>
+          >로그인</van-button
+        >
       </q-step>
       <q-step class="step-4" title="4" :name="4">
         <div class="main-text">비밀번호를 입력해주세요.</div>
@@ -87,13 +98,25 @@
       <q-step class="step-6" title="6" :name="6">
         <div class="main-title">어디 사시나요?</div>
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
-        <van-picker title="위치" :columns="areaColumns" item-height="60" @change="changeLocation"></van-picker>
-        <van-button type="default" @click="$refs.stepper.next()">다음</van-button>
+        <van-picker
+          title="위치"
+          :columns="areaColumns"
+          item-height="60"
+          @change="changeLocation"
+        ></van-picker>
+        <van-button type="default" @click="$refs.stepper.next()"
+          >다음</van-button
+        >
       </q-step>
       <q-step class="step-7" title="7" :name="7">
         <div class="main-title">언제 태어나셨나요?</div>
         <div class="main-title-sub">회원님에 대해 알고 싶어요 :)</div>
-        <van-picker title="년도" :columns="yearsColumns" item-height="60" @change="changeYear"></van-picker>
+        <van-picker
+          title="년도"
+          :columns="yearsColumns"
+          item-height="60"
+          @change="changeYear"
+        ></van-picker>
         <van-button type="default" @click="checkStep7">다음</van-button>
       </q-step>
       <q-step class="step-8" title="8" :name="8">
@@ -131,10 +154,23 @@
             ref="uploader"
           ></my-upload>
           <img class="preview-image" :src="imgDataUrl" v-show="imgDataUrl" />
-          <div class="photo-shooting" v-show="!imgDataUrl" @click="captureImage">지금 바로 찍을래요</div>
+          <div
+            class="photo-shooting"
+            v-show="!imgDataUrl"
+            @click="captureImage"
+          >
+            지금 바로 찍을래요
+          </div>
         </div>
-        <van-button type="default" v-show="!imgDataUrl" @click.prevent="customCallPrepareUpload">다음</van-button>
-        <van-button type="default" v-show="imgDataUrl" @click="registerUser">다음</van-button>
+        <van-button
+          type="default"
+          v-show="!imgDataUrl"
+          @click.prevent="customCallPrepareUpload"
+          >다음</van-button
+        >
+        <van-button type="default" v-show="imgDataUrl" @click="registerUser"
+          >다음</van-button
+        >
       </q-step>
 
       <q-step class="step-10" title="10" :name="10">
@@ -150,8 +186,12 @@
           </div>
         </div>
 
-        <button type="button" class="now" @click="userLogin">조금 더 알려주기</button>
-        <button type="button" class="later" @click="userLogin">나중에 할래요</button>
+        <button type="button" class="now" @click="userLogin">
+          조금 더 알려주기
+        </button>
+        <button type="button" class="later" @click="userLogin">
+          나중에 할래요
+        </button>
       </q-step>
     </q-stepper>
   </q-page>
@@ -164,9 +204,9 @@ import { Toast } from "vant";
 
 import myUpload from "vue-image-crop-upload";
 import * as firebase from "firebase";
-import {Plugins, CameraResultType, CameraSource} from '@capacitor/core'
+import { Plugins, CameraResultType, CameraSource } from "@capacitor/core";
 
-const { Camera } = Plugins
+const { Camera } = Plugins;
 
 export default {
   data() {
@@ -245,8 +285,7 @@ export default {
       return years.reverse();
     },
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     emailIsValid(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -379,10 +418,14 @@ export default {
         profileImage: this.imgDataUrl,
         chats: "",
         comment: "",
-        height: "",
+        height: 0,
         name: this.name,
         uid: "",
         voteHistories: "",
+        hobbies: [],
+        character: [],
+        smoking: "",
+        drinking: "",
       };
       console.log(registerUserData);
       const successCb = async (userData) => {
@@ -440,11 +483,11 @@ export default {
       const image = await Camera.getPhoto({
         quality: 90,
         source: CameraSource.Camera,
-        resultType: CameraResultType.DataUrl
-      })
-      console.log('captureImage image', image.dataUrl)
+        resultType: CameraResultType.DataUrl,
+      });
+      console.log("captureImage image", image.dataUrl);
       this.imgDataUrl = image.dataUrl;
-    }
+    },
   },
 };
 </script>

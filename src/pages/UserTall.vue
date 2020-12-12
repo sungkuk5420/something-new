@@ -14,14 +14,12 @@
       <van-picker
         title="키"
         :columns="columns"
-        @confirm="onConfirm"
-        @cancel="onCancel"
         @change="onChange"
         item-height="60"
       >
       </van-picker>
       <div class="button-wrapper">
-        <button type="button" class="button-save">저장</button>
+        <button type="button" class="button-save" @click="saveHeight">저장</button>
       </div>
     </div>
   </q-page>
@@ -30,47 +28,28 @@
 <script>
 export default {
   data() {
-    return {};
-  },
-};
-</script>
-<script>
-import { Toast } from "vant";
-
-export default {
-  data() {
     return {
-      columns: [
-        "140",
-        "141",
-        "142",
-        "143",
-        "144",
-        "145",
-        "145",
-        "147",
-        "148",
-        "149",
-        "150",
-        "151",
-        "152",
-        "153",
-        "154",
-        "156",
-        "167",
-      ],
+      selectHeight: 140,
     };
   },
-  methods: {
-    // onConfirm(value, index) {
-    //   Toast(`Value: ${value}, Index: ${index}`);
-    // },
-    onChange(picker, value, index) {
-      Toast(`Value: ${value}, Index: ${index}`);
+  computed: {
+    columns() {
+      const minHeight = 139;
+      const maxHeight = 200;
+      return Array(maxHeight - minHeight)
+        .fill("")
+        .map((v, idx) => maxHeight - idx)
+        .reverse();
     },
-    // onCancel() {
-    //   Toast("Cancel");
-    // },
+  },
+  methods: {
+    onChange(_, value) {
+      this.selectHeight = value;
+    },
+    saveHeight() {
+      this.$store.commit('UPDATE_HEIGHT', this.selectHeight)
+      this.$router.push('/user-profile');
+    }
   },
 };
 </script>
@@ -91,7 +70,7 @@ export default {
 
     .button-wrapper {
       padding: 0 20px;
-      bottom: 20px;
+      bottom: 70px;
       left: 0;
       position: fixed;
       width: 100%;

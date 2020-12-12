@@ -33,28 +33,50 @@
               />
               <feOffset dy="4" />
               <feGaussianBlur stdDeviation="5" />
-              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0" />
-              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"
+              />
+              <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="effect1_dropShadow"
+              />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="effect1_dropShadow"
+                result="shape"
+              />
             </filter>
-            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <use xlink:href="#image0" transform="translate(-0.254098) scale(0.0163934)" />
+            <pattern
+              id="pattern0"
+              patternContentUnits="objectBoundingBox"
+              width="1"
+              height="1"
+            >
+              <use
+                xlink:href="#image0"
+                transform="translate(-0.254098) scale(0.0163934)"
+              />
             </pattern>
             <image
               id="image0"
               width="92"
               height="61"
-              :href="this.$store.state.example.loginUser.profileImage"
+              :href="loginUser.profileImage"
             />
           </defs>
         </svg>
       </div>
       <div class="info-text">
-        <div class="nickname">{{this.$store.state.example.loginUser.name}}</div>
-        <div class="email">{{this.$store.state.example.loginUser.email}}</div>
+        <div class="nickname">{{ loginUser.name }}</div>
+        <div class="email">{{ loginUser.email }}</div>
       </div>
       <div class="info-button">
-        <button type="button" @click="$router.push('/user-profile')">프로필 관리</button>
+        <button type="button" @click="$router.push('/user-profile')">
+          프로필 관리
+        </button>
       </div>
     </div>
     <div class="mypage-list">
@@ -104,11 +126,16 @@
 <script>
 import { T } from "../store/module-example/types";
 import { Toast } from "vant";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
-    return {
-    }
+    return {};
+  },
+  computed: {
+    ...mapGetters({
+      loginUser: "getCurrentUser",
+    }),
   },
   methods: {
     logOut(event) {

@@ -15,5 +15,8 @@ export const mutations = {
   },
   [T.SET_USER_DATA_ON_SOTRE](state, loginUser) {
     state.loginUser = loginUser
+  },
+  [T.UPDATE_HEIGHT](state, height) {
+    state.loginUser.height = height
   }
 };

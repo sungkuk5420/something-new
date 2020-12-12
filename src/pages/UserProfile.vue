@@ -211,7 +211,7 @@
           <div class="give-like">
             <div class="left">
               <div class="user-name">
-                <span>김냥냥</span
+                <span>{{ loginUser.name }}</span
                 ><svg
                   style="margin-left: 5px"
                   width="13"
@@ -227,8 +227,8 @@
                 </svg>
               </div>
               <ul class="user-age-address">
-                <li>25세</li>
-                <li>서울</li>
+                <li>{{ new Date().getFullYear() - loginUser.birthYear }}세</li>
+                <li>{{ loginUser.location }}</li>
               </ul>
             </div>
             <div class="right">
@@ -270,16 +270,30 @@
           <ul>
             <li>
               <div class="info-title">성별</div>
-              <div class="info-description">여</div>
+              <div class="info-description">
+                {{
+                  loginUser.gender === "men"
+                    ? "남자"
+                    : "여자"
+                }}
+              </div>
             </li>
             <li>
               <div class="info-title">출생년도</div>
-              <div class="info-description">1998</div>
+              <div class="info-description">
+                {{ loginUser.birthYear }}
+              </div>
             </li>
             <li @click="$router.push('/user-tall')">
               <div class="info-title">키</div>
               <div class="info-description">
-                <span>163cm</span>
+                <span>
+                  {{
+                    loginUser.height
+                      ? `${loginUser.height}cm`
+                      : "키를 선택해주세요"
+                  }}
+                </span>
                 <svg
                   width="8"
                   height="14"
@@ -294,7 +308,7 @@
             <li @click="$router.push('/user-location')">
               <div class="info-title">위치</div>
               <div class="info-description">
-                <span> 서울 </span>
+                <span>{{ loginUser.location }}</span>
                 <svg
                   width="8"
                   height="14"
@@ -543,9 +557,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters({
+      loginUser: "getCurrentUser",
+    }),
   },
 };
 </script>
