@@ -409,6 +409,8 @@ export default {
         personalities: [],
         smoking: "",
         drinking: "",
+        following: [],
+        follower: [],
       };
       console.log(registerUserData);
       const successCb = async (userData) => {
