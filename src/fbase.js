@@ -1,4 +1,4 @@
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import "firebase/firestore";
@@ -11,11 +11,11 @@ const firebaseConfig = {
   storageBucket: "some-26ee7.appspot.com",
   messagingSenderId: "881830153002",
   appId: "1:881830153002:web:5a041835cecd79da6fac53",
-  measurementId: "G-PLJFTBVXYH"
+  measurementId: "G-PLJFTBVXYH",
 };
 firebase.initializeApp(firebaseConfig);
 
-console.log("init!")
+console.log("init!");
 
 export const firebaseInstance = firebase;
 export const fireStore = firebase.firestore();

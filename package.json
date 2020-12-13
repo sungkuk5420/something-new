@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "description": "something app",
   "productName": "something",
-  "cordovaId": "app.netlify.something",
-  "capacitorId": "",
   "author": "sungkuk5420 <sungkuk5420@gmail.com>",
   "private": true,
   "scripts": {
@@ -17,7 +15,8 @@
   "dependencies": {
     "@quasar/extras": "^1.9.11",
     "axios": "^0.21.0",
-    "firebase": "7.24.0",
+    "core-js": "^3.8.1",
+    "firebase": "^8.2.0",
     "lodash": "^4.17.20",
     "quasar": "^1.14.7",
     "vant": "^2.11.2",
@@ -26,7 +25,7 @@
   },
   "devDependencies": {
     "@capacitor/core": "^2.4.4",
-    "@quasar/app": "1.9.6",
+    "@quasar/app": "^2.1.11",
     "babel-plugin-import": "^1.13.3"
   },
   "engines": {
