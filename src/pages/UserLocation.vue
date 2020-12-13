@@ -10,9 +10,17 @@
       "
     ></van-nav-bar>
     <div class="picker-place">
-      <van-picker title="위치" :columns="locations" @change="onChange" item-height="60"></van-picker>
+      <van-picker
+        title="위치"
+        :columns="locations"
+        @change="onChange"
+        item-height="60"
+        :default-index="locations.findIndex((item) => item === selectLocation)"
+      ></van-picker>
       <div class="button-wrapper">
-        <button type="button" class="button-save" @click="saveLocation">저장</button>
+        <button type="button" class="button-save" @click="saveLocation">
+          저장
+        </button>
       </div>
     </div>
   </q-page>
@@ -33,6 +41,9 @@ export default {
       locations: "getLocations",
       loginUser: "getLoginUser",
     }),
+  },
+  beforeMount() {
+    this.selectLocation = this.loginUser.location;
   },
   methods: {
     onChange(_, value) {

@@ -10,9 +10,17 @@
       "
     ></van-nav-bar>
     <div class="picker-place">
-      <van-picker title="키" :columns="columns" @change="onChange" item-height="60"></van-picker>
+      <van-picker
+        title="키"
+        :columns="columns"
+        @change="onChange"
+        item-height="60"
+        :default-index="columns.findIndex((item) => item === selectHeight)"
+      ></van-picker>
       <div class="button-wrapper">
-        <button type="button" class="button-save" @click="saveHeight">저장</button>
+        <button type="button" class="button-save" @click="saveHeight">
+          저장
+        </button>
       </div>
     </div>
   </q-page>
@@ -40,6 +48,9 @@ export default {
     ...mapGetters({
       loginUser: "getLoginUser",
     }),
+  },
+  beforeMount() {
+    this.selectHeight = this.loginUser.height;
   },
   methods: {
     onChange(_, value) {
