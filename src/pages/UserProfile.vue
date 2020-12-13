@@ -332,7 +332,7 @@
                 <span>
                   {{
                     loginUser.hobbies.length > 0
-                      ? loginUser.hobbies.toString()
+                      ? loginUser.hobbies.slice(0, 2).toString()
                       : "취미를 선택해주세요"
                   }}
                 </span>
@@ -353,7 +353,7 @@
                 <span>
                   {{
                     loginUser.personalities.length > 0
-                      ? loginUser.personalities.toString()
+                      ? loginUser.personalities.slice(0, 2).toString()
                       : "성격을 선택해주세요"
                   }}
                 </span>
