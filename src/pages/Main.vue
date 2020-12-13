@@ -4,17 +4,24 @@
     <div class="user-card-wrapper">
       <div
         class="user-card"
-        v-for="(currentUser,index) in userList.filter(item=>item.profileImage!='').slice(0,3)"
+        v-for="(currentUser, index) in userList
+          .filter((item) => item.profileImage != '')
+          .slice(0, 3)"
         :key="currentUser.uid"
-        :style="`bottom:calc(2vh + ${(index*39)-(3*(index*index))}px); z-index:-${index}; transform:scale(${1-0.09*index});`"
+        :style="`bottom:calc(2vh + ${
+          index * 39 - 3 * (index * index)
+        }px); z-index:-${index}; transform:scale(${1 - 0.09 * index});`"
       >
-        <div class="profile-image" :style="`background-image:url('${currentUser.profileImage}')`"></div>
+        <div
+          class="profile-image"
+          :style="`background-image:url('${currentUser.profileImage}')`"
+        ></div>
 
-        <div class="user-card__name">{{currentUser.name}}</div>
+        <div class="user-card__name">{{ currentUser.name }}</div>
         <div class="user-card__age-wapper">
-          <div
-            class="user-card__age-wapper__age"
-          >{{ new Date().getFullYear() - currentUser.birthYear}}세</div>
+          <div class="user-card__age-wapper__age">
+            {{ new Date().getFullYear() - currentUser.birthYear }}세
+          </div>
           <svg
             width="12"
             height="17"
@@ -27,19 +34,30 @@
               fill="#FF576B"
             />
           </svg>
-
-          <div class="user-card__age-wapper__km">14Km 이내</div>
+          <div class="user-card__age-wapper__km">
+            {{ currentUser.location }}
+          </div>
         </div>
         <div class="user-card__hash-tag-wapper">
-          <div class="user-card__hash-tag-wapper__tag">맛집 탐방</div>
-          <div class="user-card__hash-tag-wapper__tag">헬린이</div>
-          <div class="user-card__hash-tag-wapper__tag">웃음이 예뻐요</div>
+          <div
+            v-if="currentUser.hobbies.length > 0"
+            class="user-card__hash-tag-wapper__tag"
+            v-for="hobbyName in currentUser.hobbies.slice(0, 2)"
+          >
+            {{ hobbyName }}
+          </div>
+          <div
+            v-if="currentUser.personalities.length > 0"
+            class="user-card__hash-tag-wapper__tag"
+          >
+            {{ currentUser.personalities[0] }}
+          </div>
         </div>
       </div>
     </div>
     <div class="choice">
       <svg
-        style="width:72px;height:72px; margin-right:35px;"
+        style="width: 72px; height: 72px; margin-right: 35px"
         width="82"
         height="83"
         viewBox="0 0 82 83"
@@ -77,13 +95,22 @@
               type="matrix"
               values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
             />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow"
+              result="shape"
+            />
           </filter>
         </defs>
       </svg>
       <svg
-        style="width:72px;height:72px;"
+        style="width: 72px; height: 72px"
         width="83"
         height="83"
         viewBox="0 0 83 83"
@@ -140,8 +167,17 @@
               type="matrix"
               values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
             />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow"
+              result="shape"
+            />
           </filter>
           <linearGradient
             id="paint0_linear"
@@ -162,11 +198,18 @@
 
 <script>
 import { T } from "../store/module-example/types";
+import { mapGetters } from "vuex";
+import shuffle from "lodash/shuffle";
 export default {
   data() {
     return {
       userList: [],
     };
+  },
+  computed: {
+    ...mapGetters({
+      loginUser: "getLoginUser",
+    }),
   },
   mounted() {
     this.getAllUsers();
@@ -174,7 +217,13 @@ export default {
   methods: {
     getAllUsers() {
       const successCb = (userList) => {
-        this.userList = userList;
+        const shuffleUserList = shuffle(userList);
+        const shuffleFilterList = shuffle(
+          shuffleUserList.filter(
+            (user) => user.gender !== this.loginUser.gender
+          )
+        );
+        this.userList = shuffleFilterList.slice(0, 8);
         this.loading = false;
       };
       const errorCb = (errorMessage) => {
