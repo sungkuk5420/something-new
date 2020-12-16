@@ -12,7 +12,78 @@
           index * 39 - 3 * (index * index)
         }px); z-index:-${index}; transform:scale(${1 - 0.09 * index});`"
       >
-        <div :class="`bg-area index-${index}`"></div>
+        <div :class="`bg-area index-${index}`">
+          <svg
+            class="nope-icon"
+            width="71"
+            height="71"
+            viewBox="0 0 71 71"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M13.7428 66.8256C18.44 70.1146 24.9142 68.9731 28.2032 64.2758L38.1134 50.1226L52.4011 60.127C57.0984 63.416 63.5725 62.2744 66.8616 57.5772C70.1506 52.88 69.0091 46.4058 64.3118 43.1168L50.0241 33.1124L60.0284 18.8248C63.3175 14.1275 62.1759 7.65337 57.4786 4.36433C52.7814 1.07529 46.3073 2.21685 43.0182 6.91409L33.0139 21.2017L18.8608 11.2916C14.1635 8.00257 7.68937 9.14413 4.40033 13.8414C1.11129 18.5386 2.25285 25.0128 6.95009 28.3018L21.1032 38.2119L11.193 52.3651C7.90401 57.0624 9.04558 63.5365 13.7428 66.8256Z"
+              fill="#A4A1A1"
+            />
+          </svg>
+          <svg
+            class="like-icon"
+            width="266"
+            height="282"
+            viewBox="0 0 266 282"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="173.392"
+              y="102.17"
+              width="39.2608"
+              height="71.1038"
+              rx="19.6304"
+              transform="rotate(50.2482 173.392 102.17)"
+              fill="#FF96A2"
+            />
+            <g filter="url(#filter0_d)">
+              <rect
+                x="100.892"
+                y="119.192"
+                width="39.2608"
+                height="71.1038"
+                rx="19.6304"
+                transform="rotate(-35 100.892 119.192)"
+                fill="#FFBCC4"
+              />
+            </g>
+            <defs>
+              <filter
+                id="filter0_d"
+                x="0.89209"
+                y="0.672852"
+                width="272.944"
+                height="280.764"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                />
+                <feOffset dy="4" />
+                <feGaussianBlur stdDeviation="50" />
+                <feColorMatrix
+                  type="matrix"
+                  values="0 0 0 0 1 0 0 0 0 0.341176 0 0 0 0 0.419608 0 0 0 1 0"
+                />
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+              </filter>
+            </defs>
+          </svg>
+        </div>
         <div class="profile-image" :style="`background-image:url('${currentUser.profileImage}')`"></div>
 
         <div class="user-card__name">{{ currentUser.name }}</div>
@@ -201,10 +272,10 @@ export default {
     handleNope() {
       console.log(this.currentIndex);
       gsap.to(`.user-card.index-${this.currentIndex}`, {
-        x: -300,
-        duration: 1,
+        x: -200,
+        duration: 1.2,
         opacity: 0,
-        rotate: -30,
+        rotate: -15,
       });
       document
         .querySelector(`.bg-area.index-${this.currentIndex}`)
@@ -214,7 +285,7 @@ export default {
 
         gsap.to(`.user-card.index-${i + 1}`, {
           scale: 1 - 0.09 * (i - this.currentIndex),
-          duration: 1,
+          duration: 1.2,
           bottom: `${
             (i - this.currentIndex) * 39 -
             3 * ((i - this.currentIndex) * (i - this.currentIndex))
@@ -226,10 +297,10 @@ export default {
     handleLike() {
       console.log(this.currentIndex);
       gsap.to(`.user-card.index-${this.currentIndex}`, {
-        x: 300,
-        duration: 1,
+        x: 200,
+        duration: 1.2,
         opacity: 0,
-        rotate: 30,
+        rotate: 15,
       });
       document
         .querySelector(`.bg-area.index-${this.currentIndex}`)
@@ -239,7 +310,7 @@ export default {
 
         gsap.to(`.user-card.index-${i + 1}`, {
           scale: 1 - 0.09 * (i - this.currentIndex),
-          duration: 1,
+          duration: 1.2,
           bottom: `${
             (i - this.currentIndex) * 39 -
             3 * ((i - this.currentIndex) * (i - this.currentIndex))
@@ -322,21 +393,40 @@ export default {
       border-top-left-radius: 24px;
       border-top-right-radius: 24px;
       opacity: 0;
+      svg {
+        display: none;
+      }
       &.nope {
         opacity: 1;
+        display: flex;
+        flex: none;
+        align-items: center;
+        justify-content: center;
         background: linear-gradient(
           180deg,
           #121214 0%,
           rgba(18, 18, 20, 0) 100%
         );
+        .nope-icon {
+          display: block;
+          transform: rotate(10deg);
+        }
       }
       &.like {
         opacity: 1;
+        display: flex;
+        flex: none;
+        align-items: center;
+
         background: linear-gradient(
           180deg,
           #fe7f8e 0%,
           rgba(255, 66, 89, 0) 100%
         );
+        .like-icon {
+          display: block;
+          transform: rotate(-7deg);
+        }
       }
     }
     .profile-image {
