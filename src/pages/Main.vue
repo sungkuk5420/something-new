@@ -3,25 +3,23 @@
     <div class="main-title">이런 친구는 어때요?</div>
     <div class="user-card-wrapper">
       <div
-        class="user-card"
+        :class="`user-card index-${index}`"
         v-for="(currentUser, index) in userList
           .filter((item) => item.profileImage != '')
-          .slice(0, 3)"
+          "
         :key="currentUser.uid"
         :style="`bottom:calc(2vh + ${
           index * 39 - 3 * (index * index)
         }px); z-index:-${index}; transform:scale(${1 - 0.09 * index});`"
       >
-        <div
-          class="profile-image"
-          :style="`background-image:url('${currentUser.profileImage}')`"
-        ></div>
+        <div :class="`bg-area index-${index}`"></div>
+        <div class="profile-image" :style="`background-image:url('${currentUser.profileImage}')`"></div>
 
         <div class="user-card__name">{{ currentUser.name }}</div>
         <div class="user-card__age-wapper">
-          <div class="user-card__age-wapper__age">
-            {{ new Date().getFullYear() - currentUser.birthYear }}세
-          </div>
+          <div
+            class="user-card__age-wapper__age"
+          >{{ new Date().getFullYear() - currentUser.birthYear }}세</div>
           <svg
             width="12"
             height="17"
@@ -34,29 +32,24 @@
               fill="#FF576B"
             />
           </svg>
-          <div class="user-card__age-wapper__km">
-            {{ currentUser.location }}
-          </div>
+          <div class="user-card__age-wapper__km">{{ currentUser.location }}</div>
         </div>
-        <div class="user-card__hash-tag-wapper">
+        <div class="user-card__hash-tag-wapper" v-if="currentUser.hobbies.length > 0">
           <div
-            v-if="currentUser.hobbies.length > 0"
             class="user-card__hash-tag-wapper__tag"
-            v-for="hobbyName in currentUser.hobbies.slice(0, 2)"
-          >
-            {{ hobbyName }}
-          </div>
+            v-for="(hobbyName,index) in currentUser.hobbies.slice(0, 2)"
+            :key="`user-card__hash-tag-${index}`"
+          >{{ hobbyName }}</div>
           <div
             v-if="currentUser.personalities.length > 0"
             class="user-card__hash-tag-wapper__tag"
-          >
-            {{ currentUser.personalities[0] }}
-          </div>
+          >{{ currentUser.personalities[0] }}</div>
         </div>
       </div>
     </div>
     <div class="choice">
       <svg
+        @click="handleNope"
         style="width: 72px; height: 72px; margin-right: 35px"
         width="82"
         height="83"
@@ -95,21 +88,13 @@
               type="matrix"
               values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
             />
-            <feBlend
-              mode="normal"
-              in2="BackgroundImageFix"
-              result="effect1_dropShadow"
-            />
-            <feBlend
-              mode="normal"
-              in="SourceGraphic"
-              in2="effect1_dropShadow"
-              result="shape"
-            />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
           </filter>
         </defs>
       </svg>
       <svg
+        @click="handleLike"
         style="width: 72px; height: 72px"
         width="83"
         height="83"
@@ -167,17 +152,8 @@
               type="matrix"
               values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
             />
-            <feBlend
-              mode="normal"
-              in2="BackgroundImageFix"
-              result="effect1_dropShadow"
-            />
-            <feBlend
-              mode="normal"
-              in="SourceGraphic"
-              in2="effect1_dropShadow"
-              result="shape"
-            />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
           </filter>
           <linearGradient
             id="paint0_linear"
@@ -200,10 +176,12 @@
 import { T } from "../store/module-example/types";
 import { mapGetters } from "vuex";
 import shuffle from "lodash/shuffle";
+import { gsap } from "gsap";
 export default {
   data() {
     return {
       userList: [],
+      currentIndex: 0,
     };
   },
   computed: {
@@ -211,10 +189,65 @@ export default {
       loginUser: "getLoginUser",
     }),
   },
-  mounted() {
-    this.getAllUsers();
+  watch: {
+    loginUser(value) {
+      if (value) {
+        this.getAllUsers();
+      }
+    },
   },
+  mounted() {},
   methods: {
+    handleNope() {
+      console.log(this.currentIndex);
+      gsap.to(`.user-card.index-${this.currentIndex}`, {
+        x: -300,
+        duration: 1,
+        opacity: 0,
+        rotate: -30,
+      });
+      document
+        .querySelector(`.bg-area.index-${this.currentIndex}`)
+        .classList.add("nope");
+      for (let i = this.currentIndex; i < this.userList.length; i++) {
+        const element = this.userList[i];
+
+        gsap.to(`.user-card.index-${i + 1}`, {
+          scale: 1 - 0.09 * (i - this.currentIndex),
+          duration: 1,
+          bottom: `${
+            (i - this.currentIndex) * 39 -
+            3 * ((i - this.currentIndex) * (i - this.currentIndex))
+          }`,
+        });
+      }
+      this.currentIndex += 1;
+    },
+    handleLike() {
+      console.log(this.currentIndex);
+      gsap.to(`.user-card.index-${this.currentIndex}`, {
+        x: 300,
+        duration: 1,
+        opacity: 0,
+        rotate: 30,
+      });
+      document
+        .querySelector(`.bg-area.index-${this.currentIndex}`)
+        .classList.add("like");
+      for (let i = this.currentIndex; i < this.userList.length; i++) {
+        const element = this.userList[i];
+
+        gsap.to(`.user-card.index-${i + 1}`, {
+          scale: 1 - 0.09 * (i - this.currentIndex),
+          duration: 1,
+          bottom: `${
+            (i - this.currentIndex) * 39 -
+            3 * ((i - this.currentIndex) * (i - this.currentIndex))
+          }`,
+        });
+      }
+      this.currentIndex += 1;
+    },
     getAllUsers() {
       const successCb = (userList) => {
         const shuffleUserList = shuffle(userList);
@@ -282,6 +315,30 @@ export default {
     width: calc(63% + (13vh));
     height: calc(100% - 7vh);
     max-height: 469px;
+    .bg-area {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      opacity: 0;
+      &.nope {
+        opacity: 1;
+        background: linear-gradient(
+          180deg,
+          #121214 0%,
+          rgba(18, 18, 20, 0) 100%
+        );
+      }
+      &.like {
+        opacity: 1;
+        background: linear-gradient(
+          180deg,
+          #fe7f8e 0%,
+          rgba(255, 66, 89, 0) 100%
+        );
+      }
+    }
     .profile-image {
       width: 100%;
       height: 100%;
