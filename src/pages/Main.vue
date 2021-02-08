@@ -4,9 +4,9 @@
     <div class="user-card-wrapper">
       <div
         :class="`user-card index-${index}`"
-        v-for="(currentUser, index) in userList
-          .filter((item) => item.profileImage != '')
-          "
+        v-for="(currentUser, index) in userList.filter(
+          (item) => item.profileImage != ''
+        )"
         :key="currentUser.uid"
         :style="`bottom:calc(2vh + ${
           index * 39 - 3 * (index * index)
@@ -45,20 +45,8 @@
               transform="rotate(50.2482 173.392 102.17)"
               fill="#FF96A2"
             />
-            <g filter="url(#filter0_d)">
-              <rect
-                x="100.892"
-                y="119.192"
-                width="39.2608"
-                height="71.1038"
-                rx="19.6304"
-                transform="rotate(-35 100.892 119.192)"
-                fill="#FFBCC4"
-              />
-            </g>
             <defs>
               <filter
-                id="filter0_d"
                 x="0.89209"
                 y="0.672852"
                 width="272.944"
@@ -78,19 +66,31 @@
                   type="matrix"
                   values="0 0 0 0 1 0 0 0 0 0.341176 0 0 0 0 0.419608 0 0 0 1 0"
                 />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                <feBlend
+                  mode="normal"
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow"
+                />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow"
+                  result="shape"
+                />
               </filter>
             </defs>
           </svg>
         </div>
-        <div class="profile-image" :style="`background-image:url('${currentUser.profileImage}')`"></div>
+        <div
+          class="profile-image"
+          :style="`background-image:url('${currentUser.profileImage}')`"
+        ></div>
 
         <div class="user-card__name">{{ currentUser.name }}</div>
         <div class="user-card__age-wapper">
-          <div
-            class="user-card__age-wapper__age"
-          >{{ new Date().getFullYear() - currentUser.birthYear }}세</div>
+          <div class="user-card__age-wapper__age">
+            {{ new Date().getFullYear() - currentUser.birthYear }}세
+          </div>
           <svg
             width="12"
             height="17"
@@ -103,18 +103,27 @@
               fill="#FF576B"
             />
           </svg>
-          <div class="user-card__age-wapper__km">{{ currentUser.location }}</div>
+          <div class="user-card__age-wapper__km">
+            {{ currentUser.location }}
+          </div>
         </div>
-        <div class="user-card__hash-tag-wapper" v-if="currentUser.hobbies.length > 0">
+        <div
+          class="user-card__hash-tag-wapper"
+          v-if="currentUser.hobbies.length > 0"
+        >
           <div
             class="user-card__hash-tag-wapper__tag"
-            v-for="(hobbyName,index) in currentUser.hobbies.slice(0, 2)"
+            v-for="(hobbyName, index) in currentUser.hobbies.slice(0, 2)"
             :key="`user-card__hash-tag-${index}`"
-          >{{ hobbyName }}</div>
+          >
+            {{ hobbyName }}
+          </div>
           <div
             v-if="currentUser.personalities.length > 0"
             class="user-card__hash-tag-wapper__tag"
-          >{{ currentUser.personalities[0] }}</div>
+          >
+            {{ currentUser.personalities[0] }}
+          </div>
         </div>
       </div>
     </div>
@@ -159,8 +168,17 @@
               type="matrix"
               values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
             />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow"
+              result="shape"
+            />
           </filter>
         </defs>
       </svg>
@@ -223,8 +241,17 @@
               type="matrix"
               values="0 0 0 0 0.891667 0 0 0 0 0.880521 0 0 0 0 0.880521 0 0 0 1 0"
             />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow"
+              result="shape"
+            />
           </filter>
           <linearGradient
             id="paint0_linear"
@@ -394,7 +421,9 @@ export default {
       border-top-right-radius: 24px;
       opacity: 0;
       svg {
-        display: none;
+        // display: none;
+        width: 0;
+        height: 0;
       }
       &.nope {
         opacity: 1;
@@ -408,8 +437,9 @@ export default {
           rgba(18, 18, 20, 0) 100%
         );
         .nope-icon {
-          display: block;
           transform: rotate(10deg);
+          width: auto;
+          height: auto;
         }
       }
       &.like {
@@ -424,8 +454,9 @@ export default {
           rgba(255, 66, 89, 0) 100%
         );
         .like-icon {
-          display: block;
           transform: rotate(-7deg);
+          width: auto;
+          height: auto;
         }
       }
     }
