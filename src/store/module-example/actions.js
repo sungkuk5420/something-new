@@ -107,6 +107,7 @@ export const actions = {
     const where = data.where || ["email", "!=", ""];
     fireStore
       .collection("users")
+      .limit(10)
       .where(...where)
       .get()
       .then((querySnapshot) => {

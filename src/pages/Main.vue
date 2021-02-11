@@ -4,9 +4,7 @@
     <div class="user-card-wrapper">
       <div
         :class="`user-card index-${index}`"
-        v-for="(currentUser, index) in userList.filter(
-          (item) => item.profileImage != ''
-        )"
+        v-for="(currentUser, index) in userList"
         :key="currentUser.uid"
         :style="`bottom:calc(2vh + ${
           index * 39 - 3 * (index * index)
@@ -109,7 +107,9 @@
         </div>
         <div
           class="user-card__hash-tag-wapper"
-          v-if="currentUser.hobbies.length > 0"
+          v-if="
+            currentUser && currentUser.hobbies && currentUser.hobbies.length > 0
+          "
         >
           <div
             class="user-card__hash-tag-wapper__tag"
@@ -127,7 +127,7 @@
         </div>
       </div>
     </div>
-    <div class="choice">
+    <div class="choice" v-show="userList.length != currentIndex">
       <svg
         @click="handleNope"
         style="width: 72px; height: 72px; margin-right: 35px"
@@ -297,8 +297,6 @@ export default {
   mounted() {},
   methods: {
     voteUser(currentTarget, voteValue) {
-      console.log(this.loginUser);
-      console.log(currentTarget);
       this.$store.dispatch(T.ADD_VOTE_HISTORY, {
         data: {
           userUid: this.loginUser.uid,
@@ -367,13 +365,14 @@ export default {
     },
     getAllUsers() {
       const successCb = (userList) => {
-        const shuffleUserList = shuffle(userList);
-        const shuffleFilterList = shuffle(
-          shuffleUserList.filter(
-            (user) => user.gender !== this.loginUser.gender
-          )
-        );
-        this.userList = shuffleFilterList.slice(0, 8);
+        console.log(userList);
+        this.userList = userList;
+        // const shuffleUserList = shuffle(userList);
+        // const shuffleFilterList = shuffle(
+        //   shuffleUserList.filter(
+        //     (user) => user.gender !== this.loginUser.gender
+        //   )
+        // );
         this.loading = false;
       };
       const errorCb = (errorMessage) => {

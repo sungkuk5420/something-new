@@ -22,16 +22,19 @@
         </div>
         <div class="chat-content">
           <div
-            :class="'chat-line ' +  `${loginUser.uid == currentMessage.creatorId?'mine':''}`"
-            v-for="(currentMessage,index) in chats"
+            :class="
+              'chat-line ' +
+              `${loginUser.uid == currentMessage.creatorId ? 'mine' : ''}`
+            "
+            v-for="(currentMessage, index) in chats"
             :key="index"
           >
             <div class="profile-image">
               <img :src="currentMessage.profileImage" alt srcset />
             </div>
             <div class="chat-text">
-              <div class="line">{{currentMessage.text}}</div>
-              <div class="time">{{currentMessage.createdAt}}</div>
+              <div class="line">{{ currentMessage.text }}</div>
+              <div class="time">{{ currentMessage.createdAt }}</div>
             </div>
           </div>
         </div>
@@ -39,7 +42,13 @@
     </div>
     <div class="input-box">
       <div class="input-inner">
-        <input type="text" name id v-model="messageInput" v-on:keyup.enter="sendMessage" />
+        <input
+          type="text"
+          name
+          id
+          v-model="messageInput"
+          v-on:keyup.enter="sendMessage"
+        />
       </div>
       <div class="input-emoticon">
         <svg
@@ -50,8 +59,8 @@
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect opacity="0.5" width="32" height="32" rx="8" fill="#E3E1E1" />
-          <rect x="23" y="15" width="2" height="14" transform="rotate(90 23 15)" fill="#747070" />
-          <rect x="17" y="23" width="2" height="14" transform="rotate(-180 17 23)" fill="#747070" />
+          <rect x="23" y="15" width="2" height="14" fill="#747070" />
+          <rect x="17" y="23" width="2" height="14" fill="#747070" />
         </svg>
       </div>
     </div>
