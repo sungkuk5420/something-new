@@ -208,4 +208,23 @@ export const actions = {
       successCb();
     }
   },
+  [T.ADD_VOTE_HISTORY]({ commit }, { data, successCb, errorCb }) {
+    console.log(
+      `store action [T.ADD_VOTE_HISTORY] data : ${JSON.stringify(data)}`
+    );
+    console.log(data)
+    fireStore
+      .collection(`voteHistories`)
+      .add(data)
+      .then(function (docRef) {
+        if (successCb) {
+          successCb();
+        }
+      })
+      .catch(function (error) {
+        if (errorCb) {
+          errorCb(error);
+        }
+      });
+  },
 };

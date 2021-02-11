@@ -296,6 +296,23 @@ export default {
   },
   mounted() {},
   methods: {
+    voteUser(currentTarget, voteValue) {
+      console.log(this.loginUser);
+      console.log(currentTarget);
+      this.$store.dispatch(T.ADD_VOTE_HISTORY, {
+        data: {
+          userUid: this.loginUser.uid,
+          targetUid: currentTarget.uid,
+          vote: voteValue,
+          createdAt: Date.now(),
+          responseVote: null,
+        },
+        successCb: (result) => {},
+        errorCb: (errorMessage) => {
+          console.log(errorMessage);
+        },
+      });
+    },
     handleNope() {
       console.log(this.currentIndex);
       gsap.to(`.user-card.index-${this.currentIndex}`, {
@@ -319,6 +336,7 @@ export default {
           }`,
         });
       }
+      this.voteUser(this.userList[this.currentIndex], "unlike");
       this.currentIndex += 1;
     },
     handleLike() {
@@ -344,6 +362,7 @@ export default {
           }`,
         });
       }
+      this.voteUser(this.userList[this.currentIndex], "like");
       this.currentIndex += 1;
     },
     getAllUsers() {
