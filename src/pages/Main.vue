@@ -281,7 +281,11 @@ export default {
                   const uniqueUsers = users.filter(item => this.allUserListVoteHistory.indexOf(item.uid) == -1);
                   console.log("allUserListVoteHistory", this.allUserListVoteHistory)
                   console.log("uniqueUsers", uniqueUsers.map(i => i.uid))
-                  this.allUserListWithOutVoteHistory.push(...uniqueUsers)
+                  uniqueUsers.map(item=>{
+                    if(this.allUserListWithOutVoteHistory.map(i=>i.uid).indexOf(item.uid) == -1){
+                      this.allUserListWithOutVoteHistory.push(item)
+                    }
+                  })
                   resolve();
                 });
             })

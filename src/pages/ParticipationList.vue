@@ -6,14 +6,14 @@
           <van-search v-model="value" placeholder="Placeholder" />
           <div class="content">
             <ul v-show="giveToLikeList.length != 0">
-              <li v-for="currnetGiveToLike in giveToLikeList">
+              <li v-for="currnetGiveToLike in giveToLikeList" :key="currnetGiveToLike">
                 <div class="image">
                   <img :src="currnetGiveToLike.targetUser.profileImage" alt="" srcset="">
                 </div>
                 <div class="left">
                   <div class="nickname">{{ currnetGiveToLike.targetUser.name }}</div>
                   <div class="user-infomation">
-                    <div class="user-infomation-age">{{ currnetGiveToLike.targetUser.birthYear }}</div>
+                    <div class="user-infomation-age">{{ new Date().getFullYear() - currnetGiveToLike.targetUser.birthYear }}살</div>
                     <div class="user-infomation-address">{{ currnetGiveToLike.targetUser.location }}</div>
                   </div>
                 </div>
