@@ -416,18 +416,14 @@ export default {
         email: this.email,
         password: this.password,
         profileImage: this.imgDataUrl,
-        chats: "",
         comment: "",
         height: 0,
         name: this.name,
         uid: "",
-        voteHistories: "",
         hobbies: [],
         personalities: [],
         smoking: "",
         drinking: "",
-        following: [],
-        follower: [],
       };
       console.log(registerUserData);
       const successCb = async (userData) => {
