@@ -94,7 +94,14 @@ export default {
           .sort((a, b) => a.createdAt - b.createdAt);
         this.chats = chatsArray;
         if (this.$refs.chatsArea) {
-          this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
+          console.log('mounted');
+          console.log(this.$refs);
+          console.log(this.$refs.chatsArea.lastChild.offsetHeight);
+          console.log(this.$refs.chatsArea.scrollHeight);
+          setTimeout(() => {
+            this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
+            this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight+"px";
+          }, 3000);
         }
       });
   },
