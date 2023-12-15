@@ -1,14 +1,9 @@
 <template>
   <q-page class="chat-page">
-    <van-nav-bar
-      title="고구마"
-      left-arrow
-      @click-left="
-        () => {
-          $router.push('/chatList');
-        }
-      "
-    ></van-nav-bar>
+    <van-nav-bar title="고구마" left-arrow @click-left="() => {
+      $router.push('/chatList');
+    }
+      "></van-nav-bar>
     <div class="chat" ref="chatsArea">
       <div class="chat-contents">
         <div class="date-bar">
@@ -21,20 +16,16 @@
           </div>
         </div>
         <div class="chat-content">
-          <div
-            :class="
-              'chat-line ' +
-              `${loginUser.uid == currentMessage.creatorId ? 'mine' : ''}`
-            "
-            v-for="(currentMessage, index) in chats"
-            :key="index"
-          >
+          <div :class="'chat-line ' +
+            `${loginUser&&loginUser.uid == currentMessage.creatorId ? 'mine' : ''}`
+            " v-for="(currentMessage, index) in chats" :key="index">
             <div class="profile-image">
               <img :src="currentMessage.profileImage" alt srcset />
             </div>
             <div class="chat-text">
               <div class="line">{{ currentMessage.text }}</div>
-              <div class="time">{{ new Date(currentMessage.createdAt).toLocaleDateString() + ' ' + new Date(currentMessage.createdAt).toLocaleTimeString() }}</div>
+              <div class="time">{{ new Date(currentMessage.createdAt).toLocaleDateString() + ' ' + new
+                Date(currentMessage.createdAt).toLocaleTimeString() }}</div>
             </div>
           </div>
         </div>
@@ -42,23 +33,11 @@
     </div>
     <div class="input-box">
       <div class="input-inner">
-        <input
-          type="text"
-          name
-          id
-          v-model="messageInput"
-          v-on:keyup.enter="sendMessage"
-        />
+        <input type="text" name id v-model="messageInput" v-on:keyup.enter="sendMessage" />
       </div>
       <div class="input-emoticon">
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          @click="sendMessage"
-        >
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+          @click="sendMessage">
           <rect opacity="0.5" width="32" height="32" rx="8" fill="#E3E1E1" />
           <rect x="23" y="15" width="2" height="14" fill="#747070" />
           <rect x="17" y="23" width="2" height="14" fill="#747070" />
@@ -80,6 +59,7 @@ export default {
     return {
       chats: [],
       messageInput: "",
+      isFirst: true
     };
   },
   mounted() {
@@ -93,15 +73,13 @@ export default {
           }))
           .sort((a, b) => a.createdAt - b.createdAt);
         this.chats = chatsArray;
-        if (this.$refs.chatsArea) {
+        if (this.isFirst) {
+          this.isFirst = false
           console.log('mounted');
-          console.log(this.$refs);
-          console.log(this.$refs.chatsArea.lastChild.offsetHeight);
-          console.log(this.$refs.chatsArea.scrollHeight);
+          console.log(this.$refs.chatsArea.scrollHeight)
           setTimeout(() => {
             this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
-            this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight+"px";
-          }, 3000);
+          }, 0);
         }
       });
   },
@@ -148,19 +126,24 @@ export default {
   flex-direction: column;
   height: 100vh;
   flex: none;
+
   .van-nav-bar {
     flex: none;
     height: 46px;
   }
+
   .van-nav-bar .van-icon {
     color: #000;
   }
+
   .van-hairline--bottom::after {
     border-bottom: none;
   }
+
   .chat {
     flex: 1;
     overflow: auto;
+
     .chat-contents {
       .date-bar {
         display: flex;
@@ -168,6 +151,7 @@ export default {
         width: 100%;
         margin: 20px 0;
         font-size: 12px;
+
         .date {
           font-family: Noto Sans CJK KR;
           font-style: normal;
@@ -178,9 +162,11 @@ export default {
           align-items: center;
           color: #747070;
         }
+
         .line {
           flex: 1;
           margin: 4px 16px;
+
           hr {
             border: 0;
             height: 1px;
@@ -188,27 +174,33 @@ export default {
           }
         }
       }
+
       .chat-content {
         .chat-line {
           display: flex;
           margin-bottom: 6px;
+
           .profile-image {
             margin-left: 23px;
             width: 39px;
             height: 39px;
             overflow: hidden;
+
             img {
               border-radius: 50%;
               width: 100%;
               height: 100%;
             }
           }
+
           .non-image {
             margin-left: 62px;
           }
+
           .chat-text {
             display: flex;
             margin-left: 15px;
+
             .line {
               height: 43px;
               padding: 0 12px;
@@ -226,6 +218,7 @@ export default {
               align-items: center;
               color: #121214;
             }
+
             .time {
               margin-left: 7px;
               padding-bottom: 4px;
@@ -239,18 +232,22 @@ export default {
               align-items: flex-end;
             }
           }
+
           .chat-last {
             display: flex;
           }
         }
+
         .chat-line.mine {
           margin-right: 25px;
           margin-bottom: 4px;
           display: flex;
           justify-content: flex-end;
+
           .chat-text {
             display: flex;
             flex-direction: row-reverse;
+
             .line {
               height: 43px;
               padding: 0 12px;
@@ -266,6 +263,7 @@ export default {
               align-items: center;
               color: #ffffff;
             }
+
             .time {
               order: 1;
               margin-right: 7px;
@@ -280,6 +278,7 @@ export default {
               align-items: flex-end;
             }
           }
+
           .profile-image {
             display: none;
           }
@@ -287,6 +286,7 @@ export default {
       }
     }
   }
+
   .input-box {
     width: 100%;
     background: white;
@@ -295,6 +295,7 @@ export default {
     flex: none;
     padding-left: 16px;
     align-items: center;
+
     .input-inner {
       background: #ffffff;
       border: 1px solid #e3e1e1;
@@ -303,6 +304,7 @@ export default {
       height: 32px;
       flex: 1;
       padding: 0;
+
       input {
         padding: 0 10px;
         width: 100%;
@@ -311,6 +313,7 @@ export default {
         background: transparent;
       }
     }
+
     .input-emoticon {
       width: 32px;
       height: 32px;
