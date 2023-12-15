@@ -168,7 +168,7 @@ export default {
           });
 
         });
-    },
+    },//내가 좋아요한사람
     loadVoteTakeToHistory() {
       function onlyUnique(value, index, array) {
         return array.indexOf(value) === index;
@@ -227,7 +227,7 @@ export default {
           });
 
         });
-    }
+    } // 좋아요를 받은 사람
   },
   mounted() {
     this.loadVoteGiveToHistory();
