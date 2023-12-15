@@ -6,15 +6,15 @@
           <van-search v-model="value" placeholder="Placeholder" />
           <div class="content">
             <ul v-show="giveToLikeList.length != 0">
-              <li v-for="currnetGiveToLike in giveToLikeList" :key="currnetGiveToLike">
+              <li v-for="(currnetGiveToLike,index) in giveToLikeList" :key="index">
                 <div class="image">
-                  <img :src="currnetGiveToLike.targetUser.profileImage" alt="" srcset="">
+                  <img :src="currnetGiveToLike.targetUser&&currnetGiveToLike.targetUser.profileImage" alt="" srcset="">
                 </div>
                 <div class="left">
-                  <div class="nickname">{{ currnetGiveToLike.targetUser.name }}</div>
+                  <div class="nickname">{{ currnetGiveToLike.targetUser&&currnetGiveToLike.targetUser.name }}</div>
                   <div class="user-infomation">
                     <div class="user-infomation-age">{{ new Date().getFullYear() - currnetGiveToLike.targetUser.birthYear }}살</div>
-                    <div class="user-infomation-address">{{ currnetGiveToLike.targetUser.location }}</div>
+                    <div class="user-infomation-address">{{ currnetGiveToLike.targetUser&&currnetGiveToLike.targetUser.location }}</div>
                   </div>
                 </div>
                 <div class="right">
@@ -48,15 +48,15 @@
           <van-search v-model="value" placeholder="Placeholder" />
           <div class="content">
             <ul v-show="takeToLikeList.length != 0">
-              <li v-for="currnetTakeToLike in takeToLikeList">
+              <li v-for="(currnetTakeToLike,index) in takeToLikeList" :key="index">
                 <div class="image">
-                  <img :src="currnetTakeToLike.targetUser.profileImage" alt="" srcset="">
+                  <img :src="currnetTakeToLike.targetUser&&currnetTakeToLike.targetUser.profileImage" alt="" srcset="">
                 </div>
                 <div class="left">
-                  <div class="nickname">{{ currnetTakeToLike.targetUser.name }}</div>
+                  <div class="nickname">{{ currnetTakeToLike.targetUser&&currnetTakeToLike.targetUser.name }}</div>
                   <div class="user-infomation">
-                    <div class="user-infomation-age">{{ currnetTakeToLike.targetUser.birthYear }}</div>
-                    <div class="user-infomation-address">{{ currnetTakeToLike.targetUser.location }}</div>
+                    <div class="user-infomation-age">{{ currnetTakeToLike.targetUser&&currnetTakeToLike.targetUser.birthYear }}</div>
+                    <div class="user-infomation-address">{{ currnetTakeToLike.targetUser&&currnetTakeToLike.targetUser.location }}</div>
                   </div>
                 </div>
                 <div class="right">
@@ -118,6 +118,7 @@ export default {
         .collection("voteHistories")
         .orderBy("createdAt", "desc")
         .where("userUid", "==", user.uid)
+        .where("vote", "==", "like")  
         .onSnapshot((snapshot) => {
           let voteList = snapshot.docs
             .map((doc) => ({
@@ -179,6 +180,7 @@ export default {
         .collection("voteHistories")
         .orderBy("createdAt", "desc")
         .where("targetUid", "==", user.uid)
+        .where("vote", '==', "like")
         .onSnapshot((snapshot) => {
           let voteList = snapshot.docs
             .map((doc) => ({
@@ -230,8 +232,10 @@ export default {
     } // 좋아요를 받은 사람
   },
   mounted() {
-    this.loadVoteGiveToHistory();
-    this.loadVoteTakeToHistory();
+    setTimeout(() => {
+      this.loadVoteGiveToHistory();
+      this.loadVoteTakeToHistory();
+    }, 500);
   },
 };
 </script>
@@ -273,7 +277,7 @@ export default {
 
           .content {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
             flex: 1;
             padding-bottom: 60px;
@@ -497,6 +501,9 @@ export default {
       margin-bottom: 14px;
     }
 
+    ul{
+      width: 100%;
+    }
     ul>li {
       margin-bottom: 12px;
       display: flex;
@@ -557,8 +564,11 @@ export default {
       }
 
       .image {
-        width: 60px;
-        height: 60px;
+        img {
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+        }
       }
     }
 
