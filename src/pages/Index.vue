@@ -496,6 +496,9 @@ export default {
 
 <style lang="scss">
 .index-page {
+  .van-picker-column {
+    overflow: auto;
+  }
   .q-stepper,
   .q-stepper__content,
   .q-stepper__step-content,
