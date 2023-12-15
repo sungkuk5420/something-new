@@ -55,7 +55,7 @@
                 <div class="left">
                   <div class="nickname">{{ currnetTakeToLike.targetUser&&currnetTakeToLike.targetUser.name }}</div>
                   <div class="user-infomation">
-                    <div class="user-infomation-age">{{ currnetTakeToLike.targetUser&&currnetTakeToLike.targetUser.birthYear }}</div>
+                    <div class="user-infomation-age">{{ new Date().getFullYear() - currnetTakeToLike.targetUser.birthYear }}살</div>
                     <div class="user-infomation-address">{{ currnetTakeToLike.targetUser&&currnetTakeToLike.targetUser.location }}</div>
                   </div>
                 </div>

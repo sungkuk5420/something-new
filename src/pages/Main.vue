@@ -123,6 +123,7 @@ export default {
       userList: [],
       currentIndex: 0,
       allUserListVoteHistory: [],//내가좋아요한 리스트
+      allReciveVoteHistory: [],//좋아요 받은 리스트
       allUserListWithOutVoteHistory: [],//내가 좋아요한 사람 이외의 리스트
     };
   },
@@ -140,7 +141,62 @@ export default {
   },
   mounted() { },
   methods: {
+    replyVote(currentVote,voteValue){
+      fireStore
+          .collection(`voteHistories`)
+          .doc(currentVote.id)
+          .set({
+            ...currentVote,
+            responseVote:voteValue
+          })
+          .then(function (docRef) {
+            console.log(docRef) 
+           
+          })
+          .catch(function (error) {
+            if (errorCb) {
+              errorCb(error);
+            }
+          });
+    },
+    createChat(youInfo,myInfo){
+      fireStore
+          .collection(`chats`)
+          .add({
+            name: `${youInfo.name},${myInfo.name}`,
+            latestMassage: "새로운 메세지를 보내보세요.",
+            time: Date.now(),
+            members:[youInfo.uid,myInfo.uid],
+            badgeCount: `0`,
+
+          })
+          .then(function (docRef) {
+            console.log(docRef) 
+           
+          })
+          .catch(function (error) {
+            if (errorCb) {
+              errorCb(error);
+            }
+          });
+    },
     voteUser(currentTarget, voteValue) {
+      const user = authService.currentUser;
+      console.log("login user ",user.uid)
+      console.log(currentTarget)
+      let currentVote = this.allReciveVoteHistory.filter(i=>i.userUid === currentTarget.uid)[0]
+      if(currentVote){
+        if(voteValue=="like"){
+          console.log(user)
+          this.getAllUserByUids([user.uid]).then(result=>{
+            console.log(result)
+            const myInfo = result[0];
+            const yourInfo = currentTarget;
+            this.createChat(yourInfo,myInfo)
+          });
+        }
+        this.replyVote(currentVote,voteValue);
+      }
       this.$store.dispatch(T.ADD_VOTE_HISTORY, {
         data: {
           userUid: this.loginUser.uid,
@@ -242,12 +298,74 @@ export default {
             .map((doc) => (doc.data().targetUid)).filter(onlyUnique);
           console.log("voted users ", allUserList)
           this.allUserListVoteHistory.push(...allUserList, user.uid)
-
-
           console.log(this.allUserListVoteHistory)
 
           this.loadVoteGiveToHistory()
         });
+    },
+    getAllReciveVote(){
+      const user = authService.currentUser;
+      console.log(user.uid)
+      fireStore
+        .collection("voteHistories")
+        .orderBy("createdAt", "desc")
+        .where("targetUid", "==", user.uid)
+        .where("responseVote", "==", null)
+        .get()
+        .then((snapshot) => {
+          let voteList = snapshot.docs
+            .map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
+          console.log("recive voted users ", voteList)
+          this.allReciveVoteHistory = voteList;
+          console.log("user.uid ", user.uid)
+          this.getAllUserByUids(voteList.map(i=>i.userUid)).then(reciveVoteUsers=>{
+            console.log("reciveVoteUsers",reciveVoteUsers)
+            this.allUserListWithOutVoteHistory.push(...reciveVoteUsers)
+          })
+
+        });
+    },
+    getAllUserByUids(pamasUserUids){
+      return new Promise((resolveMain,rejectMain)=>{
+        let allUserList = pamasUserUids.slice(0);
+        const promiseFuncs = [];
+
+        let returnUsers = []
+        console.log("pamasUserUids", pamasUserUids)
+        while (allUserList.length) {
+          let queryUsers = allUserList.slice(0, 10)
+          allUserList.splice(0, 10)
+          if (queryUsers.length != 0) {
+            promiseFuncs.push(
+              new Promise((resolve, reject) => {
+                fireStore
+                  .collection("users")
+                  .where("uid", "in", queryUsers)
+                  .get()
+                  .then((snapshot) => {
+                    const users = snapshot.docs.map((doc) => ({
+                      ...doc.data(),
+                    }));
+                    console.log("query in ", users)
+                    users.map(item=>{
+                      if(returnUsers.map(i=>i.uid).indexOf(item.uid) == -1){
+                        returnUsers.push(item)
+                      }
+                    })
+                    resolve(returnUsers);
+                  });
+              })
+            );
+          }
+        }
+
+        Promise.all(promiseFuncs).then(() => {
+          resolveMain(returnUsers);
+        });
+      })
     },
 
 
@@ -258,7 +376,7 @@ export default {
       let allUserList = this.allUserListVoteHistory.slice(0);
       if (allUserList.length == 0) {
         this.getAllUsers();
-        debugger
+        this.getAllReciveVote();
         return false;
       }
       const promiseFuncs = [];
@@ -295,6 +413,7 @@ export default {
 
       Promise.all(promiseFuncs).then((values) => {
         console.log("allUserListWithOutVoteHistory", this.allUserListWithOutVoteHistory.map(i => i.uid))
+        this.getAllReciveVote();
       });
     },//내가 좋아요한사람
 
