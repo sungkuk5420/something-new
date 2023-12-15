@@ -220,7 +220,7 @@ export default {
               return {
                 ...i,
                 targetUser: this.allUserList.filter(user => {
-                  return user.uid == i.targetUid
+                  return user.uid == i.userUid
                 })[0]
               }
             })
