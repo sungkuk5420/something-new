@@ -336,9 +336,14 @@ export default {
       margin-bottom: 14px;
     }
 
+    ul {
+      width: 100%;
+    }
+
     ul>li {
       margin-bottom: 12px;
       display: flex;
+      width: 100%;
 
       .left {
         flex: 8;
@@ -397,6 +402,7 @@ export default {
 
       .image {
         img {
+          border-radius: 50%;
           width: 60px;
           height: 60px;
         }
