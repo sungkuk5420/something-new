@@ -1,5 +1,11 @@
 <template>
   <q-page class="index-page">
+    <van-nav-bar
+      title=""
+      left-arrow
+      @click-left="backFunc"
+      v-show="step!=1 "
+    ></van-nav-bar>
     <q-stepper v-model="step" ref="stepper" color="primary" animated>
       <q-step class="step-1" title="1" :name="1">
         <div class="logo">
@@ -270,6 +276,13 @@ export default {
   },
   mounted() {},
   methods: {
+    backFunc() {
+      if(this.step == 4) {
+        this.$refs.stepper.goTo(2);
+      } else {
+        this.$refs.stepper.previous();
+      }
+    },
     emailIsValid(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     },
@@ -483,6 +496,9 @@ export default {
 
 <style lang="scss">
 .index-page {
+  .van-picker-column {
+    overflow: auto;
+  }
   .q-stepper,
   .q-stepper__content,
   .q-stepper__step-content,

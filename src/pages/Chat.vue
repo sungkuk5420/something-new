@@ -34,7 +34,7 @@
             </div>
             <div class="chat-text">
               <div class="line">{{ currentMessage.text }}</div>
-              <div class="time">{{ currentMessage.createdAt }}</div>
+              <div class="time">{{ new Date(currentMessage.createdAt).toLocaleDateString() + ' ' + new Date(currentMessage.createdAt).toLocaleTimeString() }}</div>
             </div>
           </div>
         </div>
@@ -57,6 +57,7 @@
           viewBox="0 0 32 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          @click="sendMessage"
         >
           <rect opacity="0.5" width="32" height="32" rx="8" fill="#E3E1E1" />
           <rect x="23" y="15" width="2" height="14" fill="#747070" />
@@ -93,7 +94,14 @@ export default {
           .sort((a, b) => a.createdAt - b.createdAt);
         this.chats = chatsArray;
         if (this.$refs.chatsArea) {
-          this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
+          console.log('mounted');
+          console.log(this.$refs);
+          console.log(this.$refs.chatsArea.lastChild.offsetHeight);
+          console.log(this.$refs.chatsArea.scrollHeight);
+          setTimeout(() => {
+            this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
+            this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight+"px";
+          }, 3000);
         }
       });
   },
@@ -109,6 +117,9 @@ export default {
         profileImage: this.loginUser.profileImage,
         name: this.loginUser.name,
       });
+      if (this.$refs.chatsArea) {
+        this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
+      }
       this.messageInput = "";
     },
     getAllUsers() {
