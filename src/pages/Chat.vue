@@ -6,7 +6,7 @@
       "></van-nav-bar>
     <div class="chat" ref="chatsArea">
       <div class="chat-contents">
-        <div class="date-bar">
+        <!-- <div class="date-bar">
           <div class="line">
             <hr />
           </div>
@@ -14,7 +14,7 @@
           <div class="line">
             <hr />
           </div>
-        </div>
+        </div> -->
         <div class="chat-content">
           <div :class="'chat-line ' +
             `${loginUser&&loginUser.uid == currentMessage.creatorId ? 'mine' : ''}`
@@ -35,13 +35,8 @@
       <div class="input-inner">
         <input type="text" name id v-model="messageInput" v-on:keyup.enter="sendMessage" />
       </div>
-      <div class="input-emoticon">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-          @click="sendMessage">
-          <rect opacity="0.5" width="32" height="32" rx="8" fill="#E3E1E1" />
-          <rect x="23" y="15" width="2" height="14" fill="#747070" />
-          <rect x="17" y="23" width="2" height="14" fill="#747070" />
-        </svg>
+      <div class="input-emoticon" @click="sendMessage">
+        <img src="~assets/send-icon.png" alt="" srcset="">
       </div>
     </div>
   </q-page>
@@ -318,11 +313,14 @@ export default {
       width: 32px;
       height: 32px;
       background: #e3e1e1;
-      opacity: 0.5;
       border-radius: 8px;
       margin-left: 8px;
       margin-right: 16px;
       flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
   }
 }
