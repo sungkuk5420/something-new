@@ -82,16 +82,14 @@ export default {
         .where("members", "array-contains", user.uid)
         .get()
         .then((snapshot) => {
+          let allChatMemberList = [];
           snapshot.docs.map(item=>{
             return item.data().members.map(i=>{
-              const allChatMemberListUids = this.allChatMemberList.map(i=>i.uid)
-              if(allChatMemberListUids.indexOf(i.uid) == -1){
-                this.allChatMemberList.push(i)
-              }
+                allChatMemberList.push(i)
             })
           })
-          console.log("allChatMemberList",this.allChatMemberList)
-          this.getAllUserByUids(this.allChatMemberList).then(result=>{
+          console.log("allChatMemberList",allChatMemberList)
+          this.getAllUserByUids(allChatMemberList).then(result=>{
             this.allChatMemberList = result;
             let chatList = snapshot.docs
               .map((doc) => {

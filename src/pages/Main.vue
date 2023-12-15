@@ -266,7 +266,8 @@ export default {
     getAllUsers() {
       const successCb = (userList) => {
         console.log(userList);
-        this.allUserListWithOutVoteHistory = userList;
+        const user = authService.currentUser;
+        this.allUserListWithOutVoteHistory = userList.filter(i=>i.uid!=user.uid);
         this.loading = false;
       };
       const errorCb = (errorMessage) => {
@@ -325,7 +326,11 @@ export default {
           console.log("user.uid ", user.uid)
           this.getAllUserByUids(voteList.map(i=>i.userUid)).then(reciveVoteUsers=>{
             console.log("reciveVoteUsers",reciveVoteUsers)
-            this.allUserListWithOutVoteHistory.push(...reciveVoteUsers)
+            console.log("this.allUserListWithOutVoteHistory ",this.allUserListWithOutVoteHistory )
+            const uids = this.allUserListWithOutVoteHistory;
+            if(uids.indexOf(reciveVoteUsers[0].uid)!=-1){
+              this.allUserListWithOutVoteHistory.push(...reciveVoteUsers)
+            }
           })
 
         });
