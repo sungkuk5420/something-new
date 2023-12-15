@@ -57,6 +57,7 @@
           viewBox="0 0 32 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          @click="sendMessage"
         >
           <rect opacity="0.5" width="32" height="32" rx="8" fill="#E3E1E1" />
           <rect x="23" y="15" width="2" height="14" fill="#747070" />
@@ -109,6 +110,9 @@ export default {
         profileImage: this.loginUser.profileImage,
         name: this.loginUser.name,
       });
+      if (this.$refs.chatsArea) {
+        this.$refs.chatsArea.scrollTop = this.$refs.chatsArea.scrollHeight;
+      }
       this.messageInput = "";
     },
     getAllUsers() {
