@@ -34,7 +34,7 @@
             </div>
             <div class="chat-text">
               <div class="line">{{ currentMessage.text }}</div>
-              <div class="time">{{ currentMessage.createdAt }}</div>
+              <div class="time">{{ new Date(currentMessage.createdAt).toLocaleDateString() + ' ' + new Date(currentMessage.createdAt).toLocaleTimeString() }}</div>
             </div>
           </div>
         </div>
