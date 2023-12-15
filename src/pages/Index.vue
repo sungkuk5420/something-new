@@ -356,7 +356,11 @@ export default {
         this.$refs.passwordInput.focus();
         return;
       }
-      this.$refs.stepper.next();
+      if(this.password.length < 6) {
+        Toast.fail("비밀번호를 6자리이상 입력해주세요.");
+      } else {
+        this.$refs.stepper.next();
+      }
     },
     checkStep7() {
       this.birthYear = this.selectYear;
